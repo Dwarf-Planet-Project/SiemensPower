@@ -19,7 +19,6 @@ partial model PartialFriction
   input Modelica.SIunits.MassFlowRate m_flow "mass flow rate";
 
  Modelica.SIunits.Pressure dp;
- Boolean isSinglePhase;
 
   annotation (Documentation(info="<html>
   Any derived friction pressure loss correlation must define a relation between m_flow and dp, e.g.
@@ -40,16 +39,14 @@ dp/dz = zeta_add/L*rho/2*v^2
                 </tr> 
                 <tr>
                            <td><b>Protection class:</b>    </td>
-                           <td> </td>
+                           <td>public </td>
                 </tr> 
-                <tr>
-                           <td><b>Used Dymola version:</b>    </td>
-                           <td> </td>
-                  </tr> 
            </table>
-                Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
-           For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
+          <p><b><font style=\"font-size: 10pt; \">License, Copyright and Disclaimer</font></b> </p>
+<p>
+<blockquote><br/>Licensed by Siemens AG under the Siemens Modelica License 2</blockquote>
+<blockquote><br/>Copyright  2007-2012 Siemens AG. All rights reserved.</blockquote>
+<blockquote><br/>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>; it can be redistributed and/or modified under the terms of the Siemens Modelica License 2. For license conditions (including the disclaimer of warranty) see <a href=\"../Documents/SiemensModelicaLicense2.html\">Siemens Modelica License 2 </a>.</blockquote>
         </p>
 </HTML>"));
 end PartialFriction;

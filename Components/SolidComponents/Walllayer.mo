@@ -1,10 +1,10 @@
 within SiemensPower.Components.SolidComponents;
 model Walllayer "Cylindrical metal tube (single layer)"
-  import SI = SiemensPower.Units;
-  import SiemensPower.Utilities.initOpt;
+  import SI = Modelica.SIunits;
+
   constant Real pi=Modelica.Constants.pi;
   parameter Integer numberOfNodes(min=1)=2 "Number of nodes";
-  parameter Boolean assumePlainHeatTransfer=false "no logarithmic correction" 
+  parameter Boolean assumePlainHeatTransfer=false "no logarithmic correction"
                                 annotation (Dialog(enable=considerConductivity));
   parameter SiemensPower.Utilities.Structures.PropertiesMetal metal
     "Wall metal properties"                                                      annotation (Dialog(enable=userdefinedmaterial, group="Material"));
@@ -18,17 +18,21 @@ model Walllayer "Cylindrical metal tube (single layer)"
   parameter Boolean considerConductivity=true
     "Wall conduction resistance accounted for"                                           annotation (Evaluate=true);
   parameter Boolean considerAxialHeatTransfer=false
-    "With heat transfer in the wall parallel to the flow direction" 
+    "With heat transfer in the wall parallel to the flow direction"
           annotation (Evaluate=true, Dialog(enable=considerConductivity));
+  parameter String initOpt="steadyState" "Initialisation option" annotation (Dialog(group="Initialization"),
+  choices(
+    choice="noInit" "No initial equations",
+    choice="steadyState" "Steady-state initialization",
+    choice="fixedTemperature" "Fixed-temperatures initialization"));
 
-  parameter initOpt init = initOpt.noInit;
   parameter SI.Temperature T_start[numberOfNodes] "Temperature start values"       annotation (Dialog(group="Initialization"));
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a[numberOfNodes] port_ext(T(start = T_start))
-    "Outer heat port" 
-    annotation (Placement(transformation(extent={{-16,20},{16,48}}, rotation=0)));                                                          //(T(start = SiemensPower.Utilities.Functions.my_linspace(Tstart1,TstartN,numberOfNodes)))
+    "Outer heat port"
+    annotation (Placement(transformation(extent={{-16,20},{16,48}}, rotation=0)));                                                          //(T(start = linspace(Tstart1,TstartN,numberOfNodes)))
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b[numberOfNodes] port_int(T(start = T_start))
-    "Inner heat port" 
+    "Inner heat port"
     annotation (Placement(transformation(extent={{-14,-48},{16,-20}}, rotation=
             0)));
 
@@ -39,18 +43,9 @@ model Walllayer "Cylindrical metal tube (single layer)"
   SI.Mass Tube_mass;
   SI.HeatCapacity HeatCap "HeatCapacity of a Tube part";
 
-  SI.HeatFlowRate Q_flow_ax[numberOfNodes] "axial(parallel) heat transfer";
-
 initial equation
-  if init == initOpt.noInit then
- // nothing to do
-  elseif init == initOpt.steadyState then
+
     der(T) = zeros(numberOfNodes);
-  elseif init == initOpt.fixedTemperature then // fixed temperatures at start
-    T = T_start;
-  else
-    assert(false, "Unsupported initialisation option");
-  end if;
 
 equation
   rint=diameterInner*0.5;
@@ -61,48 +56,12 @@ equation
 
   //  Energy balance
   for i in 1:numberOfNodes loop
-    if (useDynamicEquations and wallThickness>0) then
-        if (considerAxialHeatTransfer) then
-           HeatCap*der(T[i]) = port_int[i].Q_flow + port_ext[i].Q_flow +  Q_flow_ax[i];
-        else
-           HeatCap*der(T[i]) = port_int[i].Q_flow + port_ext[i].Q_flow;
-        end if;
-    else
-        if 
-          (considerAxialHeatTransfer) then
-           0.0 = port_int[i].Q_flow + port_ext[i].Q_flow +  Q_flow_ax[i];
-        else
-           0.0 = port_int[i].Q_flow + port_ext[i].Q_flow;
-        end if;
-    end if;
+     HeatCap*der(T[i]) = port_int[i].Q_flow + port_ext[i].Q_flow;
+     port_int[i].Q_flow = metal.lambda*2*pi*length/numberOfNodes*numberOfParallelTubes*(port_int[i].T-T[i])*2/(rext/rint-1);
+     port_ext[i].Q_flow = metal.lambda*2*pi*length/numberOfNodes*numberOfParallelTubes*(port_ext[i].T -T[i])*2/(1-rint/rext);
   end for;
 
   Am = (rext^2-rint^2)*pi "Area of the metal cross section of single tube";
-    if (considerConductivity and wallThickness>0) then
-       for i in 1:numberOfNodes loop
-            if assumePlainHeatTransfer then
-                  port_int[i].Q_flow = metal.lambda*2*pi*length/numberOfNodes*numberOfParallelTubes*(port_int[i].T-T[i])*2/(rext/rint-1);
-                  port_ext[i].Q_flow = metal.lambda*2*pi*length/numberOfNodes*numberOfParallelTubes*(port_ext[i].T -T[i])*2/(1-rint/rext);
-            else
-                  port_int[i].Q_flow = metal.lambda*2*pi*length/numberOfNodes*numberOfParallelTubes*(port_int[i].T-T[i])/(Modelica.Math.log((rext+rint)/(2*rint)));
-                  port_ext[i].Q_flow = metal.lambda*2*pi*length/numberOfNodes*numberOfParallelTubes*(port_ext[i].T -T[i])/(Modelica.Math.log((2*rext)/(rint + rext)));
-            end if;
-       end for;
-       if (considerAxialHeatTransfer) then
-            Q_flow_ax[1] = metal.lambda*Am*numberOfParallelTubes/(length/numberOfNodes)*(T[2]-T[1]);
-            for i in 2:(numberOfNodes-1) loop
-              Q_flow_ax[i] = metal.lambda*Am*numberOfParallelTubes/(length/numberOfNodes)*(T[i-1]-2*T[i]+T[i+1]);
-            end for;
-            Q_flow_ax[numberOfNodes] = metal.lambda*Am*numberOfParallelTubes/(length/numberOfNodes)*(T[numberOfNodes-1]-T[numberOfNodes]);
-       else
-            Q_flow_ax = zeros(numberOfNodes);
-       end if;
-    else
-      // No temperature gradients across the thickness
-      port_int.T = T;
-      port_ext.T = T;
-      Q_flow_ax = zeros(numberOfNodes);
-    end if;
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={
@@ -152,16 +111,15 @@ equation
                 </tr> 
                 <tr>
                            <td><b>Protection class:</b>    </td>
-                           <td> </td>
+                           <td>internal </td>
                 </tr> 
-                <tr>
-                           <td><b>Used Dymola version:</b>    </td>
-                           <td> </td>
-                  </tr> 
+              
            </table>
-                Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
-           For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
+        <p><b><font style=\"font-size: 10pt; \">License, Copyright and Disclaimer</font></b> </p>
+<p>
+<blockquote><br/>Licensed by Siemens AG under the Siemens Modelica License 2</blockquote>
+<blockquote><br/>Copyright  2007-2012 Siemens AG. All rights reserved.</blockquote>
+<blockquote><br/>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>; it can be redistributed and/or modified under the terms of the Siemens Modelica License 2. For license conditions (including the disclaimer of warranty) see <a href=\"../Documents/SiemensModelicaLicense2.html\">Siemens Modelica License 2 </a>.</blockquote>
         </p>
 </HTML>",
         revisions="<html>

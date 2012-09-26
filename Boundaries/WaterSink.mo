@@ -1,59 +1,45 @@
 within SiemensPower.Boundaries;
 model WaterSink "Pressure-enthalpy sink for simple water flows"
-  import SI = SiemensPower.Units;
-//  replaceable package Medium = Modelica.Media.Water.WaterIF97_ph
-//    constrainedby Modelica.Media.Interfaces.PartialMedium
-//                                                    annotation (choicesAllMatching=
-//        true);
-  parameter Boolean use_p_in = false
-    "Get the pressure from the input connector"
-    annotation(Evaluate=true, HideResult=true, choices(__Dymola_checkBox=true));
-  parameter Boolean use_h_in= false
-    "Get the temperature from the input connector"
-    annotation(Evaluate=true, HideResult=true, choices(__Dymola_checkBox=true));
 
-  parameter SI.AbsolutePressure p_start = 1.01325e5 "Pressure";
-  parameter SI.SpecificEnthalpy h_start = 1e5
+  replaceable package Medium = Modelica.Media.Water.WaterIF97_ph
+    constrainedby Modelica.Media.Interfaces.PartialMedium
+                                                    annotation (choicesAllMatching=
+        true);
+  parameter Medium.AbsolutePressure p_start = 1.01325e5 "Pressure";
+  parameter Medium.SpecificEnthalpy h_start = 1e5
     "Specific enthalpy for reverse flow";
-
-//  SI.AbsolutePressure p( start = p_start);
-//  SI.SpecificEnthalpy h( start = h_start);
-//  SI.SpecificEnthalpy hPortActual "Specific enthalpy";
-  //SI.BaseProperties water "fluid state";//(p=port.p)
-  SiemensPower.Interfaces.FluidPort_a port
+  Medium.SpecificEnthalpy hPortActual "Specific enthalpy";
+  Medium.BaseProperties water "fluid state";//(p=port.p)
+  Modelica.Fluid.Interfaces.FluidPort_a port(redeclare package Medium = Medium)
     annotation (Placement(transformation(extent={{-120,-20},{-80,20}}, rotation=
-           0)));                            //(redeclare package Medium = Medium)
-  Modelica.Blocks.Interfaces.RealInput pIn if use_p_in
+           0)));
+  Modelica.Blocks.Interfaces.RealInput p_set
     annotation (Placement(transformation(
         origin={-40,80},
         extent={{-20,-20},{20,20}},
         rotation=270)));
-  Modelica.Blocks.Interfaces.RealInput hIn if use_h_in
+  Modelica.Blocks.Interfaces.RealInput h_set
     annotation (Placement(transformation(
         origin={40,80},
         extent={{-20,-20},{20,20}},
         rotation=270)));
-protected
-  Modelica.Blocks.Interfaces.RealInput p_in_internal
-    "Needed to connect to conditional connector";
-  Modelica.Blocks.Interfaces.RealInput h_in_internal
-    "Needed to connect to conditional connector";
-
 equation
-  connect(pIn, p_in_internal);
-  connect(hIn, h_in_internal);
 
-  if not use_p_in then
-    p_in_internal = p_start;
+  if cardinality(p_set) == 0 then
+    p_set = p_start;
   end if;
-  if not use_h_in then
-    h_in_internal = h_start;
+  if cardinality(h_set) == 0 then
+    h_set = h_start;
   end if;
 
-  port.p = p_in_internal;
-  port.h_outflow = h_in_internal;
-//  port.Xi_outflow = water.Xi;
-//  hPortActual = noEvent(actualStream(port.h_outflow));
+  water.p = p_set;
+  water.h = h_set;
+  water.Xi = Medium.X_default[1:Medium.nXi];
+
+  port.p = water.p;
+  port.h_outflow = water.h;
+  port.Xi_outflow = water.Xi;
+  hPortActual = noEvent(actualStream(port.h_outflow));
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={
@@ -99,16 +85,14 @@ equation
                 </tr> 
                 <tr>
                            <td><b>Protection class:</b>    </td>
-                           <td> </td>
+                           <td>public </td>
                 </tr> 
-                <tr>
-                           <td><b>Used Dymola version:</b>    </td>
-                           <td> </td>
-                  </tr> 
            </table>
-                Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
-           For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
+              <p><b><font style=\"font-size: 10pt; \">License, Copyright and Disclaimer</font></b> </p>
+<p>
+<blockquote><br/>Licensed by Siemens AG under the Siemens Modelica License 2</blockquote>
+<blockquote><br/>Copyright  2007-2012 Siemens AG. All rights reserved.</blockquote>
+<blockquote><br/>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>; it can be redistributed and/or modified under the terms of the Siemens Modelica License 2. For license conditions (including the disclaimer of warranty) see <a href=\"../Documents/SiemensModelicaLicense2.html\">Siemens Modelica License 2 </a>.</blockquote>
         </p>
 </HTML>",
     revisions="<html>

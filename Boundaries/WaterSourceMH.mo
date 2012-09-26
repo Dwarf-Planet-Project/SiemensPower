@@ -2,61 +2,43 @@ within SiemensPower.Boundaries;
 model WaterSourceMH
   "Mass flow - enthalpy boundary condition for simple fluid flow"
 
-   import SI = SiemensPower.Units;
-//  replaceable package Medium = Modelica.Media.Water.WaterIF97_ph
-//    constrainedby Modelica.Media.Interfaces.PartialMedium
-//                                                    annotation (choicesAllMatching=
-//        true);
-  parameter SI.MassFlowRate m_flow_start=1 "Mass flow rate";
-  parameter SI.SpecificEnthalpy h_start=100e3 "Specific enthalpy";
-
-  parameter Boolean use_m_flow_in = false
-    "Get the mass flow rate from the input connector"
-    annotation(Evaluate=true, HideResult=true, choices(__Dymola_checkBox=true));
-  parameter Boolean use_h_in= false
-    "Get the temperature from the input connector"
-    annotation(Evaluate=true, HideResult=true, choices(__Dymola_checkBox=true));
-
-//  SI.SpecificEnthalpy h_port_actual "Specific enthalpy";
-//  Medium.BaseProperties medium "fluid state";
-  SI.AbsolutePressure p;
-
-  SiemensPower.Interfaces.FluidPort_b port( h_outflow(start=h_start), m_flow(start=m_flow_start))
+  replaceable package Medium = Modelica.Media.Water.WaterIF97_ph
+    constrainedby Modelica.Media.Interfaces.PartialMedium
+                                                    annotation (choicesAllMatching=
+        true);
+  parameter Medium.MassFlowRate m_flow_start=1 "Mass flow rate";
+  parameter Medium.SpecificEnthalpy h_start=100e3 "Specific enthalpy";
+  Medium.SpecificEnthalpy h_port_actual "Specific enthalpy";
+  Medium.BaseProperties medium "fluid state";
+  Modelica.Fluid.Interfaces.FluidPort_b port(redeclare package Medium = Medium, h_outflow(start=h_start), m_flow(start=m_flow_start))
     annotation (Placement(transformation(extent={{80,-20},{120,20}}, rotation=0)));
-  Modelica.Blocks.Interfaces.RealInput m_flow_in if       use_m_flow_in
+   Modelica.Blocks.Interfaces.RealInput m_flowIn
     annotation (Placement(transformation(
         origin={-40,60},
         extent={{-20,-20},{20,20}},
         rotation=270)));
-  Modelica.Blocks.Interfaces.RealInput hIn if      use_h_in
+  Modelica.Blocks.Interfaces.RealInput hIn
     annotation (Placement(transformation(
         origin={40,60},
         extent={{-20,-20},{20,20}},
         rotation=270)));
-
-protected
-  Modelica.Blocks.Interfaces.RealInput m_flow_in_internal
-    "Needed to connect to conditional connector";
-  Modelica.Blocks.Interfaces.RealInput h_in_internal
-    "Needed to connect to conditional connector";
 equation
 
-  connect(m_flow_in, m_flow_in_internal);
-  connect(hIn, h_in_internal);
-
-  if not use_m_flow_in then
-    m_flow_in_internal = m_flow_start;
+  if cardinality(m_flowIn) == 0 then
+    m_flowIn = m_flow_start;
   end if;
-  if not use_h_in then
-    h_in_internal = h_start;
+  if cardinality(hIn) == 0 then
+    hIn = h_start;
   end if;
 
-  p = port.p;
+  medium.p = port.p;
+  medium.h = hIn;
+  medium.Xi = Medium.X_default[1:Medium.nXi];
 
-  port.m_flow = -m_flow_in_internal;
-  port.h_outflow  = h_in_internal;
- // port.Xi_outflow = medium.Xi;
- // h_port_actual = noEvent(actualStream(port.h_outflow));
+  port.m_flow = -m_flowIn;
+  port.h_outflow  = medium.h;
+  port.Xi_outflow = medium.Xi;
+  h_port_actual = noEvent(actualStream(port.h_outflow));
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
             -100},{100,100}}), graphics={
@@ -99,7 +81,7 @@ equation
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
-                              <td><a href=\"mailto:kilian.link@siemens.com\">Kilian Link</a> </td>
+                                 <td><a href=\"mailto:kilian.link@siemens.com\">Kilian Link</a> </td>
                         <td><a href=\"https://scd.siemens.com/db4/v3/lookUp.d4w?tcgid=Z001K4SN\">SCD</a> </td>
                        </tr>
                 <tr>
@@ -108,16 +90,14 @@ equation
                 </tr> 
                 <tr>
                            <td><b>Protection class:</b>    </td>
-                           <td> </td>
+                           <td>public </td>
                 </tr> 
-                <tr>
-                           <td><b>Used Dymola version:</b>    </td>
-                           <td> </td>
-                  </tr> 
            </table>
-                Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
-           For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
+            <p><b><font style=\"font-size: 10pt; \">License, Copyright and Disclaimer</font></b> </p>
+<p>
+<blockquote><br/>Licensed by Siemens AG under the Siemens Modelica License 2</blockquote>
+<blockquote><br/>Copyright  2007-2012 Siemens AG. All rights reserved.</blockquote>
+<blockquote><br/>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>; it can be redistributed and/or modified under the terms of the Siemens Modelica License 2. For license conditions (including the disclaimer of warranty) see <a href=\"../Documents/SiemensModelicaLicense2.html\">Siemens Modelica License 2 </a>.</blockquote>
         </p>
 </HTML>",
     revisions="<html>

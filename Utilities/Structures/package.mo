@@ -1,3 +1,3 @@
 within SiemensPower.Utilities;
-package Structures "Record definitions with parameter structures"
+package Structures 
 end Structures;
