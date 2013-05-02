@@ -11,11 +11,11 @@ model TubeOwnMedia
   //constant Medium.Temperature Tcrit=Medium.fluidConstants[1].criticalTemperature;
 
    parameter Boolean initializeInletPressure=true
-    "mp or pp boundary conditions"                                               annotation(evaluate=true);
+    "mp or pp boundary conditions"                                         annotation(evaluate=true);
   parameter Integer numberOfNodes(min=2) = 2
-    "Number of nodes for thermal variables"                                          annotation(Dialog(group="Geometry and pressure drop parameters"));
+    "Number of nodes for thermal variables"                                    annotation(Dialog(group="Geometry and pressure drop parameters"));
   parameter SiemensPower.Utilities.Structures.PipeGeo geoPipe
-    "Geometry of tube"                                                           annotation(Dialog(group="Geometry and pressure drop parameters"));
+    "Geometry of tube"                                                     annotation(Dialog(group="Geometry and pressure drop parameters"));
   parameter SI.MassFlowRate m_flowLaminar=0.001
     "(small) mass flow rate at wich laminar equals turbulent pressure drop" annotation(Dialog(group="Geometry and pressure drop parameters"));
   parameter Boolean considerDynamicMomentum=true
@@ -23,7 +23,7 @@ model TubeOwnMedia
   parameter Boolean considerMassAccelaration=true
     "Inertial phenomena d/dz(m_dot^2/d) accounted for" annotation(evaluate=true);
   parameter Boolean initializeSteadyStateEnthalpies=true
-    "lets initialize der(h)=0"                                                      annotation(evaluate=true, Dialog(tab="Initialization"));
+    "lets initialize der(h)=0"                                                annotation(evaluate=true, Dialog(tab="Initialization"));
   parameter Boolean initializeSteadyStateInletEnthalpy=true
     "steady state initial condition for input enthalpy" annotation(evaluate=true, Dialog(tab="Initialization", enable=initializeSteadyStateEnthalpies));
 
@@ -38,19 +38,19 @@ model TubeOwnMedia
   parameter Real hydM=0.4 "Part of portOut for m_flow";
 
   parameter SI.CoefficientOfHeatTransfer alphaOffset=10e3
-    "alpha offset (in case of verysimple=true)"                    annotation(Dialog(tab="Inner heat transfer", enable=verysimple));
+    "alpha offset (in case of verysimple=true)"              annotation(Dialog(tab="Inner heat transfer", enable=verysimple));
   parameter Real alphaFactor=0.0
-    "Factor for state dependent alpha term (in case of verysimple=true)"                    annotation(Dialog(tab="Inner heat transfer", enable=verysimple));
+    "Factor for state dependent alpha term (in case of verysimple=true)"              annotation(Dialog(tab="Inner heat transfer", enable=verysimple));
 
   parameter Boolean delayInnerHeatTransfer=false "With delay of qMetalFluid" annotation(Dialog(tab="Inner heat transfer"));
   parameter Modelica.SIunits.Time timeDelayOfInnerHeatTransfer=1
-    "artificial delay time for qMetalFluid"             annotation(Dialog(tab="Inner heat transfer",enable=delayInnerHeatTransfer));
+    "artificial delay time for qMetalFluid"       annotation(Dialog(tab="Inner heat transfer",enable=delayInnerHeatTransfer));
 
   // Init parameters
   parameter Boolean useHeatInput=true
-    "Initialisation of qMetalFluidDelayed=qMetalFluid"                                   annotation(Dialog(tab="Initialization", group="Heat transfer"));
+    "Initialisation of qMetalFluidDelayed=qMetalFluid"                             annotation(Dialog(tab="Initialization", group="Heat transfer"));
   parameter Boolean initializeWithZeroInnerHeatFlow=false
-    "Initialisation of qMetalFluidDelayed=0"                                                       annotation(Dialog(tab="Initialization",group="Heat transfer",enable=(useHeatInput==false) and delayInnerHeatTransfer));
+    "Initialisation of qMetalFluidDelayed=0"                                                 annotation(Dialog(tab="Initialization",group="Heat transfer",enable=(useHeatInput==false) and delayInnerHeatTransfer));
 
   // wall parameters
  parameter Integer numberOfWallLayers(min=1)=3 "Number of wall layers" annotation(Dialog(group="Wall"),choices(choice=1, choice=2, choice=3, choice=4, choice=5, choice=6));
@@ -58,9 +58,9 @@ model TubeOwnMedia
 
   parameter SI.Temperature T_wall_start[numberOfNodes]=T_start
     "start values for wall temperatures" 
-                                       annotation (Dialog(tab="Initialization",group="Wall"));
+                                 annotation (Dialog(tab="Initialization",group="Wall"));
  parameter SiemensPower.Utilities.Structures.PropertiesMetal metal
-    "Wall metal properties"                                                      annotation (Dialog(group="Wall"));
+    "Wall metal properties"                                                annotation (Dialog(group="Wall"));
 
   final parameter SI.Length di = geoPipe.d_out - 2*geoPipe.s;
   final parameter SI.Area A =  0.25*pi*di^2;
@@ -98,11 +98,11 @@ model TubeOwnMedia
     init=initOptWall,
     numberOfParallelTubes=geoPipe.Nt,
     diameterInner =   geoPipe.d_out - 2*geoPipe.s) "Metal wall of the tube" 
-                 annotation (extent=[-10,34; 10,54]);
+           annotation (extent=[-10,34; 10,54]);
 
   SiemensPower.Interfaces.portHeat heatport(
-                               numberOfNodes=numberOfNodes, TWall = TWall)
-    "Inner wall (masked) heat port "                                             annotation (extent=[-10,-8; 10,12]);
+                         numberOfNodes=numberOfNodes, TWall = TWall)
+    "Inner wall (masked) heat port "                                       annotation (extent=[-10,-8; 10,12]);
 
 protected
   parameter SI.AbsolutePressure pFkt[numberOfNodes] = SiemensPower.Utilities.Functions.my_linspace(pIn_start,pOut_start,numberOfNodes);
@@ -138,17 +138,17 @@ initial equation
 
    // h
   if (initializeSteadyStateInletEnthalpy and initializeSteadyStateEnthalpies) then
-        der(h[1])=0;
+  der(h[1])=0;
   end if;
   if initializeSteadyStateEnthalpies then
       for j in 2:numberOfNodes loop
-         der(h[j]) = 0;
+   der(h[j]) = 0;
      end for;
   end if;
 
   // m_flow
   if (considerDynamicMomentum) then
-        der(m_flow) = 0;
+  der(m_flow) = 0;
   end if;
 
    // p (or d)
@@ -158,9 +158,9 @@ initial equation
 
   // qMetalFluidDelayed
   if (useHeatInput and delayInnerHeatTransfer) then
-          qMetalFluidDelayed=qMetalFluid;
+    qMetalFluidDelayed=qMetalFluid;
   elseif (initializeWithZeroInnerHeatFlow) then
-        qMetalFluidDelayed=zeros(numberOfNodes);
+  qMetalFluidDelayed=zeros(numberOfNodes);
   end if;
 
 equation
@@ -178,9 +178,9 @@ equation
   // pressure and mass flow rate
   pUndelayed = hydP*portIn.p + (1-hydP)*portOut.p;
   if useDelayedPressure then
-        der(p) = (pUndelayed-p)/timeDelayOfPressure;
+  der(p) = (pUndelayed-p)/timeDelayOfPressure;
   else
-        p = pUndelayed;
+  p = pUndelayed;
   end if;
   m_flow = (hydM*portIn.m_flow - (1-hydM)*portOut.m_flow)/geoPipe.Nt;
 
@@ -261,10 +261,10 @@ end for;
        T[j] =  SiemensPower.Media.IntH2O.T_rhoh(d[j],h[j]);
       (d[j],drdp[j],drdh[j]) =  SiemensPower.Media.IntH2O.rho_ph_dpdh(p, h[j]);
     else  // TTSE
-        T[j]    = SiemensPower.Media.TTSE.Utilities.T_ph(p, h[j]);
-        d[j]  = SiemensPower.Media.TTSE.Utilities.rho_ph(p, h[j]);
-        drdp[j] = SiemensPower.Media.TTSE.Utilities.rho_ph_dp(p, h[j]);
-        drdh[j] = SiemensPower.Media.TTSE.Utilities.rho_ph_dh(p, h[j]);
+  T[j]    = SiemensPower.Media.TTSE.Utilities.T_ph(p, h[j]);
+  d[j]  = SiemensPower.Media.TTSE.Utilities.rho_ph(p, h[j]);
+  drdp[j] = SiemensPower.Media.TTSE.Utilities.rho_ph_dp(p, h[j]);
+  drdh[j] = SiemensPower.Media.TTSE.Utilities.rho_ph_dh(p, h[j]);
 
     end if;
  end for;
@@ -274,15 +274,15 @@ end for;
   qMetalFluid = alpha * (TWall-T);
   heatport.Q_flow = perimeter*geoPipe.Nt*dz*qMetalFluidDelayed;
   if (delayInnerHeatTransfer) then
-        der(qMetalFluidDelayed) = (qMetalFluid-qMetalFluidDelayed)/timeDelayOfInnerHeatTransfer;
+  der(qMetalFluidDelayed) = (qMetalFluid-qMetalFluidDelayed)/timeDelayOfInnerHeatTransfer;
   else
-        qMetalFluidDelayed=qMetalFluid;
+  qMetalFluidDelayed=qMetalFluid;
   end if;
 
   connect(gasSide, wall.port_ext) annotation (points=[1.77636e-015,66;
-        1.77636e-016,66; 1.77636e-016,48.9], style(color=42, rgbcolor={191,0,0}));
+  1.77636e-016,66; 1.77636e-016,48.9], style(color=42, rgbcolor={191,0,0}));
   connect(wall.port_int, heatport.port) annotation (points=[-0.1,39.4; -0.1,
-        32.7; 0,32.7; 0,5.4], style(color=42, rgbcolor={191,0,0}));
+  32.7; 0,32.7; 0,5.4], style(color=42, rgbcolor={191,0,0}));
 
 annotation (Documentation(info="<HTML>
 <p>This tube model comes with a detailed energy balance, but <b>integrated</b> momentum and mass balance. 
@@ -295,29 +295,29 @@ The tube is heated. The water/steam media is simplified: You can chose between:
 <p>
 
        <p>  
-           <table>
-                <tr>
-                              <td><b>Author:</b>  </td>
-                              <td><a href=\"mailto:haiko.steuer@siemens.com\">Haiko Steuer</a> </td>
-                        <td><a href=\"https://scd.siemens.com/db4/v3/lookUp.d4w?tcgid=Z001K4SN\">SCD</a> </td>
-                       </tr>
-                <tr>
-                           <td><b>Checked by:</b>   </td>
-                           <td>            </td>
-                </tr> 
-                <tr>
-                           <td><b>Protection class:</b>    </td>
-                           <td> </td>
-                </tr> 
-                <tr>
-                           <td><b>Used Dymola version:</b>    </td>
-                           <td> </td>
-                  </tr> 
-           </table>
-                Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
-           For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
-        </p>
+     <table>
+          <tr>
+                        <td><b>Author:</b>  </td>
+                        <td><a href=\"mailto:haiko.steuer@siemens.com\">Haiko Steuer</a> </td>
+                  <td><a href=\"https://scd.siemens.com/db4/v3/lookUp.d4w?tcgid=Z001K4SN\">SCD</a> </td>
+                 </tr>
+          <tr>
+                     <td><b>Checked by:</b>   </td>
+                     <td>            </td>
+          </tr> 
+          <tr>
+                     <td><b>Protection class:</b>    </td>
+                     <td> </td>
+          </tr> 
+          <tr>
+                     <td><b>Used Dymola version:</b>    </td>
+                     <td> </td>
+            </tr> 
+     </table>
+          Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
+         This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+     For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
+  </p>
 
 </HTML>",
       revisions="<html>
@@ -325,29 +325,29 @@ The tube is heated. The water/steam media is simplified: You can chose between:
 <li> January 2007, added by Haiko Steuer
 </ul>
 </HTML>"), Icon(graphics={
-        Rectangle(
-          extent={{-80,54},{80,-60}},
-          fillColor={0,255,255},
-          fillPattern=FillPattern.Solid,
-          pattern=LinePattern.None,
-          lineColor={0,0,0}),
-        Text(
-          extent={{-76,30},{78,-26}},
-          lineColor={0,0,0},
-          fillColor={0,128,255},
-          fillPattern=FillPattern.Solid,
-          textString="%name"),
-        Rectangle(
-          extent={{-80,54},{80,40}},
-          pattern=LinePattern.None,
-          fillColor={0,0,0},
-          fillPattern=FillPattern.Solid,
-          lineColor={0,0,0}),
-        Rectangle(
-          extent={{-80,-46},{80,-60}},
-          pattern=LinePattern.None,
-          fillColor={0,0,0},
-          fillPattern=FillPattern.Solid,
-          lineColor={0,0,0})}),
+  Rectangle(
+    extent={{-80,54},{80,-60}},
+    fillColor={0,255,255},
+    fillPattern=FillPattern.Solid,
+    pattern=LinePattern.None,
+    lineColor={0,0,0}),
+  Text(
+    extent={{-76,30},{78,-26}},
+    lineColor={0,0,0},
+    fillColor={0,128,255},
+    fillPattern=FillPattern.Solid,
+    textString="%name"),
+  Rectangle(
+    extent={{-80,54},{80,40}},
+    pattern=LinePattern.None,
+    fillColor={0,0,0},
+    fillPattern=FillPattern.Solid,
+    lineColor={0,0,0}),
+  Rectangle(
+    extent={{-80,-46},{80,-60}},
+    pattern=LinePattern.None,
+    fillColor={0,0,0},
+    fillPattern=FillPattern.Solid,
+    lineColor={0,0,0})}),
     Diagram(graphics));
 end TubeOwnMedia;

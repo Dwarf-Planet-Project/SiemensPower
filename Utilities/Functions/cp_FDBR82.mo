@@ -76,59 +76,59 @@ error:=abs(summe - 1);
 assert(error<0.01, "cp_SimitFlueGas: Illegal gas composition");   // control: in total 100%
 
 if (TGas<1000) then
-         cp := ((((( cpKoeff_1[5]) * TGas
-                   + cpKoeff_1[4]) * TGas
-                   + cpKoeff_1[3]) * TGas
-                     + cpKoeff_1[2]) * TGas
-                     + cpKoeff_1[1]) * XGas[1]
-        +(((((  cpKoeff_2[5]) * TGas
-                  + cpKoeff_2[4]) * TGas
-                   + cpKoeff_2[3]) * TGas
-                     + cpKoeff_2[2]) * TGas
-                     + cpKoeff_2[1]) * XGas[2]
-        +((((( cpKoeff_3[5]) * TGas
-                  + cpKoeff_3[4]) * TGas
-                   + cpKoeff_3[3]) * TGas
-                     + cpKoeff_3[2]) * TGas
-                     + cpKoeff_3[1]) * XGas[3]
-        +((((( cpKoeff_4[5]) * TGas
-                  + cpKoeff_4[4]) * TGas
-                   + cpKoeff_4[3]) * TGas
-                     + cpKoeff_4[2]) * TGas
-                     + cpKoeff_4[1]) * XGas[4]
-        +((((( cpKoeff_5[5]) * TGas
-                  + cpKoeff_5[4]) * TGas
-                   + cpKoeff_5[3]) * TGas
-                     + cpKoeff_5[2]) * TGas
-                     + cpKoeff_5[1]) * XGas[5]
-        + cpKoeff_6 * XGas[6];
+   cp := ((((( cpKoeff_1[5]) * TGas
+             + cpKoeff_1[4]) * TGas
+             + cpKoeff_1[3]) * TGas
+               + cpKoeff_1[2]) * TGas
+               + cpKoeff_1[1]) * XGas[1]
+  +(((((  cpKoeff_2[5]) * TGas
+            + cpKoeff_2[4]) * TGas
+             + cpKoeff_2[3]) * TGas
+               + cpKoeff_2[2]) * TGas
+               + cpKoeff_2[1]) * XGas[2]
+  +((((( cpKoeff_3[5]) * TGas
+            + cpKoeff_3[4]) * TGas
+             + cpKoeff_3[3]) * TGas
+               + cpKoeff_3[2]) * TGas
+               + cpKoeff_3[1]) * XGas[3]
+  +((((( cpKoeff_4[5]) * TGas
+            + cpKoeff_4[4]) * TGas
+             + cpKoeff_4[3]) * TGas
+               + cpKoeff_4[2]) * TGas
+               + cpKoeff_4[1]) * XGas[4]
+  +((((( cpKoeff_5[5]) * TGas
+            + cpKoeff_5[4]) * TGas
+             + cpKoeff_5[3]) * TGas
+               + cpKoeff_5[2]) * TGas
+               + cpKoeff_5[1]) * XGas[5]
+  + cpKoeff_6 * XGas[6];
 else
-         cp := ((((( cpKoeff_1h[5]) * TGas
-                   + cpKoeff_1h[4]) * TGas
-                   + cpKoeff_1h[3]) * TGas
-                     + cpKoeff_1h[2]) * TGas
-                     + cpKoeff_1h[1]) * XGas[1]
-        +(((((  cpKoeff_2h[5]) * TGas
-                  + cpKoeff_2h[4]) * TGas
-                   + cpKoeff_2h[3]) * TGas
-                     + cpKoeff_2h[2]) * TGas
-                     + cpKoeff_2h[1]) * XGas[2]
-        +((((( cpKoeff_3h[5]) * TGas
-                  + cpKoeff_3h[4]) * TGas
-                   + cpKoeff_3h[3]) * TGas
-                     + cpKoeff_3h[2]) * TGas
-                     + cpKoeff_3h[1]) * XGas[3]
-        +((((( cpKoeff_4h[5]) * TGas
-                  + cpKoeff_4h[4]) * TGas
-                   + cpKoeff_4h[3]) * TGas
-                     + cpKoeff_4h[2]) * TGas
-                     + cpKoeff_4h[1]) * XGas[4]
-        +((((( cpKoeff_5h[5]) * TGas
-                  + cpKoeff_5h[4]) * TGas
-                   + cpKoeff_5h[3]) * TGas
-                     + cpKoeff_5h[2]) * TGas
-                     + cpKoeff_5h[1]) * XGas[5]
-        + cpKoeff_6h * XGas[6];
+   cp := ((((( cpKoeff_1h[5]) * TGas
+             + cpKoeff_1h[4]) * TGas
+             + cpKoeff_1h[3]) * TGas
+               + cpKoeff_1h[2]) * TGas
+               + cpKoeff_1h[1]) * XGas[1]
+  +(((((  cpKoeff_2h[5]) * TGas
+            + cpKoeff_2h[4]) * TGas
+             + cpKoeff_2h[3]) * TGas
+               + cpKoeff_2h[2]) * TGas
+               + cpKoeff_2h[1]) * XGas[2]
+  +((((( cpKoeff_3h[5]) * TGas
+            + cpKoeff_3h[4]) * TGas
+             + cpKoeff_3h[3]) * TGas
+               + cpKoeff_3h[2]) * TGas
+               + cpKoeff_3h[1]) * XGas[3]
+  +((((( cpKoeff_4h[5]) * TGas
+            + cpKoeff_4h[4]) * TGas
+             + cpKoeff_4h[3]) * TGas
+               + cpKoeff_4h[2]) * TGas
+               + cpKoeff_4h[1]) * XGas[4]
+  +((((( cpKoeff_5h[5]) * TGas
+            + cpKoeff_5h[4]) * TGas
+             + cpKoeff_5h[3]) * TGas
+               + cpKoeff_5h[2]) * TGas
+               + cpKoeff_5h[1]) * XGas[5]
+  + cpKoeff_6h * XGas[6];
 end if;
 
 if (cp < 0.0099) then
@@ -142,46 +142,46 @@ cp := cp * 1000;  // conversion from kJ to J
 annotation (
       Documentation(
    info="<HTML>
-                    <p>This function returns the specific heat capacity of an ideal composition of the following ideal gases according to the FDBR82 cpGasVon_t function
-                          <br> The heat capacity depends on the TGas via a 4th order polynomial.
-                        <ul>
-                             <li> Carbon dioxide
-                             <li> Sulphur dioxide
-                             <li> Nitrogen
-                             <li> Water
-                             <li> Oxygen
-                             <li> Argon
-                       </ul>
-                    </p>
-                      The default gas composition matches to the reference composition of the FlueGas model.<br>
-                      This cp is also implenented in Krawal modular and DynaplantII.
-                   </HTML>
+              <p>This function returns the specific heat capacity of an ideal composition of the following ideal gases according to the FDBR82 cpGasVon_t function
+                    <br> The heat capacity depends on the TGas via a 4th order polynomial.
+                  <ul>
+                       <li> Carbon dioxide
+                       <li> Sulphur dioxide
+                       <li> Nitrogen
+                       <li> Water
+                       <li> Oxygen
+                       <li> Argon
+                 </ul>
+              </p>
+                The default gas composition matches to the reference composition of the FlueGas model.<br>
+                This cp is also implenented in Krawal modular and DynaplantII.
+             </HTML>
 <HTML> 
        <p>  
-           <table>
-                <tr>
-                              <td><b>Author:</b>  </td>
-                             <td><a href=\"mailto:haiko.steuer@siemens.com\">Haiko Steuer</a> </td>
-                        <td><a href=\"https://scd.siemens.com/db4/v3/lookUp.d4w?tcgid=Z001K4SN\">SCD</a> </td>
-                       </tr>
-                <tr>
-                           <td><b>Checked by:</b>   </td>
-                           <td>            </td>
-                </tr> 
-                <tr>
-                           <td><b>Protection class:</b>    </td>
-                           <td> </td>
-                </tr> 
-           </table>
-                Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
-           For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
-        </p>
+     <table>
+          <tr>
+                        <td><b>Author:</b>  </td>
+                       <td><a href=\"mailto:haiko.steuer@siemens.com\">Haiko Steuer</a> </td>
+                  <td><a href=\"https://scd.siemens.com/db4/v3/lookUp.d4w?tcgid=Z001K4SN\">SCD</a> </td>
+                 </tr>
+          <tr>
+                     <td><b>Checked by:</b>   </td>
+                     <td>            </td>
+          </tr> 
+          <tr>
+                     <td><b>Protection class:</b>    </td>
+                     <td> </td>
+          </tr> 
+     </table>
+          Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
+         This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+     For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
+  </p>
 </HTML>",
       revisions="<html>
-                      <ul>
-                             <li> December 2006, added to SiemensPower by Haiko Steuer
-                             <li> original by Stefan Bennoit
-                       </ul>
-                        </html>"));
+                <ul>
+                       <li> December 2006, added to SiemensPower by Haiko Steuer
+                       <li> original by Stefan Bennoit
+                 </ul>
+                  </html>"));
 end cp_FDBR82;

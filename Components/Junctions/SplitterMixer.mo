@@ -10,9 +10,9 @@ model SplitterMixer "Splitter/mixer with N ports"
     "Number of inlets(mixer) / outlets(splitter)";
 
   parameter SI.AbsolutePressure p_start=1e5 "Pressure" 
-                                               annotation(Dialog(tab="Initialization"));
+                                         annotation(Dialog(tab="Initialization"));
   parameter Boolean useTemperatureStartValue=false
-    "Use temperature instead of specific enthalpy"                                   annotation(Dialog(tab="Initialization"));
+    "Use temperature instead of specific enthalpy"                             annotation(Dialog(tab="Initialization"));
   // parameter Medium.SpecificEnthalpy h_start=if useTemperatureStartValue then Medium.specificEnthalpy_pTX(p_start, T_start, Medium.reference_X) else 300e3
  parameter SI.SpecificEnthalpy h_start = 300e3 "Specific enthalpy" 
   annotation(Dialog(tab="Initialization", enable= not useTemperatureStartValue));
@@ -25,21 +25,21 @@ model SplitterMixer "Splitter/mixer with N ports"
   //  annotation (Dialog(tab="Initialization", enable=Medium.nXi > 0));
 
   parameter SI.MassFlowRate m_flow_start=1
-    "Mass flow rate trough outlet(mixer, negative!) / inlet(splitter)"                                   annotation(Dialog(tab="Initialization"));
+    "Mass flow rate trough outlet(mixer, negative!) / inlet(splitter)"                             annotation(Dialog(tab="Initialization"));
   parameter SI.MassFlowRate[numberOfPortsSplit] m_flowOpposite_start = -ones(numberOfPortsSplit)*m_flow_start/numberOfPortsSplit
-    "Mass flow rate trough inlets(mixer) / outlets(splitter, negative!)"                                   annotation(Dialog(tab="Initialization"));
+    "Mass flow rate trough inlets(mixer) / outlets(splitter, negative!)"                             annotation(Dialog(tab="Initialization"));
 
   parameter Boolean initializeSteadyMassBalance=true "ma=sum(mb)" annotation(Dialog(tab="Initialization",group="Initial equations in case of volume > 0", enable=hasVolume));
   parameter Boolean initializeSteadyEnthalpyBalance=true
     "der(h)=0, may be too much in case of mixer" 
-                 annotation(Dialog(tab="Initialization",group="Initial equations in case of volume > 0", enable=hasVolume));
+           annotation(Dialog(tab="Initialization",group="Initial equations in case of volume > 0", enable=hasVolume));
   parameter Boolean initializeFixedPressure=false "p=p_start" annotation(Dialog(tab="Initialization",group="Initial equations in case of volume > 0", enable=hasVolume));
   parameter Boolean initializeFixedEnthalpy=false "h=h_start" annotation(Dialog(tab="Initialization",group="Initial equations in case of volume > 0", enable=hasVolume));
 
   parameter Boolean hasVolume=false annotation(evaluate=true, Dialog(group="Volume"));
   parameter SI.Volume V=0.1 annotation(Dialog(group="Volume", enable=hasVolume));
   parameter Boolean hasPressureDrop=false
-    "may be necessary in case of a splitter"                                         annotation(evaluate=true, Dialog(group="Pressure loss"));
+    "may be necessary in case of a splitter"                                   annotation(evaluate=true, Dialog(group="Pressure loss"));
   parameter Modelica.Fluid.Types.HydraulicResistance resistanceHydraulic=2
     "Hydraulic resistance" annotation(Dialog(group="Pressure loss", enable=hasPressureDrop));
 
@@ -50,8 +50,8 @@ model SplitterMixer "Splitter/mixer with N ports"
   SiemensPower.Interfaces.FluidPort_a portMix(
     m_flow(start=m_flow_start),
     p(start=p_start),
-    h_outflow(start=h_start)) "inlet(splitter) / outlet(mixer)"                                              annotation (Placement(
-        transformation(extent={{-10,-100},{10,-80}}, rotation=0)));
+    h_outflow(start=h_start)) "inlet(splitter) / outlet(mixer)"                                        annotation (Placement(
+  transformation(extent={{-10,-100},{10,-80}}, rotation=0)));
   //  redeclare package Medium = Medium,
 
   SiemensPower.Interfaces.FluidPorts_b portsSplit[numberOfPortsSplit](
@@ -59,10 +59,10 @@ model SplitterMixer "Splitter/mixer with N ports"
     each p(start=p_start),
     each h_outflow(start=h_start)) "outlets(splitter) / inlets(mixer)" 
     annotation (Placement(transformation(extent={{-8,16},{12,96}}),
-        iconTransformation(
-        extent={{-10,-40},{10,40}},
-        rotation=90,
-        origin={0,90})));
+  iconTransformation(
+  extent={{-10,-40},{10,40}},
+  rotation=90,
+  origin={0,90})));
   //  redeclare package Medium = Medium,
 
 //  Medium.BaseProperties medium(h(start=h_start), p(start=p_start), X(start=X_start));
@@ -116,9 +116,9 @@ equation
 
   for i in 1:numberOfPortsSplit loop
       if (hasPressureDrop) then
-          portsSplit[i].p - p =resistanceHydraulic*portsSplit[i].m_flow;
+    portsSplit[i].p - p =resistanceHydraulic*portsSplit[i].m_flow;
       else
-          portsSplit[i].p = p;
+    portsSplit[i].p = p;
       end if;
       portsSplit[i].h_outflow = h;
     //  portsSplit[i].Xi_outflow = medium.Xi;
@@ -133,46 +133,46 @@ or can be modeled with a volume and/or pressure losses in the N outlets/inlets.
 In case of using this component as a mixer you must use the portsSplit[numberOfPortsSplit] as inlets and portMix as the outlet.
 <p>
 <table>
-        <tr>
-              <td><b>Author:</b>  </td>
-              <td><a href=\"mailto:haiko.steuer@siemens.com\">Haiko Steuer</a> </td>
-              <td><a href=\"https://scd.siemens.com/db4/v3/lookUp.d4w?tcgid=Z001K4SN\">SCD</a> </td>
+  <tr>
+        <td><b>Author:</b>  </td>
+        <td><a href=\"mailto:haiko.steuer@siemens.com\">Haiko Steuer</a> </td>
+        <td><a href=\"https://scd.siemens.com/db4/v3/lookUp.d4w?tcgid=Z001K4SN\">SCD</a> </td>
        </tr>
-        <tr>
-           <td><b>Checked by:</b>   </td>
-           <td>            </td>
-        </tr> 
-        <tr>
-           <td><b>Protection class:</b>    </td>
-           <td>free </td>
-        </tr> 
-        <tr>
-           <td><b>Used Dymola version:</b>    </td>
-           <td>6.1 </td>
-        </tr> 
-        
-        </table>
+  <tr>
+     <td><b>Checked by:</b>   </td>
+     <td>            </td>
+  </tr> 
+  <tr>
+     <td><b>Protection class:</b>    </td>
+     <td>free </td>
+  </tr> 
+  <tr>
+     <td><b>Used Dymola version:</b>    </td>
+     <td>6.1 </td>
+  </tr> 
+  
+  </table>
      Copyright &copy  2007 Siemens AG, PG EIP12 , All rights reserved.<br>
  <br>   This model is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY. For details <a href=\"../Documents/Disclaimer.html\">see</a> <br>
 </HTML>",
     revisions="<html>
-                      <ul>
-                              <li> Feb 2009 adapted for stream connector by Haiko Steuer
-                              <li> November 2007, generalized for other media
-                              <li> June 2007 by Haiko Steuer (for water/steam)  
-                       </ul>
-                        </html>"),
+                <ul>
+                        <li> Feb 2009 adapted for stream connector by Haiko Steuer
+                        <li> November 2007, generalized for other media
+                        <li> June 2007 by Haiko Steuer (for water/steam)  
+                 </ul>
+                  </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},{100,
-            100}}),     graphics),
+      100}}),     graphics),
     Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
-            100}}), graphics={Polygon(
-          points={{-20,-80},{20,-80},{20,-20},{76,-20},{76,80},{46,80},{46,20},
-              {16,20},{16,80},{-16,80},{-16,20},{-44,20},{-44,80},{-76,80},{-76,
-              -20},{-20,-20},{-20,-80}},
-          smooth=Smooth.None,
-          pattern=LinePattern.None,
-          lineColor={0,0,0},
-          fillColor={0,128,255},
-          fillPattern=FillPattern.Solid)}));
+      100}}), graphics={Polygon(
+    points={{-20,-80},{20,-80},{20,-20},{76,-20},{76,80},{46,80},{46,20},
+        {16,20},{16,80},{-16,80},{-16,20},{-44,20},{-44,80},{-76,80},{-76,
+        -20},{-20,-20},{-20,-80}},
+    smooth=Smooth.None,
+    pattern=LinePattern.None,
+    lineColor={0,0,0},
+    fillColor={0,128,255},
+    fillPattern=FillPattern.Solid)}));
 end SplitterMixer;

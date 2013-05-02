@@ -14,20 +14,20 @@ model MassFlowSource_h
   parameter SiemensPower.Units.MassFlowRate m_flow_start = 0
     "Fixed mass flow rate going out of the fluid port"
     annotation (Evaluate = true,
-                Dialog(enable = not use_m_flow_in));
+          Dialog(enable = not use_m_flow_in));
   parameter SiemensPower.Units.SpecificEnthalpy h_start=4e5
     "Fixed value of specific enthalpy"
     annotation (Evaluate = true,
-                Dialog(enable = not use_h_in));
+          Dialog(enable = not use_h_in));
 
   Modelica.Blocks.Interfaces.RealInput m_flow_in if     use_m_flow_in
     "Prescribed mass flow rate"
     annotation (Placement(transformation(extent={{-120,60},{-80,100}},
-          rotation=0)));
-  Modelica.Blocks.Interfaces.RealInput hIn if              use_h_in
+    rotation=0)));
+  Modelica.Blocks.Interfaces.RealInput hIn if        use_h_in
     "Prescribed fluid specific enthalpy"
     annotation (Placement(transformation(extent={{-140,20},{-100,60}},
-          rotation=0), iconTransformation(extent={{-140,20},{-100,60}})));
+    rotation=0), iconTransformation(extent={{-140,20},{-100,60}})));
 
  SiemensPower.Units.AbsolutePressure p;
  SiemensPower.Units.SpecificEnthalpy h(start=h_start);
@@ -63,66 +63,66 @@ equation
   m_flow = m_flow_in_internal;
   annotation (defaultComponentName="boundary",
     Icon(coordinateSystem(
-        preserveAspectRatio=false,
-        extent={{-100,-100},{100,100}},
-        grid={1,1}), graphics={
-        Rectangle(
-          extent={{36,45},{100,-45}},
-          lineColor={0,0,0},
-          fillPattern=FillPattern.HorizontalCylinder,
-          fillColor={0,127,255}),
-        Ellipse(
-          extent={{-100,80},{60,-80}},
-          lineColor={0,0,255},
-          fillColor={255,255,255},
-          fillPattern=FillPattern.Solid),
-        Polygon(
-          points={{-60,70},{60,0},{-60,-68},{-60,70}},
-          lineColor={0,0,255},
-          fillColor={0,0,255},
-          fillPattern=FillPattern.Solid),
-        Text(
-          extent={{-54,32},{16,-30}},
-          lineColor={255,0,0},
-          textString="m"),
-        Ellipse(
-          extent={{-26,30},{-18,22}},
-          lineColor={255,0,0},
-          fillColor={255,0,0},
-          fillPattern=FillPattern.Solid),
-        Text(
-          visible=use_m_flow_in,
-          extent={{-185,132},{-45,100}},
-          lineColor={0,0,0},
-          textString="m_flow"),
-        Text(
-          visible=use_h_in,
-          extent={{-113,72},{-73,38}},
-          lineColor={0,0,0},
-          textString="h"),
-        Text(
-          visible=use_X_in,
-          extent={{-153,-44},{-33,-72}},
-          lineColor={0,0,0},
-          textString="X"),
-        Text(
-          visible=use_X_in,
-          extent={{-155,-98},{-35,-126}},
-          lineColor={0,0,0},
-          textString="C"),
-        Text(
-          extent={{-150,110},{150,150}},
-          textString="%name",
-          lineColor={0,0,255})}),
+  preserveAspectRatio=false,
+  extent={{-100,-100},{100,100}},
+  grid={1,1}), graphics={
+  Rectangle(
+    extent={{36,45},{100,-45}},
+    lineColor={0,0,0},
+    fillPattern=FillPattern.HorizontalCylinder,
+    fillColor={0,127,255}),
+  Ellipse(
+    extent={{-100,80},{60,-80}},
+    lineColor={0,0,255},
+    fillColor={255,255,255},
+    fillPattern=FillPattern.Solid),
+  Polygon(
+    points={{-60,70},{60,0},{-60,-68},{-60,70}},
+    lineColor={0,0,255},
+    fillColor={0,0,255},
+    fillPattern=FillPattern.Solid),
+  Text(
+    extent={{-54,32},{16,-30}},
+    lineColor={255,0,0},
+    textString="m"),
+  Ellipse(
+    extent={{-26,30},{-18,22}},
+    lineColor={255,0,0},
+    fillColor={255,0,0},
+    fillPattern=FillPattern.Solid),
+  Text(
+    visible=use_m_flow_in,
+    extent={{-185,132},{-45,100}},
+    lineColor={0,0,0},
+    textString="m_flow"),
+  Text(
+    visible=use_h_in,
+    extent={{-113,72},{-73,38}},
+    lineColor={0,0,0},
+    textString="h"),
+  Text(
+    visible=use_X_in,
+    extent={{-153,-44},{-33,-72}},
+    lineColor={0,0,0},
+    textString="X"),
+  Text(
+    visible=use_X_in,
+    extent={{-155,-98},{-35,-126}},
+    lineColor={0,0,0},
+    textString="C"),
+  Text(
+    extent={{-150,110},{150,150}},
+    textString="%name",
+    lineColor={0,0,255})}),
     Window(
       x=0.45,
       y=0.01,
       width=0.44,
       height=0.65),
     Diagram(coordinateSystem(
-        preserveAspectRatio=false,
-        extent={{-100,-100},{100,100}},
-        grid={1,1}), graphics),
+  preserveAspectRatio=false,
+  extent={{-100,-100},{100,100}},
+  grid={1,1}), graphics),
     Documentation(info="<html>
 <p>
 Models an ideal flow source, with prescribed values of flow rate, temperature and composition:

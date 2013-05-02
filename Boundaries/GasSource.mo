@@ -6,7 +6,7 @@ model GasSource "Flowrate source for gas flows"
  //   T(start=T_start),
  //   Xi(start=Xi_start[1:Medium.nXi]));
   parameter SiemensPower.Units.AbsolutePressure p_start=101325
-    "Nominal pressure"                                                              annotation(Dialog(tab="Advanced"));
+    "Nominal pressure"                                                        annotation(Dialog(tab="Advanced"));
   parameter SiemensPower.Units.Temperature T_start=300 "Temperature";
 
   parameter SiemensPower.Units.MassFlowRate m_flow_start= 0 "Mass flow rate";
@@ -27,26 +27,26 @@ model GasSource "Flowrate source for gas flows"
     annotation (Placement(transformation(extent={{80,-20},{120,20}}, rotation=0)));
   Modelica.Blocks.Interfaces.RealInput m_flow_set if use_m_flow_set
     annotation (Placement(transformation(
-        origin={-60,60},
-        extent={{-20,-20},{20,20}},
-        rotation=270)));
+  origin={-60,60},
+  extent={{-20,-20},{20,20}},
+  rotation=270)));
   Modelica.Blocks.Interfaces.RealInput T_set if use_T_set
     annotation (Placement(transformation(
-        origin={0,60},
-        extent={{-20,-20},{20,20}},
-        rotation=270)));
+  origin={0,60},
+  extent={{-20,-20},{20,20}},
+  rotation=270)));
 
 protected
  Modelica.Blocks.Interfaces.RealInput m_flow_internal
     annotation (Placement(transformation(
-        origin={-60,60},
-        extent={{-20,-20},{20,20}},
-        rotation=270)));
+  origin={-60,60},
+  extent={{-20,-20},{20,20}},
+  rotation=270)));
   Modelica.Blocks.Interfaces.RealInput T_internal
     annotation (Placement(transformation(
-        origin={0,60},
-        extent={{-20,-20},{20,20}},
-        rotation=270)));
+  origin={0,60},
+  extent={{-20,-20},{20,20}},
+  rotation=270)));
 
 equation
   connect(m_flow_set,m_flow_internal);
@@ -72,23 +72,23 @@ equation
   //TPortActual=noEvent(Medium.temperature_phX(port.p, actualStream(port.h_outflow), actualStream(port.Xi_outflow)));
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}), graphics={
-        Text(extent={{-112,72},{-62,42}}, textString="m"),
-        Text(extent={{-114,98},{-64,58}}, textString="."),
-        Text(extent={{-48,72},{2,42}}, textString="T"),
-        Text(extent={{64,72},{114,42}}, textString="X"),
-        Rectangle(
-          extent={{-80,40},{80,-40}},
-          lineColor={128,128,128},
-          fillColor={159,159,223},
-          fillPattern=FillPattern.Solid),
-        Polygon(
-          points={{-12,-20},{66,0},{-12,20},{34,0},{-12,-20}},
-          lineColor={128,128,128},
-          fillColor={0,0,0},
-          fillPattern=FillPattern.Solid),
-        Text(extent={{-100,-52},{100,-80}}, textString="%name")}),
-                                                   Documentation(info="<html>
+      -100},{100,100}}), graphics={
+  Text(extent={{-112,72},{-62,42}}, textString="m"),
+  Text(extent={{-114,98},{-64,58}}, textString="."),
+  Text(extent={{-48,72},{2,42}}, textString="T"),
+  Text(extent={{64,72},{114,42}}, textString="X"),
+  Rectangle(
+    extent={{-80,40},{80,-40}},
+    lineColor={128,128,128},
+    fillColor={159,159,223},
+    fillPattern=FillPattern.Solid),
+  Polygon(
+    points={{-12,-20},{66,0},{-12,20},{34,0},{-12,-20}},
+    lineColor={128,128,128},
+    fillColor={0,0,0},
+    fillPattern=FillPattern.Solid),
+  Text(extent={{-100,-52},{100,-80}}, textString="%name")}),
+                                             Documentation(info="<html>
 <p>This is a model for a fluid boundary condition with fixed </p>
 <p><ul>
 <li>mass flow rate </li>
@@ -104,29 +104,29 @@ equation
 </html>
 <HTML> 
        <p>  
-           <table>
-                <tr>
-                              <td><b>Author:</b>  </td>
-                              <td><a href=\"mailto:\">Kilian Link</a> </td>
-                        <td><a href=\"https://scd.siemens.com/db4/v3/lookUp.d4w?tcgid=Z001K4SN\">SCD</a> </td>
-                       </tr>
-                <tr>
-                           <td><b>Checked by:</b>   </td>
-                           <td>            </td>
-                </tr> 
-                <tr>
-                           <td><b>Protection class:</b>    </td>
-                           <td> </td>
-                </tr> 
-                <tr>
-                           <td><b>Used Dymola version:</b>    </td>
-                           <td> </td>
-                  </tr> 
-           </table>
-                Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
-           For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
-        </p>
+     <table>
+          <tr>
+                        <td><b>Author:</b>  </td>
+                        <td><a href=\"mailto:\">Kilian Link</a> </td>
+                  <td><a href=\"https://scd.siemens.com/db4/v3/lookUp.d4w?tcgid=Z001K4SN\">SCD</a> </td>
+                 </tr>
+          <tr>
+                     <td><b>Checked by:</b>   </td>
+                     <td>            </td>
+          </tr> 
+          <tr>
+                     <td><b>Protection class:</b>    </td>
+                     <td> </td>
+          </tr> 
+          <tr>
+                     <td><b>Used Dymola version:</b>    </td>
+                     <td> </td>
+            </tr> 
+     </table>
+          Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
+         This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+     For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
+  </p>
 </HTML>",
       revisions="<html>
 <ul>

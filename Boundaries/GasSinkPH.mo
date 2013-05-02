@@ -15,17 +15,17 @@ model GasSinkPH "Pressure sink for gas flows"
 
   SiemensPower.Interfaces.portGasIn portGas
     annotation (Placement(transformation(extent={{-120,-20},{-80,20}}, rotation=
-           0)));
+     0)));
   Modelica.Blocks.Interfaces.RealInput p_In if use_p_In
     annotation (Placement(transformation(
-        origin={-60,60},
-        extent={{-20,-20},{20,20}},
-        rotation=270)));
+  origin={-60,60},
+  extent={{-20,-20},{20,20}},
+  rotation=270)));
   Modelica.Blocks.Interfaces.RealInput h_In if use_h_In
     annotation (Placement(transformation(
-        origin={0,90},
-        extent={{-20,-20},{20,20}},
-        rotation=270)));
+  origin={0,90},
+  extent={{-20,-20},{20,20}},
+  rotation=270)));
 
  // Medium.BaseProperties gas(
  //   p(start=p_start),
@@ -40,14 +40,14 @@ model GasSinkPH "Pressure sink for gas flows"
 protected
   Modelica.Blocks.Interfaces.RealInput p_In_internal
     annotation (Placement(transformation(
-        origin={-60,60},
-        extent={{-20,-20},{20,20}},
-        rotation=270)));
+  origin={-60,60},
+  extent={{-20,-20},{20,20}},
+  rotation=270)));
   Modelica.Blocks.Interfaces.RealInput h_In_internal
     annotation (Placement(transformation(
-        origin={0,90},
-        extent={{-20,-20},{20,20}},
-        rotation=270)));
+  origin={0,90},
+  extent={{-20,-20},{20,20}},
+  rotation=270)));
  // Modelica.Blocks.Interfaces.RealInput Xi_In_internal[Medium.nX]
  //   annotation (Placement(transformation(
  //       origin={0,90},
@@ -79,28 +79,28 @@ equation
 // T = (h) / cp;
 // T-670 = (h-4e5) / cp;
    h = SiemensPower.Utilities.Functions.hT_FDBR82(T);
-                                                                                                      annotation (
+                                                                                                annotation (
       choicesAllMatching=true,
-              Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
-            -100},{100,100}}), graphics={
-        Text(extent={{-114,72},{-64,42}}, textString="p"),
-        Text(extent={{-48,102},{2,72}},
-          textString="h",
-          lineColor={0,0,0}),
-        Text(extent={{64,72},{114,42}}, textString="X"),
-        Ellipse(
-          extent={{-80,74},{80,-86}},
-          lineColor={128,128,128},
-          fillColor={159,159,223},
-          fillPattern=FillPattern.Solid),
-        Text(
-          extent={{-20,28},{28,-32}},
-          lineColor={255,255,255},
-          textString="P"),
-        Text(
-          extent={{-88,-82},{90,-132}},
-          lineColor={0,0,0},
-          textString="%name")}),                   Documentation(info="<html>
+        Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
+      -100},{100,100}}), graphics={
+  Text(extent={{-114,72},{-64,42}}, textString="p"),
+  Text(extent={{-48,102},{2,72}},
+    textString="h",
+    lineColor={0,0,0}),
+  Text(extent={{64,72},{114,42}}, textString="X"),
+  Ellipse(
+    extent={{-80,74},{80,-86}},
+    lineColor={128,128,128},
+    fillColor={159,159,223},
+    fillPattern=FillPattern.Solid),
+  Text(
+    extent={{-20,28},{28,-32}},
+    lineColor={255,255,255},
+    textString="P"),
+  Text(
+    extent={{-88,-82},{90,-132}},
+    lineColor={0,0,0},
+    textString="%name")}),                   Documentation(info="<html>
 <p>This is a model for a fluid boundary condition with fixed </p>
 <p><ul>
 <li>pressure </li>
@@ -117,29 +117,29 @@ equation
 </html>
 <HTML> 
        <p>  
-           <table>
-                <tr>
-                              <td><b>Author:</b>  </td>
-                                 <td><a href=\"mailto:kilian.link@siemens.com\">Kilian Link</a> </td>
-                        <td><a href=\"https://scd.siemens.com/db4/v3/lookUp.d4w?tcgid=Z001K4SN\">SCD</a> </td>
-                       </tr>
-                <tr>
-                           <td><b>Checked by:</b>   </td>
-                           <td>            </td>
-                </tr> 
-                <tr>
-                           <td><b>Protection class:</b>    </td>
-                           <td> </td>
-                </tr> 
-                <tr>
-                           <td><b>Used Dymola version:</b>    </td>
-                           <td> </td>
-                  </tr> 
-           </table>
-                Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
-           For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
-        </p>
+     <table>
+          <tr>
+                        <td><b>Author:</b>  </td>
+                           <td><a href=\"mailto:kilian.link@siemens.com\">Kilian Link</a> </td>
+                  <td><a href=\"https://scd.siemens.com/db4/v3/lookUp.d4w?tcgid=Z001K4SN\">SCD</a> </td>
+                 </tr>
+          <tr>
+                     <td><b>Checked by:</b>   </td>
+                     <td>            </td>
+          </tr> 
+          <tr>
+                     <td><b>Protection class:</b>    </td>
+                     <td> </td>
+          </tr> 
+          <tr>
+                     <td><b>Used Dymola version:</b>    </td>
+                     <td> </td>
+            </tr> 
+     </table>
+          Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
+         This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+     For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
+  </p>
 </HTML>",
       revisions="<html>
 <ul>
