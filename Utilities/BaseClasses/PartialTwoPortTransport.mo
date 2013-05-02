@@ -9,14 +9,14 @@ partial model PartialTwoPortTransport
 // Medium
 //  replaceable package Medium = Modelica.Media.Water.WaterIF97_ph
 //    constrainedby Modelica.Media.Interfaces.PartialMedium
-//     annotation (choicesAllMatching = true);
+//           annotation (choicesAllMatching = true);
 
   parameter Boolean preferredStates=true
-    "Try to select preferred medium states"                                annotation(Dialog(tab="Advanced"));
+    "Try to select preferred medium states"                                      annotation(Dialog(tab="Advanced"));
 
 // Initializatin parameters
  parameter Modelica.SIunits.MassFlowRate m_flow_start=1
-    "Guess value for mass flow rate"                                           annotation(Dialog(tab="Initialization"));
+    "Guess value for mass flow rate"                                                 annotation(Dialog(tab="Initialization"));
 
   parameter SI.AbsolutePressure pIn_start = 1e5 "Start value of inlet pressure"
     annotation(Dialog(tab = "Initialization"));
@@ -57,18 +57,18 @@ partial model PartialTwoPortTransport
 //    annotation (Dialog(tab="Initialization", enable=Medium.nXi > 0));
 
   parameter Boolean useSubstanceStorage=false "consider composition storage" 
-                             annotation(Dialog(tab="Advanced", group="Dynamics"));
+                                   annotation(Dialog(tab="Advanced", group="Dynamics"));
 
   parameter Boolean useEnergyStorage=true
-    "consider energy storage (else: isenthalpic transport)"                                  annotation(Dialog(tab="Advanced", group="Dynamics"));
+    "consider energy storage (else: isenthalpic transport)"                                        annotation(Dialog(tab="Advanced", group="Dynamics"));
 
   SiemensPower.Interfaces.FluidPort_a portIn( m_flow(start=m_flow_start), h_outflow(start=hIn_start), p(start=pIn_start))
     "Inlet port" annotation (Placement(transformation(extent={{-120,-20},{-80,
-      20}}, rotation=0), iconTransformation(extent={{-120,-20},{-80,20}})));
+            20}}, rotation=0), iconTransformation(extent={{-120,-20},{-80,20}})));
 
   SiemensPower.Interfaces.FluidPort_b portOut( m_flow(start=-m_flow_start), h_outflow(start=hOut_start), p(start=pOut_start))
     "Outlet port" annotation (Placement(transformation(extent={{120,-20},{80,20}},
-    rotation=0), iconTransformation(extent={{120,-20},{80,20}})));
+          rotation=0), iconTransformation(extent={{120,-20},{80,20}})));
 
   SI.Pressure dp(start=pIn_start-pOut_start);
 
@@ -110,7 +110,7 @@ equation
 //  portOut.C_outflow = inStream(portIn.C_outflow);
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
-      -100},{100,100}}), graphics),
+            -100},{100,100}}), graphics),
     Documentation(info="<HTML>
 <p>This base class describes the geometry and most important variables for the fluid flow without storing substance.<br> 
 In the derived class, the following quantities/equations have to be set:<br>
@@ -125,29 +125,29 @@ In the derived class, the following quantities/equations have to be set:<br>
 
 <HTML> 
        <p>  
-     <table>
-          <tr>
-                        <td><b>Author:</b>  </td>
-                         <td><a href=\"mailto:haiko.steuer@siemens.com\">Haiko Steuer</a> </td>
-                  <td><a href=\"https://scd.siemens.com/db4/v3/lookUp.d4w?tcgid=Z001K4SN\">SCD</a> </td>
-                 </tr>
-          <tr>
-                     <td><b>Checked by:</b>   </td>
-                     <td>            </td>
-          </tr> 
-          <tr>
-                     <td><b>Protection class:</b>    </td>
-                     <td> </td>
-          </tr> 
-          <tr>
-                     <td><b>Used Dymola version:</b>    </td>
-                     <td> </td>
-            </tr> 
-     </table>
-          Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-         This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
-     For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
-  </p>
+           <table>
+                <tr>
+                              <td><b>Author:</b>  </td>
+                               <td><a href=\"mailto:haiko.steuer@siemens.com\">Haiko Steuer</a> </td>
+                        <td><a href=\"https://scd.siemens.com/db4/v3/lookUp.d4w?tcgid=Z001K4SN\">SCD</a> </td>
+                       </tr>
+                <tr>
+                           <td><b>Checked by:</b>   </td>
+                           <td>            </td>
+                </tr> 
+                <tr>
+                           <td><b>Protection class:</b>    </td>
+                           <td> </td>
+                </tr> 
+                <tr>
+                           <td><b>Used Dymola version:</b>    </td>
+                           <td> </td>
+                  </tr> 
+           </table>
+                Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+           For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
+        </p>
 </HTML>",
       revisions="<html>
 <ul>
@@ -155,5 +155,5 @@ In the derived class, the following quantities/equations have to be set:<br>
 </ul>
 </HTML>"),
     Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
-      100}}), graphics));
+            100}}), graphics));
 end PartialTwoPortTransport;

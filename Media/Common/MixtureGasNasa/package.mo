@@ -26,27 +26,27 @@ protected
   algorithm
   for i in 1:nX loop
       assert(fluidConstants[i].hasCriticalData, "Critical data for " +
-  fluidConstants[i].chemicalFormula +
+        fluidConstants[i].chemicalFormula +
    " not known. Can not compute thermal conductivity.");
       eta[i] := Common.SingleGasNasa.dynamicViscosityLowPressure(
-    state.T, fluidConstants[i].criticalTemperature,
-             fluidConstants[i].molarMass,
-             fluidConstants[i].criticalMolarVolume,
-             fluidConstants[i].acentricFactor,
-             fluidConstants[i].dipoleMoment);
+          state.T, fluidConstants[i].criticalTemperature,
+                   fluidConstants[i].molarMass,
+                   fluidConstants[i].criticalMolarVolume,
+                   fluidConstants[i].acentricFactor,
+                   fluidConstants[i].dipoleMoment);
       cp[i] := Common.SingleGasNasa.cp_T(data[i], state.T);
       lambdaX[i] := Common.SingleGasNasa.thermalConductivityEstimate(
-    Cp=cp[i],
-    eta=
+          Cp=cp[i],
+          eta=
       eta[i], method=method);
   end for;
   lambda := lowPressureThermalConductivity(massToMoleFractions(state.X,
-                         fluidConstants[:].molarMass),
-                 state.T,
-                 fluidConstants[:].criticalTemperature,
-                 fluidConstants[:].criticalPressure,
-                 fluidConstants[:].molarMass,
-                 lambdaX);
+                               fluidConstants[:].molarMass),
+                       state.T,
+                       fluidConstants[:].criticalTemperature,
+                       fluidConstants[:].criticalPressure,
+                       fluidConstants[:].molarMass,
+                       lambdaX);
   annotation (smoothOrder=2);
   end thermalConductivity;
 
@@ -63,7 +63,7 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
 <td><p><a href=\"https://scd.siemens.com/db4/v3/lookUp.d4w?tcgid=Z001K4SN\">SCD</a> </p></td>
 </tr>
 <tr>
-<td><p><b>Checked by:  </b> </p></td>
+<td><p><b>Checked by:        </b> </p></td>
 <td><p><a href=\"mailto:kilian.link@siemens.com\">Kilian Link</a> </p></td>
 <td><p><a href=\"https://scd.siemens.com/db4/v3/lookUp.d4w?tcgid=Z000PMEA\">SCD</a> </p></td>
 </tr>
@@ -82,8 +82,8 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
 <p>This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> </p>
 </html>",
       revisions="<html>
-                <ul>
-                       <li> October 2011,  Julien Bonifay
-                 </ul>
-                  </html>"));
+                      <ul>
+                             <li> October 2011,  Julien Bonifay
+                       </ul>
+                        </html>"));
 end MixtureGasNasa;

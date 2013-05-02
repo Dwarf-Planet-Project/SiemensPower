@@ -25,7 +25,7 @@ partial model BaseTube "Base class for spatial discretized tubes"
   // Advanced
   parameter SI.Volume additionalVolume=0
     "Additional volume to total tubes volumes" 
-                                        annotation(Dialog(tab="Advanced"));
+                                              annotation(Dialog(tab="Advanced"));
   parameter Boolean useDynamicMassBalance=true "consider mass storage" annotation(Dialog(tab="Advanced", group="Dynamics"),Evaluate=true);
   parameter Boolean considerDynamicMomentum=true
     "der(m_flow) accounted for, be careful!"  annotation(Dialog(tab="Advanced", group="Dynamics"),evaluate=true);
@@ -43,9 +43,9 @@ partial model BaseTube "Base class for spatial discretized tubes"
   final parameter Real sinphi = geoPipe.H / geoPipe.L;
 
 //  Medium.BaseProperties fluid[numberOfNodes](each preferredMediumStates=preferredStates,
-//                      p(start=SiemensPower.Utilities.Functions.my_linspace(pIn_start,pOut_start,numberOfNodes)),
-//                      h(start=h_start),
-//                      each Xi(start=XIn_start[1:Medium.nXi]));
+//                            p(start=SiemensPower.Utilities.Functions.my_linspace(pIn_start,pOut_start,numberOfNodes)),
+//                            h(start=h_start),
+//                            each Xi(start=XIn_start[1:Medium.nXi]));
   SI.MassFlowRate m_flows[numberOfNodes](each start=m_flow_start/geoPipe.Nt);
   SI.Density d_av(start=sum(d_start)/numberOfNodes);
   SI.SpecificVolume vol_av(start=1/SiemensPower.Media.TTSE.Utilities.rho_ph(0.5*(pIn_start+pOut_start), 0.5*(hIn_start+hOut_start)));
@@ -77,11 +77,11 @@ initial equation
   // h
  if (useEnergyStorage) then
   if (initializeSteadyStateInletEnthalpy and initializeSteadyStateEnthalpies) then
-  der(hFluid[1])=0;
+        der(hFluid[1])=0;
   end if;
   if (initializeSteadyStateEnthalpies) then
       for j in 2:numberOfNodes loop
-  der(hFluid[j]) = 0;
+        der(hFluid[j]) = 0;
      end for;
   end if;
   end if;
@@ -127,31 +127,31 @@ equation
 //  end if;
   for j in 1:numberOfNodes loop
      if useEnergyStorage then
-  if considerDynamicPressure then
-     VCell*(d[j]*der(hFluid[j])-der(pFluid[j])) = E_flows[j] + heatedArea*qHeating[j]/(numberOfNodes*geoPipe.Nt);
-  else
-     VCell*d[j]*der(hFluid[j]) = E_flows[j] + heatedArea*qHeating[j]/(numberOfNodes*geoPipe.Nt);
-  end if;
+        if considerDynamicPressure then
+           VCell*(d[j]*der(hFluid[j])-der(pFluid[j])) = E_flows[j] + heatedArea*qHeating[j]/(numberOfNodes*geoPipe.Nt);
+        else
+           VCell*d[j]*der(hFluid[j]) = E_flows[j] + heatedArea*qHeating[j]/(numberOfNodes*geoPipe.Nt);
+        end if;
      else
-  hFluid[j] = Modelica.Fluid.Utilities.regStep(m_flowsZero, inStream(portIn.h_outflow), inStream(portOut.h_outflow));
+        hFluid[j] = Modelica.Fluid.Utilities.regStep(m_flowsZero, inStream(portIn.h_outflow), inStream(portOut.h_outflow));
      end if;
 //     if useSubstanceStorage then
-//  VCell*fluid[j].d*der(fluid[j].Xi) = M_flows[j,:];
+//        VCell*fluid[j].d*der(fluid[j].Xi) = M_flows[j,:];
 //     else
-//  fluid[j].Xi = Modelica.Fluid.Utilities.regStep(m_flowsZero, inStream(portIn.Xi_outflow), inStream(portOut.Xi_outflow));
+//        fluid[j].Xi = Modelica.Fluid.Utilities.regStep(m_flowsZero, inStream(portIn.Xi_outflow), inStream(portOut.Xi_outflow));
 //     end if;
   end for;
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
-      -100},{100,100}}), graphics={Rectangle(
-    extent={{-90,40},{92,-40}},
-    lineColor={0,0,0},
-    pattern=LinePattern.None,
-    fillPattern=FillPattern.HorizontalCylinder,
-    fillColor={0,149,255}), Text(
-    extent={{-100,-50},{100,-90}},
-    lineColor={0,0,0},
-    textString="%name")}),
+            -100},{100,100}}), graphics={Rectangle(
+          extent={{-90,40},{92,-40}},
+          lineColor={0,0,0},
+          pattern=LinePattern.None,
+          fillPattern=FillPattern.HorizontalCylinder,
+          fillColor={0,149,255}), Text(
+          extent={{-100,-50},{100,-90}},
+          lineColor={0,0,0},
+          textString="%name")}),
     Documentation(info="<HTML>
 <p>This base class describes the geometry and most important variables for the water/steam flow in a pipe.<br> 
 It will be a 1-dimensional flow model.
@@ -166,29 +166,29 @@ In the derived class, the following quantities/equations have to be set:<br>
 <p>
 </HTML><HTML> 
        <p>  
-     <table>
-          <tr>
-                        <td><b>Author:</b>  </td>
-                       <td><a href=\"mailto:haiko.steuer@siemens.com\">Haiko Steuer</a> </td>
-                  <td><a href=\"https://scd.siemens.com/db4/v3/lookUp.d4w?tcgid=Z001K4SN\">SCD</a> </td>
-                 </tr>
-          <tr>
-                     <td><b>Checked by:</b>   </td>
-                     <td>            </td>
-          </tr> 
-          <tr>
-                     <td><b>Protection class:</b>    </td>
-                     <td> </td>
-          </tr> 
-          <tr>
-                     <td><b>Used Dymola version:</b>    </td>
-                     <td> </td>
-            </tr> 
-     </table>
-          Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-         This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
-     For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
-  </p>
+           <table>
+                <tr>
+                              <td><b>Author:</b>  </td>
+                             <td><a href=\"mailto:haiko.steuer@siemens.com\">Haiko Steuer</a> </td>
+                        <td><a href=\"https://scd.siemens.com/db4/v3/lookUp.d4w?tcgid=Z001K4SN\">SCD</a> </td>
+                       </tr>
+                <tr>
+                           <td><b>Checked by:</b>   </td>
+                           <td>            </td>
+                </tr> 
+                <tr>
+                           <td><b>Protection class:</b>    </td>
+                           <td> </td>
+                </tr> 
+                <tr>
+                           <td><b>Used Dymola version:</b>    </td>
+                           <td> </td>
+                  </tr> 
+           </table>
+                Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+           For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
+        </p>
 </HTML>",
       revisions="<html>
 <ul>
