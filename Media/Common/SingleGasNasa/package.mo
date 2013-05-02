@@ -51,8 +51,8 @@ annotation (
 <p><br/><br/><br/><br/>This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> </p>
 </html>",
       revisions="<html>
-                <ul>
-                       <li> October 2011,  Julien Bonifay
-                 </ul>
-                  </html>"));
+                      <ul>
+                             <li> October 2011,  Julien Bonifay
+                       </ul>
+                        </html>"));
 end SingleGasNasa;

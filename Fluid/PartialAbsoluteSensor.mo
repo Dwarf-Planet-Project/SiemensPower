@@ -4,9 +4,9 @@ partial model PartialAbsoluteSensor
 
   SiemensPower.Interfaces.FluidPort_a port(m_flow(min=0))
     annotation (Placement(transformation(
-  origin={0,-100},
-  extent={{-10,-10},{10,10}},
-  rotation=90)));
+        origin={0,-100},
+        extent={{-10,-10},{10,10}},
+        rotation=90)));
 
 equation
   port.m_flow = 0;
@@ -20,11 +20,11 @@ as signal.
 </p>
 </html>"),
     Diagram(coordinateSystem(
-  preserveAspectRatio=false,
-  extent={{-100,-100},{100,100}},
-  grid={1,1}), graphics),
+        preserveAspectRatio=false,
+        extent={{-100,-100},{100,100}},
+        grid={1,1}), graphics),
     Icon(coordinateSystem(
-  preserveAspectRatio=false,
-  extent={{-100,-100},{100,100}},
-  grid={1,1}), graphics));
+        preserveAspectRatio=false,
+        extent={{-100,-100},{100,100}},
+        grid={1,1}), graphics));
 end PartialAbsoluteSensor;
