@@ -35,9 +35,9 @@ partial model BaseTube "Base class for spatial discretized tubes"
   final parameter Real sinphi = geoPipe.H / geoPipe.L;
 
   Medium.BaseProperties fluid[numberOfNodes](each preferredMediumStates=true,
-                            p(start=pressureDistribution_start),
-                            h(start=h_start),
-                            each Xi(start=XIn_start[1:Medium.nXi]));
+                      p(start=pressureDistribution_start),
+                      h(start=h_start),
+                      each Xi(start=XIn_start[1:Medium.nXi]));
   Medium.MassFlowRate m_flows[numberOfNodes](each start=m_flow_start/geoPipe.Nt);
   Medium.Density d_av(start=sum(d_start)/numberOfNodes);
   SI.SpecificVolume vol_av(start=1/Medium.density_phX(0.5*(pIn_start+pOut_start), 0.5*(hIn_start+hOut_start),XIn_start));
@@ -68,11 +68,11 @@ initial equation
 
   // h
   if (initializeSteadyStateInletEnthalpy and initializeSteadyStateEnthalpies) then
-        der(fluid[1].h)=0;
+  der(fluid[1].h)=0;
   end if;
   if (initializeSteadyStateEnthalpies) then
       for j in 2:numberOfNodes loop
-        der(fluid[j].h) = 0;
+  der(fluid[j].h) = 0;
      end for;
   end if;
   for j in 1:numberOfNodes loop
@@ -97,8 +97,8 @@ equation
     E_flows[1]= max(0,m_flowsZero) *(inStream(portIn.h_outflow)-fluid[1].h)+max(0,-m_flows[1])*(fluid[2].h-fluid[1].h);
     M_flows[1,:]= max(0,m_flowsZero) *(inStream(portIn.Xi_outflow)-fluid[1].Xi)+max(0,-m_flows[1])*(fluid[2].Xi-fluid[1].Xi);
     for j in 2:(numberOfNodes-1) loop
-        E_flows[j]=max(0,m_flows[j-1])*(fluid[j-1].h-fluid[j].h)+max(0,-m_flows[j])*(fluid[j+1].h-fluid[j].h);
-        M_flows[j,:]=max(0,m_flows[j-1])*(fluid[j-1].Xi-fluid[j].Xi)+max(0,-m_flows[j])*(fluid[j+1].Xi-fluid[j].Xi);
+  E_flows[j]=max(0,m_flows[j-1])*(fluid[j-1].h-fluid[j].h)+max(0,-m_flows[j])*(fluid[j+1].h-fluid[j].h);
+  M_flows[j,:]=max(0,m_flows[j-1])*(fluid[j-1].Xi-fluid[j].Xi)+max(0,-m_flows[j])*(fluid[j+1].Xi-fluid[j].Xi);
     end for;
     E_flows[numberOfNodes]=max(0,m_flows[numberOfNodes-1])*(fluid[numberOfNodes-1].h-fluid[numberOfNodes].h)+max(0,-m_flows[numberOfNodes])*(inStream(portOut.h_outflow)-fluid[numberOfNodes].h);
     M_flows[numberOfNodes,:]=max(0,m_flows[numberOfNodes-1])*(fluid[numberOfNodes-1].Xi-fluid[numberOfNodes].Xi)+max(0,-m_flows[numberOfNodes])*(inStream(portOut.Xi_outflow)-fluid[numberOfNodes].Xi);
@@ -112,20 +112,20 @@ equation
     portIn.Xi_outflow = fluid[1].Xi;
     portOut.Xi_outflow= fluid[numberOfNodes].Xi;
   for j in 1:numberOfNodes loop
-        VCell*fluid[j].d*der(fluid[j].h) = E_flows[j] + heatedArea*qHeating[j]/(numberOfNodes*geoPipe.Nt);
-        VCell*fluid[j].d*der(fluid[j].Xi) = M_flows[j,:];
+  VCell*fluid[j].d*der(fluid[j].h) = E_flows[j] + heatedArea*qHeating[j]/(numberOfNodes*geoPipe.Nt);
+  VCell*fluid[j].d*der(fluid[j].Xi) = M_flows[j,:];
   end for;
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
-            -100},{100,100}}), graphics={Rectangle(
-          extent={{-90,40},{92,-40}},
-          lineColor={0,0,0},
-          pattern=LinePattern.None,
-          fillPattern=FillPattern.HorizontalCylinder,
-          fillColor={0,149,255}), Text(
-          extent={{-100,-50},{100,-90}},
-          lineColor={0,0,0},
-          textString="%name")}),
+      -100},{100,100}}), graphics={Rectangle(
+    extent={{-90,40},{92,-40}},
+    lineColor={0,0,0},
+    pattern=LinePattern.None,
+    fillPattern=FillPattern.HorizontalCylinder,
+    fillColor={0,149,255}), Text(
+    extent={{-100,-50},{100,-90}},
+    lineColor={0,0,0},
+    textString="%name")}),
     Documentation(info="<HTML>
 <p>This base class describes the geometry and most important variables for the water/steam flow in a pipe.<br> 
 It will be a 1-dimensional flow model.
@@ -140,27 +140,27 @@ In the derived class, the following quantities/equations have to be set:<br>
 <p>
 </HTML><HTML> 
        <p>  
-           <table>
-                <tr>
-                              <td><b>Author:</b>  </td>
-                             <td><a href=\"mailto:haiko.steuer@siemens.com\">Haiko Steuer</a> </td>
-                        <td><a href=\"https://scd.siemens.com/db4/v3/lookUp.d4w?tcgid=Z001K4SN\">SCD</a> </td>
-                       </tr>
-                <tr>
-                           <td><b>Checked by:</b>   </td>
-                           <td>            </td>
-                </tr> 
-                <tr>
-                           <td><b>Protection class:</b>    </td>
-                           <td>public </td>
-                </tr>  
-           </table>
-          <p><b><font style=\"font-size: 10pt; \">License, Copyright and Disclaimer</font></b> </p>
+     <table>
+          <tr>
+                        <td><b>Author:</b>  </td>
+                       <td><a href=\"mailto:haiko.steuer@siemens.com\">Haiko Steuer</a> </td>
+                  <td><a href=\"https://scd.siemens.com/db4/v3/lookUp.d4w?tcgid=Z001K4SN\">SCD</a> </td>
+                 </tr>
+          <tr>
+                     <td><b>Checked by:</b>   </td>
+                     <td>            </td>
+          </tr> 
+          <tr>
+                     <td><b>Protection class:</b>    </td>
+                     <td>public </td>
+          </tr>  
+     </table>
+    <p><b><font style=\"font-size: 10pt; \">License, Copyright and Disclaimer</font></b> </p>
 <p>
 <blockquote><br/>Licensed by Siemens AG under the Siemens Modelica License 2</blockquote>
 <blockquote><br/>Copyright  2007-2012 Siemens AG. All rights reserved.</blockquote>
 <blockquote><br/>This Modelica package is <u>free</u> software and the use is completely at <u>your own risk</u>; it can be redistributed and/or modified under the terms of the Siemens Modelica License 2. For license conditions (including the disclaimer of warranty) see <a href=\"../Documents/SiemensModelicaLicense2.html\">Siemens Modelica License 2 </a>.</blockquote>
-        </p>
+  </p>
 </HTML>",
       revisions="<html>
 <ul>

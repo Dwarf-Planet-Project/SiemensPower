@@ -14,8 +14,8 @@ annotation(Documentation(
 </ul></p>
 </html>",
     revisions="<html>
-                      <ul>
-                              <li> May 2011 by Julien Bonifay
-                       </ul>
-                        </html>"));
+                <ul>
+                        <li> May 2011 by Julien Bonifay
+                 </ul>
+                  </html>"));
 end TTSE;

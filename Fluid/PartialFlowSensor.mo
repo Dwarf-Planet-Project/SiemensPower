@@ -24,7 +24,7 @@ this partial class should add a medium instance to calculate the measured proper
 </p>
 </html>"),
     Diagram(coordinateSystem(
-        preserveAspectRatio=false,
-        extent={{-100,-100},{100,100}},
-        grid={1,1}), graphics));
+  preserveAspectRatio=false,
+  extent={{-100,-100},{100,100}},
+  grid={1,1}), graphics));
 end PartialFlowSensor;

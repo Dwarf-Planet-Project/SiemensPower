@@ -20,17 +20,17 @@ protected
   {23.79999, +4.0000575e-3, -8.5403705e-11},
   {23.98241, +8.2362918e-3, -5.4947890e-7},
   {17.00000, +1.0000018e-2, -2.1350926e-11}};
-                                              // Standardfunktion DEFAalt
-                                              // St 35.8
-                                              // St 45.8
-                                              // 15 Mo 3
-                                              // 13 CrMo 4.4
-                                              // 10 CrMo 9.10
-                                              // X 8 CrNiTi 18.10
-                                              // X 10 CrMoVNb 9.1
-                                              // X 20 CrMoV 12.1
-                                              // AISI 409
-                                              // AISI 304
+                                        // Standardfunktion DEFAalt
+                                        // St 35.8
+                                        // St 45.8
+                                        // 15 Mo 3
+                                        // 13 CrMo 4.4
+                                        // 10 CrMo 9.10
+                                        // X 8 CrNiTi 18.10
+                                        // X 10 CrMoVNb 9.1
+                                        // X 20 CrMoV 12.1
+                                        // AISI 409
+                                        // AISI 304
 
 algorithm
  if (T-273.15 < 50.0) then
@@ -72,36 +72,36 @@ algorithm
    annotation (derivative=lambdaFin_der,
     Documentation(
  info="<HTML>
-                    <p>This function returns the thermal conductivity lambda(T) in dependence of the fin temperature.
-                   </HTML><HTML> 
+              <p>This function returns the thermal conductivity lambda(T) in dependence of the fin temperature.
+             </HTML><HTML> 
        <p>  
-           <table>
-                <tr>
-                              <td><b>Author:</b>  </td>
-                              <td><a href=\"mailto:haiko.steuer@siemens.com\">Haiko Steuer</a> </td>
-                        <td><a href=\"https://scd.siemens.com/db4/v3/lookUp.d4w?tcgid=Z001K4SN\">SCD</a> </td>
-                       </tr>
-                <tr>
-                           <td><b>Checked by:</b>   </td>
-                           <td>            </td>
-                </tr> 
-                <tr>
-                           <td><b>Protection class:</b>    </td>
-                           <td> </td>
-                </tr> 
-                <tr>
-                           <td><b>Used Dymola version:</b>    </td>
-                           <td> </td>
-                  </tr> 
-           </table>
-                Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
-           For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
-        </p>
+     <table>
+          <tr>
+                        <td><b>Author:</b>  </td>
+                        <td><a href=\"mailto:haiko.steuer@siemens.com\">Haiko Steuer</a> </td>
+                  <td><a href=\"https://scd.siemens.com/db4/v3/lookUp.d4w?tcgid=Z001K4SN\">SCD</a> </td>
+                 </tr>
+          <tr>
+                     <td><b>Checked by:</b>   </td>
+                     <td>            </td>
+          </tr> 
+          <tr>
+                     <td><b>Protection class:</b>    </td>
+                     <td> </td>
+          </tr> 
+          <tr>
+                     <td><b>Used Dymola version:</b>    </td>
+                     <td> </td>
+            </tr> 
+     </table>
+          Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
+         This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+     For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
+  </p>
 </HTML>",
     revisions="<html>
-                      <ul>
-                             <li> December 2006 by Haiko Steuer
-                       </ul>
-                        </html>"));
+                <ul>
+                       <li> December 2006 by Haiko Steuer
+                 </ul>
+                  </html>"));
 end lambdaFin;
