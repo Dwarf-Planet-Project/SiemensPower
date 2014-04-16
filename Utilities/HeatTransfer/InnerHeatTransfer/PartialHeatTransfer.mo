@@ -23,8 +23,8 @@ annotation (Documentation(info="<html>
       <li> Heat transfer coefficient  <b>alpha</b>
       <li> location of boiling crisis (dry-out) <b> xdo </b> (for single phase flow, this will bot be used, so just give a dummy value)
   </ul>
-</html><HTML> 
-       <p>  
+</html><HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -34,11 +34,11 @@ annotation (Documentation(info="<html>
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td>public </td>
-                </tr> 
+                </tr>
            </table>
            <p><b><font style=\"font-size: 10pt; \">License, Copyright and Disclaimer</font></b> </p>
 <p>

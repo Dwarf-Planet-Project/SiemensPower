@@ -96,24 +96,24 @@ equation
 <li><tt>considerConductivity = true</tt>: the thermal resistance of the tube wall is accounted for.
 </ul>
 </HTML>
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
                            <td><a href=\"mailto:haiko.steuer@siemens.com\">Haiko Steuer</a> </td>
-        
+
                         <td><a href=\"https://scd.siemens.com/db4/v3/lookUp.d4w?tcgid=Z001K4SN\">SCD</a> </td>
                        </tr>
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td>internal </td>
-                </tr> 
-              
+                </tr>
+
            </table>
         <p><b><font style=\"font-size: 10pt; \">License, Copyright and Disclaimer</font></b> </p>
 <p>

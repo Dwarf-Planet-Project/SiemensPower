@@ -16,8 +16,8 @@ record PropertiesMetal "Metal property parameters"
 <p>These parameters are needed to specify the medium properties of a metal, e.g. in a tube' wall.
    Here, the properties are fixed, i.e. they do <b>not</b> depend on the metal temperature.
   Note that for the wall aggregate, just the <b>product</b> of rho and cp (i.e. the heat capacity per volume) will enter the physics.
-</HTML><HTML> 
-       <p>  
+</HTML><HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -27,11 +27,11 @@ record PropertiesMetal "Metal property parameters"
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td>public </td>
-                </tr> 
+                </tr>
            </table>
           <p><b><font style=\"font-size: 10pt; \">License, Copyright and Disclaimer</font></b> </p>
 <p>

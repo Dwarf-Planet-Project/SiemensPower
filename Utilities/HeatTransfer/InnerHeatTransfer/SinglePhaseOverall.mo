@@ -15,8 +15,8 @@ equation
 
 annotation (Documentation(info="<html>
   This simple inner heat transfer correlation is good for single phase flow both in laminar and turbulent region.
-</html><HTML> 
-       <p>  
+</html><HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -26,11 +26,11 @@ annotation (Documentation(info="<html>
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td>public </td>
-                </tr> 
+                </tr>
            </table>
           <p><b><font style=\"font-size: 10pt; \">License, Copyright and Disclaimer</font></b> </p>
 <p>

@@ -29,8 +29,8 @@ equation
                  Modelica.Fluid.Dissipation.PressureLoss.StraightPipe.dp_overall_DP(DPMFLOW_IN_con,DPMFLOW_IN_var,m_flow)/dz;
 
   annotation (Documentation(info="<html>
-</html><HTML> 
-       <p>  
+</html><HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -40,11 +40,11 @@ equation
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td>public </td>
-                </tr> 
+                </tr>
            </table>
         <p><b><font style=\"font-size: 10pt; \">License, Copyright and Disclaimer</font></b> </p>
 <p>

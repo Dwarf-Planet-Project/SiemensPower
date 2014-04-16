@@ -80,8 +80,8 @@ equation
 This model is based on the Walllayer model which represents a cylindrical metal tube wall with a single layer.
 The parameter numberOfWallLayers says how many layers will be accounted for in that wall. The counting of layers begins at the inner side, i.e. layer[numberOfNodes] is the outside layer.
 </html>
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -91,12 +91,12 @@ The parameter numberOfWallLayers says how many layers will be accounted for in t
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td>internal </td>
-                </tr> 
-                
+                </tr>
+
            </table>
              <p><b><font style=\"font-size: 10pt; \">License, Copyright and Disclaimer</font></b> </p>
 <p>

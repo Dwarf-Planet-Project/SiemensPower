@@ -47,7 +47,7 @@ equation
   fluid.p = p*ones(numberOfNodes);
 
   annotation (Documentation(info="<HTML>
-<p>This tube model comes with a detailed energy, but integrated momentum and mass balance. 
+<p>This tube model comes with a detailed energy, but integrated momentum and mass balance.
 See <a href=\"../Documents/tube_integration.pdf\"> pdf documentation </a>for details of the integration of the hydrodynamic equations.
 Both heat transfer and friction pressure drop can be selected from a set of correlations.
  </p>
@@ -58,7 +58,7 @@ Both heat transfer and friction pressure drop can be selected from a set of corr
 <li>dynamic mass balance has no effect if medium is incompressible </li>
 </ul>
 </p>
-       <p>  
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -68,11 +68,11 @@ Both heat transfer and friction pressure drop can be selected from a set of corr
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td>internal </td>
-                </tr> 
+                </tr>
            </table>
               <p><b><font style=\"font-size: 10pt; \">License, Copyright and Disclaimer</font></b> </p>
 <p>

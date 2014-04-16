@@ -52,8 +52,8 @@ Documentation(info="<html>
 <p>This is a block giving signals with continous derivative from a time table.</p><p>The original time table function is delayed in time with time constant Tdel, which should be small compared to typical time scales of the table.</p><p>The second output gives the original time table signal in case you dont want any delay. </p>
 
 </html>
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -63,11 +63,11 @@ Documentation(info="<html>
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td>public</td>
-                </tr> 
+                </tr>
            </table>
             <p><b><font style=\"font-size: 10pt; \">License, Copyright and Disclaimer</font></b> </p>
 <p>

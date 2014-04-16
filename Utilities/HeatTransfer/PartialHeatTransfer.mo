@@ -31,8 +31,8 @@ equation
           textString="%name")}),
                           Documentation(info="<html>
 Base class for heat transfer models that can be used in distributed pipe models.
-</html><HTML> 
-       <p>  
+</html><HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -42,11 +42,11 @@ Base class for heat transfer models that can be used in distributed pipe models.
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td>public </td>
-                </tr> 
+                </tr>
            </table>
          <p><b><font style=\"font-size: 10pt; \">License, Copyright and Disclaimer</font></b> </p>
 <p>

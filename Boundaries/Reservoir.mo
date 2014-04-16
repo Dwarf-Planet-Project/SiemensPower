@@ -8,13 +8,13 @@ model Reservoir "Thermal reservoir for discretized aggregate"
   //                       choice="temperature" "Temperature reservoir"));
   parameter SiemensPower.Boundaries.Types.reservoir reservoirType = reservoir.heat;
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b ports[N]
-    "Heat output distribution" 
+    "Heat output distribution"
     annotation (Placement(transformation(extent={{-20,-92},{20,-50}}, rotation=
             0)));
-  parameter Real T_set=500 "Fixed temperature" 
+  parameter Real T_set=500 "Fixed temperature"
       annotation (Dialog(enable=reservoir=="temperature"));
   parameter SiemensPower.Units.HeatFlowRate Q_flow_set=0
-    "Fixed heat flow rate(overall)" 
+    "Fixed heat flow rate(overall)"
       annotation (Dialog(enable=reservoir=="heat"));
   SiemensPower.Units.Temperature T[N](each start=T_set);
   SiemensPower.Units.HeatFlowRate Q_flow[N](each start=Q_flow_set);
@@ -43,13 +43,13 @@ end if;
 Documentation(info="<html>
 <p>
 This model allows a specified amount of heat flow rate to be \"injected\"
-into a thermal system or specify a certain <b>temperature reservoir</b>.<br>  
+into a thermal system or specify a certain <b>temperature reservoir</b>.<br>
 In case of a <b>heat reservoir</b>, the amount of heat at each cell is given by Q0/N. <br>
 The heat flows <b>into</b> the component to which the component PrescribedHeatFlow is connected,
 if the input signal is positive.
 </p>
-</html><HTML> 
-       <p>  
+</html><HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -59,18 +59,18 @@ if the input signal is positive.
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
         </p>
 </HTML>",

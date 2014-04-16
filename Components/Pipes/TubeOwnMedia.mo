@@ -57,7 +57,7 @@ model TubeOwnMedia
  parameter initOpt initOptWall = initOpt.steadyState;
 
   parameter SI.Temperature T_wall_start[numberOfNodes]=T_start
-    "start values for wall temperatures" 
+    "start values for wall temperatures"
                                        annotation (Dialog(tab="Initialization",group="Wall"));
  parameter SiemensPower.Utilities.Structures.PropertiesMetal metal
     "Wall metal properties"                                                      annotation (Dialog(group="Wall"));
@@ -85,7 +85,7 @@ model TubeOwnMedia
   SI.CoefficientOfHeatTransfer alpha;
 
    Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a gasSide[numberOfNodes](T(start=T_wall_start))
-    "Outer wall heat port" 
+    "Outer wall heat port"
   annotation (extent=[-14,54; 14,78]);
 
   SiemensPower.Components.SolidComponents.Wall wall(
@@ -97,7 +97,7 @@ model TubeOwnMedia
     T_start =   T_wall_start,
     init=initOptWall,
     numberOfParallelTubes=geoPipe.Nt,
-    diameterInner =   geoPipe.d_out - 2*geoPipe.s) "Metal wall of the tube" 
+    diameterInner =   geoPipe.d_out - 2*geoPipe.s) "Metal wall of the tube"
                  annotation (extent=[-10,34; 10,54]);
 
   SiemensPower.Interfaces.portHeat heatport(
@@ -285,7 +285,7 @@ end for;
         32.7; 0,32.7; 0,5.4], style(color=42, rgbcolor={191,0,0}));
 
 annotation (Documentation(info="<HTML>
-<p>This tube model comes with a detailed energy balance, but <b>integrated</b> momentum and mass balance. 
+<p>This tube model comes with a detailed energy balance, but <b>integrated</b> momentum and mass balance.
 See <a href=\"../Documents/tube_integration.pdf\"> pdf documentation </a>for details.<br>
 The tube is heated. The water/steam media is simplified: You can chose between:
 <ul>
@@ -294,7 +294,7 @@ The tube is heated. The water/steam media is simplified: You can chose between:
 </ul>
 <p>
 
-       <p>  
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -304,18 +304,18 @@ The tube is heated. The water/steam media is simplified: You can chose between:
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
         </p>
 

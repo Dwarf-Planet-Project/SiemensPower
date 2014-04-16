@@ -22,12 +22,12 @@ partial model PartialFriction
 
   annotation (Documentation(info="<html>
   Any derived friction pressure loss correlation must define a relation between m_flow and dp, e.g.
-dp/dz = ... * m_flow^2/(rho) 
+dp/dz = ... * m_flow^2/(rho)
 <p>
 The additive friction coefficient geo.zeta_add should contribute to the pressure loss something similar to
 dp/dz = zeta_add/L*rho/2*v^2
-</html><HTML> 
-       <p>  
+</html><HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td><td><a href=\"mailto:haiko.steuer@siemens.com\">Haiko Steuer</a> </td>
@@ -36,11 +36,11 @@ dp/dz = zeta_add/L*rho/2*v^2
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td>public </td>
-                </tr> 
+                </tr>
            </table>
           <p><b><font style=\"font-size: 10pt; \">License, Copyright and Disclaimer</font></b> </p>
 <p>

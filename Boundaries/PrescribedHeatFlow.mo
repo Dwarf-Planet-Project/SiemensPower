@@ -53,13 +53,13 @@ equation
     Documentation(info="<HTML>
 <p>
 This model allows a specified amount of heat flow rate to be \"injected\"
-into a thermal system.<br>  
+into a thermal system.<br>
 The amount of heat at each cell is given by Q_flow/N. <br>
 The heat flows <b>into</b> the component to which the component PrescribedHeatFlow is connected,
 if the input signal is positive.
 </p>
-</HTML><HTML> 
-       <p>  
+</HTML><HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -69,11 +69,11 @@ if the input signal is positive.
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td>public </td>
-                </tr> 
+                </tr>
            </table>
          <p><b><font style=\"font-size: 10pt; \">License, Copyright and Disclaimer</font></b> </p>
 <p>

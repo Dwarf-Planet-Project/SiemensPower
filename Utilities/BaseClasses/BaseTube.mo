@@ -127,7 +127,7 @@ equation
           lineColor={0,0,0},
           textString="%name")}),
     Documentation(info="<HTML>
-<p>This base class describes the geometry and most important variables for the water/steam flow in a pipe.<br> 
+<p>This base class describes the geometry and most important variables for the water/steam flow in a pipe.<br>
 It will be a 1-dimensional flow model.
 In the derived class, the following quantities/equations have to be set:<br>
 <ul>
@@ -135,11 +135,11 @@ In the derived class, the following quantities/equations have to be set:<br>
 <li> mass flow rate(s) + momentum balance(s) incl hydrostatic and friction pressure drop
 <li> mass densities d[1], ...d[numberOfNodes] for each cell + continuity equation(s)
 <li> specific enthalpies h[1], ..., h[numberOfNodes] (energy balances)
-<li> 
+<li>
 </ul>
 <p>
-</HTML><HTML> 
-       <p>  
+</HTML><HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -149,11 +149,11 @@ In the derived class, the following quantities/equations have to be set:<br>
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td>public </td>
-                </tr>  
+                </tr>
            </table>
           <p><b><font style=\"font-size: 10pt; \">License, Copyright and Disclaimer</font></b> </p>
 <p>

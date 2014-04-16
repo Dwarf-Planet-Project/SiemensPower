@@ -1,3 +1,3 @@
 within SiemensPower;
-package Interfaces 
+package Interfaces
 end Interfaces;

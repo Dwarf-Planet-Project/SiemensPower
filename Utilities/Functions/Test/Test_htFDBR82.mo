@@ -37,7 +37,7 @@ equation
  // hCp = flueGas.T * cpFDBR82;
   //hT_FDBR82 = hInitial + (hFinal-hInitial)*time/period;
  /*
- input Real XGas[6]={0.0579690,0.0,0.7349500,0.0532280,0.1415570,0.0122996} 
+ input Real XGas[6]={0.0579690,0.0,0.7349500,0.0532280,0.1415570,0.0122996}
     "Gas composition: CO2, SO2, N2, H2O, O2, Ar [kg/kg]";
  */
   cp_FDBR82 = SiemensPower.Utilities.Functions.cp_FDBR82(T);
@@ -54,13 +54,13 @@ annotation (
                              <li> NASA (Modelica's IdealGasMixtures, e.g. FlueGas)
                              <li> FDBRold (DynaplantOld, SIMIT routine)
                        </ul>
- 
+
                       are compared.
                     </p><p>
-                   Note that the enthalpy offset in FlueGasSingleComponent is such that T=0 degC at h=0. 
+                   Note that the enthalpy offset in FlueGasSingleComponent is such that T=0 degC at h=0.
                   <br> The specific heat capacities from NASA and FDBR82 differs less then 0.1 per cent for typical flue gases.</p>
-                   </HTML><HTML> 
-       <p>  
+                   </HTML><HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -70,14 +70,14 @@ annotation (
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
         </p>
 </HTML>",

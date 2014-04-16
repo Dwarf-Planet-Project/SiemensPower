@@ -1,5 +1,5 @@
 within SiemensPower.Media.Common;
-package MixtureGasNasa 
+package MixtureGasNasa
 
 import Modelica.Media.IdealGases.*;
 
@@ -54,7 +54,7 @@ protected
 annotation (
       Documentation(
    info="<html>
-<p>Extend of Modelica.Media.IdealGases.Common.MixtureGasNasa with <b> modified Eucken </b> method as default for thermalConductivity function.<br> 
+<p>Extend of Modelica.Media.IdealGases.Common.MixtureGasNasa with <b> modified Eucken </b> method as default for thermalConductivity function.<br>
 If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a base instead!
  <code><font style=\"color: #0000ff; \">&nbsp;</font></code></p> </br> <br> </br>
 <table cellspacing=\"2\" cellpadding=\"0\" border=\"0\"><tr>

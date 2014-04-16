@@ -1,5 +1,5 @@
 within SiemensPower.Components.SolidComponents;
-package Tests 
+package Tests
       // within SiemensPower.Components.SolidComponents.Tests;
 
 end Tests;

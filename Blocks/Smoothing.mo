@@ -33,8 +33,8 @@ Documentation(info="<html>
 <p>It represents a simple time delay (PT1) with time constant T </p>
 
 </html>
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -44,11 +44,11 @@ Documentation(info="<html>
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td>public</td>
-                </tr> 
+                </tr>
            </table>
             <p><b><font style=\"font-size: 10pt; \">License, Copyright and Disclaimer</font></b> </p>
 <p>

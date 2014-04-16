@@ -214,20 +214,20 @@ The flue gas flows perpendicular to the water/steam
           <ul>
                <li> The gas flow is modeled using a simple quasi stationary pressure drop.
                <li> The water/steam flow and inner heat transfer is modeled using the <bf>Components.Pipes.Tube</bf> model.
-               <li> The outer heat transfer gas-metal can be chosen from 
+               <li> The outer heat transfer gas-metal can be chosen from
                     <ul>
-                       <li> Escoa correlation, see <i>Chris Weierman, Correlations ease the selection of finned tubes, The Oil and Gas Journal, Sept. 6, 1976</i>;   
+                       <li> Escoa correlation, see <i>Chris Weierman, Correlations ease the selection of finned tubes, The Oil and Gas Journal, Sept. 6, 1976</i>;
                             Update (Fintube Corp. <a href=\"http://www.fintubetech.com/escoa/manual.exe\">ESCOA Engineering Manual</a>) from July 2002.
                        <li> Simple heat transfer with constant heat transfer coefficient.
                     </ul>
-          </ul> 
+          </ul>
 <p>
            The model restrictions are:
                 <ul>
                         <li> Cross flow configurations (gas flow is perpendicular to water/steam flow)
                 </ul>
         </p>
-         <p>  
+         <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -237,14 +237,14 @@ The flue gas flows perpendicular to the water/steam
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td>free </td>
-                </tr> 
+                </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
         </p>
      </HTML>",

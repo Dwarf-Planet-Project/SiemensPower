@@ -17,8 +17,8 @@ record PipeGeo "Geometry parameters for a tube"
 
  annotation (Documentation(info="<HTML>
 <p>These parameters are needed to specify the geoemtry of a pipe:
-</HTML><HTML> 
-       <p>  
+</HTML><HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -28,11 +28,11 @@ record PipeGeo "Geometry parameters for a tube"
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td>public </td>
-                </tr> 
+                </tr>
            </table>
                <p><b><font style=\"font-size: 10pt; \">License, Copyright and Disclaimer</font></b> </p>
 <p>

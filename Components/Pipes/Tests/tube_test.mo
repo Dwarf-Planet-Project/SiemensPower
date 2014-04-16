@@ -92,8 +92,8 @@ equation
       points={{-72,28},{-64,28},{-64,30},{-52,30}},
       color={0,127,255},
       smooth=Smooth.None));
-  annotation (Documentation(info="<HTML> 
-       <p>  
+  annotation (Documentation(info="<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -103,11 +103,11 @@ equation
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td>internal </td>
-                </tr> 
+                </tr>
            </table>
                <p><b><font style=\"font-size: 10pt; \">License, Copyright and Disclaimer</font></b> </p>
 <p>

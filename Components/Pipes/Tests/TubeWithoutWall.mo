@@ -76,7 +76,7 @@ equation
                       graphics),
                        experiment(StopTime=150, Tolerance=1e-005),
     Commands(file="Scripts/tests/tube_unheated_test.mos" "tube_unheated_test"),
-              Documentation(info="<HTML> 
+              Documentation(info="<HTML>
        <p>  This is a simple test of the tube_unheated aggregate including reverse flow and pp tube.
            <table>
                 <tr>
@@ -87,11 +87,11 @@ equation
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td>internal </td>
-                </tr> 
+                </tr>
            </table>
               <p><b><font style=\"font-size: 10pt; \">License, Copyright and Disclaimer</font></b> </p>
 <p>

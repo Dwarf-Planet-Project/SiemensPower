@@ -275,7 +275,7 @@ equation
         <p>
            This is a test case for CouterCurrentHeatExchanger
         </p>
-         <p>  
+         <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -285,14 +285,14 @@ equation
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td>free </td>
-                </tr> 
+                </tr>
            </table>
                 Copyright &copy  2008 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
         </p>
      </HTML>"),

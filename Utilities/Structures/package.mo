@@ -1,3 +1,3 @@
 within SiemensPower.Utilities;
-package Structures 
+package Structures
 end Structures;

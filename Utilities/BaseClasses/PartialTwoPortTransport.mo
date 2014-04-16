@@ -90,19 +90,19 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
             -100},{100,100}}), graphics),
     Documentation(info="<HTML>
-<p>This base class describes the geometry and most important variables for the fluid flow without storing substance.<br> 
+<p>This base class describes the geometry and most important variables for the fluid flow without storing substance.<br>
 In the derived class, the following quantities/equations have to be set:<br>
 <ul>
 <li> pressure loss dp (e.g. momentum balance)
 <li> mass flow rate (e.g. mass balance)
 <li> outflow enthalpies (e.g. energy balance)
-<li> 
+<li>
 </ul>
 <p>
 </HTML>
 
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -112,11 +112,11 @@ In the derived class, the following quantities/equations have to be set:<br>
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td>public </td>
-                </tr> 
+                </tr>
            </table>
          <p><b><font style=\"font-size: 10pt; \">License, Copyright and Disclaimer</font></b> </p>
 <p>

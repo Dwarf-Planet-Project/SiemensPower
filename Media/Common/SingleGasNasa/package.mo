@@ -1,5 +1,5 @@
 within SiemensPower.Media.Common;
-package SingleGasNasa 
+package SingleGasNasa
 
 import Modelica.Media.IdealGases.*;
 
