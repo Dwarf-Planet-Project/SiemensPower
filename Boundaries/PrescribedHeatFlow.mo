@@ -3,13 +3,13 @@ model PrescribedHeatFlow
   "Prescribed heat flow boundary condition for discretized aggregate"
   parameter Integer numberOfCells=2 "Number of cells";
 
-  Modelica.Blocks.Interfaces.RealInput Q_flow "Overall heat input" 
+  Modelica.Blocks.Interfaces.RealInput Q_flow "Overall heat input"
         annotation (Placement(transformation(
         origin={-100,0},
         extent={{20,-20},{-20,20}},
         rotation=180)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b[numberOfCells] portsOut
-    "Heat output distribution" 
+    "Heat output distribution"
                              annotation (Placement(transformation(extent={{90,
             -10},{110,10}}, rotation=0)));
 equation
@@ -53,13 +53,13 @@ equation
     Documentation(info="<HTML>
 <p>
 This model allows a specified amount of heat flow rate to be \"injected\"
-into a thermal system.<br>  
+into a thermal system.<br>
 The amount of heat at each cell is given by Q_flow/N. <br>
 The heat flows <b>into</b> the component to which the component PrescribedHeatFlow is connected,
 if the input signal is positive.
 </p>
-</HTML><HTML> 
-       <p>  
+</HTML><HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -69,18 +69,18 @@ if the input signal is positive.
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
         </p>
 </HTML>",

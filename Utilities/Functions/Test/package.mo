@@ -1,3 +1,3 @@
 within SiemensPower.Utilities.Functions;
-package Test 
+package Test
 end Test;

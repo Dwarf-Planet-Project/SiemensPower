@@ -4,16 +4,16 @@ model Wall "Cylindrical metal tube with variable number of wall layers Nwall"
   import SiemensPower.Utilities.initOpt;
 
   parameter Integer numberOfNodes(min=1)=2 "Number of nodes";
-  parameter Integer numberOfWallLayers(min=1)=3 "Number of wall layers" 
+  parameter Integer numberOfWallLayers(min=1)=3 "Number of wall layers"
                                                                        annotation(choices(choice=1, choice=2, choice=3, choice=4, choice=5, choice=6));
 
-  parameter Boolean assumePlainHeatTransfer=false "no logarithmic correction" 
+  parameter Boolean assumePlainHeatTransfer=false "no logarithmic correction"
                                 annotation (Dialog(enable=considerConductivity));
-/*   parameter Boolean userdefinedmaterial=true 
-    "define own fixed material properties" annotation (Dialog(group="Material"));  
+/*   parameter Boolean userdefinedmaterial=true
+    "define own fixed material properties" annotation (Dialog(group="Material"));
   replaceable ThermoPower.Thermal.MaterialProperties.Metals.CarbonSteel_A106C[numberOfNodes] Material(
-              each npol=3) 
-   extends ThermoPower.Thermal.MaterialProperties.Interfaces.PartialMaterial 
+              each npol=3)
+   extends ThermoPower.Thermal.MaterialProperties.Interfaces.PartialMaterial
     "pre-defined material properties"       annotation (choicesAllMatching = true, Dialog(enable=userdefinedmaterial==false, group="Material")); */
    parameter SiemensPower.Utilities.Structures.PropertiesMetal metal
     "Wall metal properties"                                                      annotation (Dialog(enable=userdefinedmaterial, group="Material"));
@@ -27,7 +27,7 @@ model Wall "Cylindrical metal tube with variable number of wall layers Nwall"
   parameter Boolean considerConductivity=true
     "Wall conduction resistance accounted for";
   parameter Boolean considerAxialHeatTransfer=false
-    "With (small!) heat transfer in the wall parallel to the flow direction" 
+    "With (small!) heat transfer in the wall parallel to the flow direction"
           annotation (Dialog(enable=considerConductivity));
 
   parameter initOpt init = initOpt.steadyState;
@@ -46,7 +46,7 @@ model Wall "Cylindrical metal tube with variable number of wall layers Nwall"
   SiemensPower.Components.SolidComponents.Walllayer layer[
                                           numberOfWallLayers](
     each numberOfNodes = numberOfNodes,
-    diameterInner =       if (numberOfWallLayers == 1) then diameterInner*ones(1) else 
+    diameterInner =       if (numberOfWallLayers == 1) then diameterInner*ones(1) else
        SiemensPower.Utilities.Functions.my_linspace(
         diameterInner,
         diameterInner + 2*wallThickness - 2*wallThickness/numberOfWallLayers,
@@ -63,10 +63,10 @@ model Wall "Cylindrical metal tube with variable number of wall layers Nwall"
     each useDynamicEquations = useDynamicEquations);
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a[numberOfNodes] port_ext
-    "Outer heat port" 
+    "Outer heat port"
     annotation (Placement(transformation(extent={{-14,36},{14,62}}, rotation=0)));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b[numberOfNodes] port_int
-    "Inner heat port" 
+    "Inner heat port"
     annotation (Placement(transformation(extent={{-14,-58},{12,-34}}, rotation=
             0)));
 
@@ -111,8 +111,8 @@ equation
 This model is based on the Walllayer model which represents a cylindrical metal tube wall with a single layer.
 The parameter numberOfWallLayers says how many layers will be accounted for in that wall. The counting of layers begins at the inner side, i.e. layer[numberOfNodes] is the outside layer.
 </html>
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -122,18 +122,18 @@ The parameter numberOfWallLayers says how many layers will be accounted for in t
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
         </p>
 </HTML>", revisions="<html>

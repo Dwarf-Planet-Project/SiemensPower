@@ -1,8 +1,8 @@
 within SiemensPower.Utilities;
-package HeatTransfer 
+package HeatTransfer
 
 
   annotation (Documentation(info="<html>
-Heat transfer correlations 
+Heat transfer correlations
 </html>"));
 end HeatTransfer;

@@ -10,8 +10,8 @@ function T_ph_dp "T(p,h)/dp"
     annotation (Library={"TTSEmoI", "TTSE"}, Documentation(info="<html>
 <p>This function returns the partial derivative of T wrt p versus p and h according to TTSE. </p>
 </html>
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -21,15 +21,15 @@ function T_ph_dp "T(p,h)/dp"
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td>internal </td>
-                </tr> 
+                </tr>
 
            </table>
                 Copyright &copy  2007 Siemens AG. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
         </p>
 </HTML>",

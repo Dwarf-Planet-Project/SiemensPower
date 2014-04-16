@@ -1,3 +1,3 @@
 within SiemensPower.Media;
-package Common 
+package Common
 end Common;

@@ -4,7 +4,7 @@ model Walllayer "Cylindrical metal tube (single layer)"
   import SiemensPower.Utilities.initOpt;
   constant Real pi=Modelica.Constants.pi;
   parameter Integer numberOfNodes(min=1)=2 "Number of nodes";
-  parameter Boolean assumePlainHeatTransfer=false "no logarithmic correction" 
+  parameter Boolean assumePlainHeatTransfer=false "no logarithmic correction"
                                 annotation (Dialog(enable=considerConductivity));
   parameter SiemensPower.Utilities.Structures.PropertiesMetal metal
     "Wall metal properties"                                                      annotation (Dialog(enable=userdefinedmaterial, group="Material"));
@@ -18,17 +18,17 @@ model Walllayer "Cylindrical metal tube (single layer)"
   parameter Boolean considerConductivity=true
     "Wall conduction resistance accounted for"                                           annotation (Evaluate=true);
   parameter Boolean considerAxialHeatTransfer=false
-    "With heat transfer in the wall parallel to the flow direction" 
+    "With heat transfer in the wall parallel to the flow direction"
           annotation (Evaluate=true, Dialog(enable=considerConductivity));
 
   parameter initOpt init = initOpt.noInit;
   parameter SI.Temperature T_start[numberOfNodes] "Temperature start values"       annotation (Dialog(group="Initialization"));
 
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a[numberOfNodes] port_ext(T(start = T_start))
-    "Outer heat port" 
+    "Outer heat port"
     annotation (Placement(transformation(extent={{-16,20},{16,48}}, rotation=0)));                                                          //(T(start = SiemensPower.Utilities.Functions.my_linspace(Tstart1,TstartN,numberOfNodes)))
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b[numberOfNodes] port_int(T(start = T_start))
-    "Inner heat port" 
+    "Inner heat port"
     annotation (Placement(transformation(extent={{-14,-48},{16,-20}}, rotation=
             0)));
 
@@ -68,7 +68,7 @@ equation
            HeatCap*der(T[i]) = port_int[i].Q_flow + port_ext[i].Q_flow;
         end if;
     else
-        if 
+        if
           (considerAxialHeatTransfer) then
            0.0 = port_int[i].Q_flow + port_ext[i].Q_flow +  Q_flow_ax[i];
         else
@@ -137,30 +137,30 @@ equation
 <li><tt>considerConductivity = true</tt>: the thermal resistance of the tube wall is accounted for.
 </ul>
 </HTML>
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
                            <td><a href=\"mailto:haiko.steuer@siemens.com\">Haiko Steuer</a> </td>
-        
+
                         <td><a href=\"https://scd.siemens.com/db4/v3/lookUp.d4w?tcgid=Z001K4SN\">SCD</a> </td>
                        </tr>
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
         </p>
 </HTML>",

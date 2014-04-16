@@ -1,4 +1,4 @@
 within SiemensPower.Utilities.Functions;
-package CharacteristicNumbers 
+package CharacteristicNumbers
 
 end CharacteristicNumbers;

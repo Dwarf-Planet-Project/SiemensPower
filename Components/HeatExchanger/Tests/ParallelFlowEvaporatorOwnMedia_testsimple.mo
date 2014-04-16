@@ -50,17 +50,17 @@ model ParallelFlowEvaporatorOwnMedia_testsimple
  //   redeclare package Medium =
  //       SiemensPower.Media.ExhaustGasSingleComponent,
   /*
-  Modelica.Fluid.Sensors.MassFlowRate massFlowRate(redeclare package Medium = 
+  Modelica.Fluid.Sensors.MassFlowRate massFlowRate(redeclare package Medium =
         Modelica.Media.Water.StandardWater) annotation (Placement(
         transformation(
         extent={{-8,9},{9,-8}},
         rotation=90,
         origin={-14,59})));
-  Modelica.Fluid.Sensors.Temperature temperature(redeclare package Medium = 
-        Modelica.Media.Water.StandardWater) 
+  Modelica.Fluid.Sensors.Temperature temperature(redeclare package Medium =
+        Modelica.Media.Water.StandardWater)
     annotation (Placement(transformation(extent={{-44,64},{-28,84}})));
-  Modelica.Fluid.Sensors.Pressure pressure(redeclare package Medium = 
-        Modelica.Media.Water.StandardWater) 
+  Modelica.Fluid.Sensors.Pressure pressure(redeclare package Medium =
+        Modelica.Media.Water.StandardWater)
     annotation (Placement(transformation(extent={{50,-2},{70,16}})));
   */
 
@@ -214,7 +214,7 @@ equation
         <p>
            This is a test case for CouterCurrentHeatExchanger
         </p>
-         <p>  
+         <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -224,18 +224,18 @@ equation
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td>free </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td>6.1 </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2008 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
         </p>
      </HTML>"),

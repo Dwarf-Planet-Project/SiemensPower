@@ -5,20 +5,20 @@ extends Modelica.Blocks.Interfaces.SO;
     parameter Real table[:, 2]=[0, 0; 1, 1; 2, 4]
     "Table matrix (time = first column)";
   parameter Modelica.SIunits.Time timeDelay=0.01 "Delay time";
-  Modelica.Blocks.Sources.TimeTable originalTable(table=table) 
+  Modelica.Blocks.Sources.TimeTable originalTable(table=table)
     annotation (Placement(transformation(extent={{-32,-10},{-12,10}}, rotation=
             0)));
-  SiemensPower.Blocks.Smoothing C1signal(timeDelay=timeDelay) 
+  SiemensPower.Blocks.Smoothing C1signal(timeDelay=timeDelay)
                        annotation (Placement(transformation(extent={{22,-10},{
             42,10}}, rotation=0)));
   Modelica.Blocks.Interfaces.RealOutput yOriginal
-    "original time table function" 
+    "original time table function"
     annotation (Placement(transformation(extent={{100,-92},{120,-72}}, rotation=
            0)));
 equation
-   connect(originalTable.y, C1signal.u) 
+   connect(originalTable.y, C1signal.u)
     annotation (Line(points={{-11,0},{23,0}}, color={0,0,127}));
-  connect(C1signal.y, y) 
+  connect(C1signal.y, y)
     annotation (Line(points={{37,0},{110,0}}, color={0,0,127}));
   connect(originalTable.y, yOriginal) annotation (Line(points={{-11,0},{4,0},{4,
           -82},{110,-82}}, color={0,0,127}));
@@ -52,8 +52,8 @@ Documentation(info="<html>
 <p>This is a block giving signals with continous derivative from a time table.</p><p>The original time table function is delayed in time with time constant Tdel, which should be small compared to typical time scales of the table.</p><p>The second output gives the original time table signal in case you dont want any delay. </p>
 
 </html>
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -63,18 +63,18 @@ Documentation(info="<html>
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
         </p>
 </HTML>",

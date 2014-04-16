@@ -1,5 +1,5 @@
 within SiemensPower.Components.Junctions;
-package Tests 
+package Tests
       // within SiemensPower.Components.Junctions.Tests;
 
 end Tests;

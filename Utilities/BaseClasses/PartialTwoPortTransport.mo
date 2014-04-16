@@ -21,11 +21,11 @@ partial model PartialTwoPortTransport
   parameter SI.AbsolutePressure pIn_start = 1e5 "Start value of inlet pressure"
     annotation(Dialog(tab = "Initialization"));
   parameter SI.AbsolutePressure pOut_start = 1e5
-    "Start value of outlet pressure" 
+    "Start value of outlet pressure"
     annotation(Dialog(tab = "Initialization"));
 
  parameter Boolean useTemperatureStartValue = false
-    "Use T_start if true, otherwise h_start" 
+    "Use T_start if true, otherwise h_start"
     annotation(Dialog(tab = "Initialization"), Evaluate=true);
 
   parameter SI.SpecificEnthalpy hIn_start= 1000e3;
@@ -56,7 +56,7 @@ partial model PartialTwoPortTransport
 //    "Start value of mass fractions m_i/m"
 //    annotation (Dialog(tab="Initialization", enable=Medium.nXi > 0));
 
-  parameter Boolean useSubstanceStorage=false "consider composition storage" 
+  parameter Boolean useSubstanceStorage=false "consider composition storage"
                                    annotation(Dialog(tab="Advanced", group="Dynamics"));
 
   parameter Boolean useEnergyStorage=true
@@ -112,19 +112,19 @@ equation
   annotation (Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
             -100},{100,100}}), graphics),
     Documentation(info="<HTML>
-<p>This base class describes the geometry and most important variables for the fluid flow without storing substance.<br> 
+<p>This base class describes the geometry and most important variables for the fluid flow without storing substance.<br>
 In the derived class, the following quantities/equations have to be set:<br>
 <ul>
 <li> pressure loss dp (e.g. momentum balance)
 <li> mass flow rate (e.g. mass balance)
 <li> outflow enthalpies (e.g. energy balance)
-<li> 
+<li>
 </ul>
 <p>
 </HTML>
 
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -134,18 +134,18 @@ In the derived class, the following quantities/equations have to be set:<br>
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
         </p>
 </HTML>",

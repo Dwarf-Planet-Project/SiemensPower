@@ -9,16 +9,16 @@ model SplitterMixer "Splitter/mixer with N ports"
   parameter Integer numberOfPortsSplit(min=1)=2
     "Number of inlets(mixer) / outlets(splitter)";
 
-  parameter SI.AbsolutePressure p_start=1e5 "Pressure" 
+  parameter SI.AbsolutePressure p_start=1e5 "Pressure"
                                                annotation(Dialog(tab="Initialization"));
   parameter Boolean useTemperatureStartValue=false
     "Use temperature instead of specific enthalpy"                                   annotation(Dialog(tab="Initialization"));
   // parameter Medium.SpecificEnthalpy h_start=if useTemperatureStartValue then Medium.specificEnthalpy_pTX(p_start, T_start, Medium.reference_X) else 300e3
- parameter SI.SpecificEnthalpy h_start = 300e3 "Specific enthalpy" 
+ parameter SI.SpecificEnthalpy h_start = 300e3 "Specific enthalpy"
   annotation(Dialog(tab="Initialization", enable= not useTemperatureStartValue));
  // parameter Medium.Temperature T_start=
  //     if useTemperatureStartValue then 300 else Medium.temperature_phX(p_start,h_start,Medium.reference_X)
-   parameter SI.Temperature T_start=300 "Guess value of temperature" 
+   parameter SI.Temperature T_start=300 "Guess value of temperature"
    annotation(Dialog(tab = "Initialization", enable = useTemperatureStartValue));
   //parameter SI.MassFraction X_start[Medium.nX] = Medium.reference_X
   //  "Start value of mass fractions m_i/m"
@@ -31,7 +31,7 @@ model SplitterMixer "Splitter/mixer with N ports"
 
   parameter Boolean initializeSteadyMassBalance=true "ma=sum(mb)" annotation(Dialog(tab="Initialization",group="Initial equations in case of volume > 0", enable=hasVolume));
   parameter Boolean initializeSteadyEnthalpyBalance=true
-    "der(h)=0, may be too much in case of mixer" 
+    "der(h)=0, may be too much in case of mixer"
                  annotation(Dialog(tab="Initialization",group="Initial equations in case of volume > 0", enable=hasVolume));
   parameter Boolean initializeFixedPressure=false "p=p_start" annotation(Dialog(tab="Initialization",group="Initial equations in case of volume > 0", enable=hasVolume));
   parameter Boolean initializeFixedEnthalpy=false "h=h_start" annotation(Dialog(tab="Initialization",group="Initial equations in case of volume > 0", enable=hasVolume));
@@ -57,7 +57,7 @@ model SplitterMixer "Splitter/mixer with N ports"
   SiemensPower.Interfaces.FluidPorts_b portsSplit[numberOfPortsSplit](
     m_flow(start=m_flowOpposite_start),
     each p(start=p_start),
-    each h_outflow(start=h_start)) "outlets(splitter) / inlets(mixer)" 
+    each h_outflow(start=h_start)) "outlets(splitter) / inlets(mixer)"
     annotation (Placement(transformation(extent={{-8,16},{12,96}}),
         iconTransformation(
         extent={{-10,-40},{10,40}},
@@ -127,7 +127,7 @@ equation
 
   annotation (Documentation(
  info="<HTML>
-This splitter/mixer hasa variable number N of ports. It can be an ideal splitter/mixer (hasVolume=false and hasPressureDrop=false) 
+This splitter/mixer hasa variable number N of ports. It can be an ideal splitter/mixer (hasVolume=false and hasPressureDrop=false)
 or can be modeled with a volume and/or pressure losses in the N outlets/inlets.
 <p>
 In case of using this component as a mixer you must use the portsSplit[numberOfPortsSplit] as inlets and portMix as the outlet.
@@ -141,16 +141,16 @@ In case of using this component as a mixer you must use the portsSplit[numberOfP
         <tr>
            <td><b>Checked by:</b>   </td>
            <td>            </td>
-        </tr> 
+        </tr>
         <tr>
            <td><b>Protection class:</b>    </td>
            <td>free </td>
-        </tr> 
+        </tr>
         <tr>
            <td><b>Used Dymola version:</b>    </td>
            <td>6.1 </td>
-        </tr> 
-        
+        </tr>
+
         </table>
      Copyright &copy  2007 Siemens AG, PG EIP12 , All rights reserved.<br>
  <br>   This model is distributed in the hope that it will be useful,
@@ -160,7 +160,7 @@ In case of using this component as a mixer you must use the portsSplit[numberOfP
                       <ul>
                               <li> Feb 2009 adapted for stream connector by Haiko Steuer
                               <li> November 2007, generalized for other media
-                              <li> June 2007 by Haiko Steuer (for water/steam)  
+                              <li> June 2007 by Haiko Steuer (for water/steam)
                        </ul>
                         </html>"),
     Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},{100,

@@ -49,11 +49,11 @@ model ParallelFlowEvaporatorOwnMedia
 
   parameter SiemensPower.Units.MassFlowRate m_flowGas_start=228.68
     "Flue gas mass flow rate" annotation (Dialog(tab="Initialization", group="Flue gas flow"));
-/*  
-   parameter GasMedium.Temperature TGasIn_start=390 "Inlet gas temperature" 
+/*
+   parameter GasMedium.Temperature TGasIn_start=390 "Inlet gas temperature"
     annotation (Dialog(tab="Initialization", group="Flue gas flow"));
-  parameter GasMedium.Temperature TGasOut_start=TGasIn_start 
-    "Outlet gas temperature" 
+  parameter GasMedium.Temperature TGasOut_start=TGasIn_start
+    "Outlet gas temperature"
       annotation (Dialog(tab="Initialization", group="Flue gas flow"));
 */
 parameter SI.Temperature TGasIn_start =  390 "Inlet gas temperature";
@@ -63,13 +63,13 @@ parameter SI.Temperature TGasOut_start =  TGasIn_start "Outlet gas temperature";
     "Total water/steam mass flow rate" annotation (Dialog(tab="Initialization", group="Water flow"));
 
   /*
-  parameter GasMedium.AbsolutePressure pIn_start=pOut_start+2e5 
+  parameter GasMedium.AbsolutePressure pIn_start=pOut_start+2e5
     "start value for inlet pressure"                            annotation(Dialog(tab="Initialization", group="Water flow"));
-  parameter GasMedium.AbsolutePressure pOut_start=137e5 
+  parameter GasMedium.AbsolutePressure pOut_start=137e5
     "start value for outlet pressure"                              annotation(Dialog(tab="Initialization", group="Water flow"));
-  parameter GasMedium.SpecificEnthalpy hIn_start=500e3 
+  parameter GasMedium.SpecificEnthalpy hIn_start=500e3
     "start value for inlet enthalpy"                                      annotation(Dialog(tab="Initialization", group="Water flow"));
-  parameter GasMedium.SpecificEnthalpy hOut_start=hIn_start 
+  parameter GasMedium.SpecificEnthalpy hOut_start=hIn_start
     "start value for outlet enthalpy"                                   annotation(Dialog(tab="Initialization", group="Water flow"));
 */
 
@@ -77,15 +77,15 @@ parameter SI.AbsolutePressure pIn_start=pOut_start+2e5
     "start value for inlet pressure"                            annotation(Dialog(tab="Initialization", group="Water flow"));
 parameter SI.AbsolutePressure pOut_start=137e5
     "start value for outlet pressure"                              annotation(Dialog(tab="Initialization", group="Water flow"));
-parameter SI.SpecificEnthalpy hIn_start=500e3 "start value for inlet enthalpy" 
+parameter SI.SpecificEnthalpy hIn_start=500e3 "start value for inlet enthalpy"
                                                                           annotation(Dialog(tab="Initialization", group="Water flow"));
 parameter SI.SpecificEnthalpy hOut_start=hIn_start
     "start value for outlet enthalpy";
 
-  replaceable model outerHeatTransfer = 
+  replaceable model outerHeatTransfer =
       SiemensPower.Utilities.HeatTransfer.HeatTransfer_constAlpha constrainedby
     SiemensPower.Utilities.HeatTransfer.HeatTransferBaseClass
-    "Convective heat transfer" 
+    "Convective heat transfer"
             annotation (Dialog(tab="Heat transfer", group="Outer heat transfer"),editButton=true,choicesAllMatching);
 
   SiemensPower.Components.FlueGasZones.FlueGasZoneSingleTubeOwnMedia[numberOfTubeLayers]
@@ -120,7 +120,7 @@ parameter SI.SpecificEnthalpy hOut_start=hIn_start
     each hOut_start=
             hOut_start,
     redeclare SiemensPower.Utilities.HeatTransfer.HeatTransfer_constAlpha
-      heatTransfer) 
+      heatTransfer)
     annotation (extent=[-10,-10; 10,10]);
 //      redeclare each package GasMedium = GasMedium,
  //   redeclare package H2OMedium = WaterMedium,
@@ -144,33 +144,33 @@ parameter SI.SpecificEnthalpy hOut_start=hIn_start
     m_flow_start=-m_flow_start,
     hasVolume=hasMixerVolume,
     V=V,
-    initializeSteadyEnthalpyBalance=false) 
+    initializeSteadyEnthalpyBalance=false)
                     annotation (extent=[-10,60; 12,36]);
  //   redeclare package Medium = WaterMedium,
 /*
   Modelica.Fluid.Interfaces.FluidPort_b portSteamOut(redeclare package Medium
-      = WaterMedium) 
+      = WaterMedium)
     annotation (extent=[20,80; -20,120]);
-  Modelica.Fluid.Interfaces.FluidPort_a portWaterIn(redeclare package Medium = 
-        WaterMedium) 
+  Modelica.Fluid.Interfaces.FluidPort_a portWaterIn(redeclare package Medium =
+        WaterMedium)
     annotation (extent=[-20,-120; 20,-80]);
   SiemensPower.Interfaces.portGasOut portGasOut(
                                                redeclare package Medium = GasMedium, m_flow(start=-m_flowGas_start)) annotation (extent=[80,-20;
         120,20]);
-  SiemensPower.Interfaces.portGasIn portGasIn(redeclare package Medium = GasMedium, m_flow(start=m_flowGas_start)) 
+  SiemensPower.Interfaces.portGasIn portGasIn(redeclare package Medium = GasMedium, m_flow(start=m_flowGas_start))
     annotation (extent=[-120,-20; -80,20]);
 */
-  SiemensPower.Interfaces.FluidPort_b portSteamOut 
+  SiemensPower.Interfaces.FluidPort_b portSteamOut
     annotation (extent=[20,80; -20,120]);
-  SiemensPower.Interfaces.FluidPort_a portWaterIn 
+  SiemensPower.Interfaces.FluidPort_a portWaterIn
     annotation (extent=[-20,-120; 20,-80]);
   SiemensPower.Interfaces.portGasOut portGasOut(m_flow(start=-m_flowGas_start)) annotation (extent=[80,-20;
         120,20]);
-  SiemensPower.Interfaces.portGasIn portGasIn(m_flow(start=m_flowGas_start)) 
+  SiemensPower.Interfaces.portGasIn portGasIn(m_flow(start=m_flowGas_start))
     annotation (extent=[-120,-20; -80,20]);
 
 equation
-  connect(flueGasZone[1].portGasIn,portGasIn) 
+  connect(flueGasZone[1].portGasIn,portGasIn)
     annotation (points=[-10,0; -100,0],style(color=58, rgbcolor={0,191,0}));
   for i in 1:(numberOfTubeLayers-1) loop
       connect(flueGasZone[i].portGasOut,flueGasZone[i + 1].portGasIn);
@@ -178,7 +178,7 @@ equation
   connect(flueGasZone[numberOfTubeLayers].portGasOut,
                                      portGasOut) annotation (points=[10,0; 100,0],
                      style(color=58, rgbcolor={0,191,0}));
-  connect(splitter.portMix, portWaterIn) 
+  connect(splitter.portMix, portWaterIn)
     annotation (points=[0,-49; 0,-100],style(color=69, rgbcolor={0,127,255}));
   connect(mixer.portMix, portSteamOut) annotation (points=[1,58.8; 1,58.4; 0,58.4;
         0,100],       style(color=69, rgbcolor={0,127,255}));
@@ -276,20 +276,20 @@ Documentation(
           <ul>
                <li> The gas flow is modeled using a simple quasi stationary pressure drop.
                <li> The water/steam flow and inner heat transfer is modeled using the <bf>Components.Pipes.Tube</bf> model.
-               <li> The outer heat transfer gas-metal can be chosen from 
+               <li> The outer heat transfer gas-metal can be chosen from
                     <ul>
-                       <li> Escoa correlation, see <i>Chris Weierman, Correlations ease the selection of finned tubes, The Oil and Gas Journal, Sept. 6, 1976</i>;   
+                       <li> Escoa correlation, see <i>Chris Weierman, Correlations ease the selection of finned tubes, The Oil and Gas Journal, Sept. 6, 1976</i>;
                             Update (Fintube Corp. <a href=\"http://www.fintubetech.com/escoa/manual.exe\">ESCOA Engineering Manual</a>) from July 2002.
                        <li> Simple heat transfer with constant heat transfer coefficient.
                     </ul>
-          </ul> 
+          </ul>
 <p>
            The model restrictions are:
                 <ul>
                         <li> see composits
                 </ul>
         </p>
-         <p>  
+         <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -299,18 +299,18 @@ Documentation(
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td>free </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td>6.1 </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
         </p>
      </HTML>",

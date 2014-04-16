@@ -42,10 +42,10 @@ revisions="<html>
               extent={{40,-10},{60,10}}, rotation=0)));
       parameter Modelica.SIunits.Time timeDelay=0.01;
 
-    initial equation 
+    initial equation
       u=y;
 
-    equation 
+    equation
       der(y)=(u-y)/timeDelay;
 
       annotation (Diagram(graphics),
@@ -68,8 +68,8 @@ revisions="<html>
 <p>It represents a simple time delay (PT1) with time constant T </p>
 
 </html>
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -79,18 +79,18 @@ revisions="<html>
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\", revisions=\"<html>
@@ -100,26 +100,26 @@ revisions="<html>
 </html>\"));
     end Smoothing;
 
-    model TimeTable 
+    model TimeTable
       \"Time table with signal, which has a continous derivative (if desired)\"
     extends Modelica.Blocks.Interfaces.SO;
-        parameter Real table[:, 2]=[0, 0; 1, 1; 2, 4] 
+        parameter Real table[:, 2]=[0, 0; 1, 1; 2, 4]
         \"Table matrix (time = first column)\";
       parameter Modelica.SIunits.Time timeDelay=0.01 \"Delay time\";
-      Modelica.Blocks.Sources.TimeTable originalTable(table=table) 
+      Modelica.Blocks.Sources.TimeTable originalTable(table=table)
         annotation (Placement(transformation(extent={{-32,-10},{-12,10}}, rotation=
                 0)));
-      SiemensPower.Blocks.Smoothing C1signal(timeDelay=timeDelay) 
+      SiemensPower.Blocks.Smoothing C1signal(timeDelay=timeDelay)
                            annotation (Placement(transformation(extent={{22,-10},{
                 42,10}}, rotation=0)));
-      Modelica.Blocks.Interfaces.RealOutput yOriginal 
-        \"original time table function\" 
+      Modelica.Blocks.Interfaces.RealOutput yOriginal
+        \"original time table function\"
         annotation (Placement(transformation(extent={{100,-92},{120,-72}}, rotation=
                0)));
-    equation 
-       connect(originalTable.y, C1signal.u) 
+    equation
+       connect(originalTable.y, C1signal.u)
         annotation (Line(points={{-11,0},{23,0}}, color={0,0,127}));
-      connect(C1signal.y, y) 
+      connect(C1signal.y, y)
         annotation (Line(points={{37,0},{110,0}}, color={0,0,127}));
       connect(originalTable.y, yOriginal) annotation (Line(points={{-11,0},{4,0},{4,
               -82},{110,-82}}, color={0,0,127}));
@@ -153,8 +153,8 @@ revisions="<html>
 <p>This is a block giving signals with continous derivative from a time table.</p><p>The original time table function is delayed in time with time constant Tdel, which should be small compared to typical time scales of the table.</p><p>The second output gives the original time table signal in case you dont want any delay. </p>
 
 </html>
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -164,18 +164,18 @@ revisions="<html>
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\", revisions=\"<html>
@@ -191,28 +191,28 @@ This package contains blocks if not specified in the Control package.
 
   package Boundaries \"Sources and sinks\"
     model GasSinkP \"Pressure sink for gas flows\"
-      replaceable package Medium = Modelica.Media.Air.SimpleAir constrainedby 
-        Modelica.Media.Interfaces.PartialMedium \"Medium model\" 
+      replaceable package Medium = Modelica.Media.Air.SimpleAir constrainedby
+        Modelica.Media.Interfaces.PartialMedium \"Medium model\"
                                                       annotation (
           choicesAllMatching=true);
       parameter .Pressure p_start=101325 \"Pressure\";
       parameter Medium.Temperature T_start=300 \"Temperature for reverse flow\";
-      parameter Medium.MassFraction Xi_start[Medium.nX]=Medium.reference_X 
+      parameter Medium.MassFraction Xi_start[Medium.nX]=Medium.reference_X
         \"Gas composition for reverse flow\";
-      SiemensPower.Interfaces.portGasIn portGas(redeclare package Medium = Medium) 
+      SiemensPower.Interfaces.portGasIn portGas(redeclare package Medium = Medium)
         annotation (Placement(transformation(extent={{-120,-20},{-80,20}}, rotation=
                0)));
-      Modelica.Blocks.Interfaces.RealInput p_In 
+      Modelica.Blocks.Interfaces.RealInput p_In
         annotation (Placement(transformation(
             origin={-60,60},
             extent={{-20,-20},{20,20}},
             rotation=270)));
-      Modelica.Blocks.Interfaces.RealInput T_In 
+      Modelica.Blocks.Interfaces.RealInput T_In
         annotation (Placement(transformation(
             origin={0,90},
             extent={{-20,-20},{20,20}},
             rotation=270)));
-      Modelica.Blocks.Interfaces.RealInput Xi_In[Medium.nX] 
+      Modelica.Blocks.Interfaces.RealInput Xi_In[Medium.nX]
         annotation (Placement(transformation(
             origin={60,60},
             extent={{-20,-20},{20,20}},
@@ -225,7 +225,7 @@ This package contains blocks if not specified in the Control package.
 
       Medium.Temperature TPortActual;
 
-    equation 
+    equation
      portGas.p = gas.p;
      gas.p = p_In;
 
@@ -280,8 +280,8 @@ This package contains blocks if not specified in the Control package.
 <p>If the <code>Xi_In</code> connector is wired, then the source massfraction is given by the corresponding signal, otherwise it is fixed to <code>Xi_start</code>.</p>
 
 </html>
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -291,18 +291,18 @@ This package contains blocks if not specified in the Control package.
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\", revisions=\"<html>
@@ -316,8 +316,8 @@ This package contains blocks if not specified in the Control package.
     end GasSinkP;
 
     model GasSource \"Flowrate source for gas flows\"
-      replaceable package Medium = Modelica.Media.Air.SimpleAir constrainedby 
-        Modelica.Media.Interfaces.PartialMedium \"Medium model\" 
+      replaceable package Medium = Modelica.Media.Air.SimpleAir constrainedby
+        Modelica.Media.Interfaces.PartialMedium \"Medium model\"
                                                     annotation (
         choicesAllMatching=true);
       Medium.BaseProperties gas(
@@ -326,7 +326,7 @@ This package contains blocks if not specified in the Control package.
         Xi(start=Xi_start[1:Medium.nXi]));
       parameter Medium.AbsolutePressure p_start=101325 \"Nominal pressure\"   annotation(Dialog(tab=\"Advanced\"));
       parameter Medium.Temperature T_start=300 \"Temperature\";
-      parameter Medium.MassFraction Xi_start[Medium.nX]=Medium.reference_X 
+      parameter Medium.MassFraction Xi_start[Medium.nX]=Medium.reference_X
         \"Gas composition\";
       parameter Medium.MassFlowRate m_flow_start= 0 \"Mass flow rate\";
 
@@ -334,24 +334,24 @@ This package contains blocks if not specified in the Control package.
 
       Medium.MassFlowRate m_flow;
       SiemensPower.Interfaces.portGasOut port(
-                                             redeclare package Medium = Medium) 
+                                             redeclare package Medium = Medium)
         annotation (Placement(transformation(extent={{80,-20},{120,20}}, rotation=0)));
-      Modelica.Blocks.Interfaces.RealInput m_flow_set 
+      Modelica.Blocks.Interfaces.RealInput m_flow_set
         annotation (Placement(transformation(
             origin={-60,60},
             extent={{-20,-20},{20,20}},
             rotation=270)));
-      Modelica.Blocks.Interfaces.RealInput T_set 
+      Modelica.Blocks.Interfaces.RealInput T_set
         annotation (Placement(transformation(
             origin={0,60},
             extent={{-20,-20},{20,20}},
             rotation=270)));
-      Modelica.Blocks.Interfaces.RealInput Xi_set[Medium.nX] 
+      Modelica.Blocks.Interfaces.RealInput Xi_set[Medium.nX]
         annotation (Placement(transformation(
             origin={60,60},
             extent={{-20,-20},{20,20}},
             rotation=270)));
-    equation 
+    equation
 
       port.m_flow = -m_flow;
       port.p = gas.p;
@@ -406,8 +406,8 @@ This package contains blocks if not specified in the Control package.
 <p>If the <code>X_in</code> connector is wired, then the source massfraction is given by the corresponding signal, otherwise it is fixed to <code>X0</code>.</p>
 
 </html>
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -417,18 +417,18 @@ This package contains blocks if not specified in the Control package.
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\", revisions=\"<html>
@@ -443,20 +443,20 @@ This package contains blocks if not specified in the Control package.
         DymolaStoredErrors);
     end GasSource;
 
-    model PrescribedHeatFlow 
+    model PrescribedHeatFlow
       \"Prescribed heat flow boundary condition for discretized aggregate\"
       parameter Integer numberOfCells=2 \"Number of cells\";
 
-      Modelica.Blocks.Interfaces.RealInput Q_flow \"Overall heat input\" 
+      Modelica.Blocks.Interfaces.RealInput Q_flow \"Overall heat input\"
             annotation (Placement(transformation(
             origin={-100,0},
             extent={{20,-20},{-20,20}},
             rotation=180)));
       Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b[numberOfCells] portsOut
-        \"Heat output distribution\" 
+        \"Heat output distribution\"
                                  annotation (Placement(transformation(extent={{90,
                 -10},{110,10}}, rotation=0)));
-    equation 
+    equation
       portsOut.Q_flow = -Q_flow*ones(numberOfCells)/numberOfCells;
 
      annotation (
@@ -497,13 +497,13 @@ This package contains blocks if not specified in the Control package.
         Documentation(info=\"<HTML>
 <p>
 This model allows a specified amount of heat flow rate to be \\\"injected\\\"
-into a thermal system.<br>  
+into a thermal system.<br>
 The amount of hea" + "t at each cell is given by Q_flow/N. <br>
 The heat flows <b>into</b> the component to which the component PrescribedHeatFlow is connected,
 if the input signal is positive.
 </p>
-</HTML><HTML> 
-       <p>  
+</HTML><HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -513,18 +513,18 @@ if the input signal is positive.
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\",
@@ -563,22 +563,22 @@ if the input signal is positive.
 
     model Reservoir \"Thermal reservoir for discretized aggregate\"
       parameter Integer N=2 \"Number of cells\";
-      parameter String reservoir=\"heat\" \"Kind of reservoir\" 
+      parameter String reservoir=\"heat\" \"Kind of reservoir\"
              annotation(choices(choice=\"heat\" \"Heat reservoir\",
                              choice=\"temperature\" \"Temperature reservoir\"));
-      Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b ports[N] 
-        \"Heat output distribution\" 
+      Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b ports[N]
+        \"Heat output distribution\"
         annotation (Placement(transformation(extent={{-20,-92},{20,-50}}, rotation=
                 0)));
-      parameter Real T_set=500 \"Fixed temperature\" 
+      parameter Real T_set=500 \"Fixed temperature\"
           annotation (Dialog(enable=reservoir==\"temperature\"));
-       parameter SiemensPower.Units.HeatFlowRate Q_flow_set=0 
-        \"Fixed heat flow rate(overall)\" 
+       parameter SiemensPower.Units.HeatFlowRate Q_flow_set=0
+        \"Fixed heat flow rate(overall)\"
           annotation (Dialog(enable=reservoir==\"heat\"));
       SiemensPower.Units.Temperature T[N](each start=T_set);
       SiemensPower.Units.HeatFlowRate Q_flow[N](each start=Q_flow_set);
 
-    equation 
+    equation
     if (reservoir==\"temperature\") then
             T = ones(N)*T_set;
     else
@@ -602,13 +602,13 @@ if the input signal is positive.
     Documentation(info=\"<html>
 <p>
 This model allows a specified amount of heat flow rate to be \\\"injected\\\"
-into a thermal system or specify a certain <b>temperature reservoir</b>.<br>  
+into a thermal system or specify a certain <b>temperature reservoir</b>.<br>
 In case of a <b>heat reservoir</b>, the amount of heat at each cell is given by Q0/N. <br>
 The heat flows <b>into</b> the component to which the component PrescribedHeatFlow is connected,
 if the input signal is positive.
 </p>
-</html><HTML> 
-       <p>  
+</html><HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -618,18 +618,18 @@ if the input signal is positive.
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\", revisions=\"<html>
@@ -647,26 +647,26 @@ if the input signal is positive.
     //                                                    annotation (choicesAllMatching=
     //        true);
       parameter SI.AbsolutePressure p_start = 1.01325e5 \"Pressure\";
-      parameter SI.SpecificEnthalpy h_start = 1e5 
+      parameter SI.SpecificEnthalpy h_start = 1e5
         \"Specific enthalpy for reverse flow\";
       SI.AbsolutePressure p( start = p_start);
       SI.SpecificEnthalpy h( start = h_start);
       SI.SpecificEnthalpy hPortActual \"Specific enthalpy\";
       //SI.BaseProperties water \"fluid state\";//(p=port.p)
-      SiemensPower.Interfaces.FluidPort_a port 
+      SiemensPower.Interfaces.FluidPort_a port
         annotation (Placement(transformation(extent={{-120,-20},{-80,20}}, rotation=
                0)));                            //(redeclare package Medium = Medium)
-      Modelica.Blocks.Interfaces.RealInput p_set 
+      Modelica.Blocks.Interfaces.RealInput p_set
         annotation (Placement(transformation(
             origin={-40,80},
             extent={{-20,-20},{20,20}},
             rotation=270)));
-      Modelica.Blocks.Interfaces.RealInput h_set 
+      Modelica.Blocks.Interfaces.RealInput h_set
         annotation (Placement(transformation(
             origin={40,80},
             extent={{-20,-20},{20,20}},
             rotation=270)));
-    equation 
+    equation
 
       if cardinality(p_set) == 0 then
         p_set = p_start;
@@ -714,8 +714,8 @@ if the input signal is positive.
 <p>Note that the specific enthalpy value takes only effect in case of reverse flow. </p>
 
 </html>
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -725,18 +725,18 @@ if the input signal is positive.
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\",
@@ -748,7 +748,7 @@ if the input signal is positive.
                         </html>\"));
     end WaterSink;
 
-    model WaterSourceMH 
+    model WaterSourceMH
       \"Mass flow - enthalpy boundary condition for simple flu" + "id flow\"
 
        import SI = SiemensPower.Units;
@@ -762,19 +762,19 @@ if the input signal is positive.
     //  Medium.BaseProperties medium \"fluid state\";
       SI.AbsolutePressure p;
       SI.SpecificEnthalpy h( start = h_start);
-      SiemensPower.Interfaces.FluidPort_b port( h_outflow(start=h_start), m_flow(start=m_flow_start)) 
+      SiemensPower.Interfaces.FluidPort_b port( h_outflow(start=h_start), m_flow(start=m_flow_start))
         annotation (Placement(transformation(extent={{80,-20},{120,20}}, rotation=0)));
-       Modelica.Blocks.Interfaces.RealInput m_flowIn 
+       Modelica.Blocks.Interfaces.RealInput m_flowIn
         annotation (Placement(transformation(
             origin={-40,60},
             extent={{-20,-20},{20,20}},
             rotation=270)));
-      Modelica.Blocks.Interfaces.RealInput hIn 
+      Modelica.Blocks.Interfaces.RealInput hIn
         annotation (Placement(transformation(
             origin={40,60},
             extent={{-20,-20},{20,20}},
             rotation=270)));
-    equation 
+    equation
 
       if cardinality(m_flowIn) == 0 then
         m_flowIn = m_flow_start;
@@ -828,8 +828,8 @@ if the input signal is positive.
 </ul></p>
 
 </html>
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -839,18 +839,18 @@ if the input signal is positive.
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\",
@@ -862,7 +862,7 @@ if the input signal is positive.
                         </html>\"));
     end WaterSourceMH;
 
-    model WaterSourceWithSetPressure 
+    model WaterSourceWithSetPressure
       \"Pressure-enthalpy source for simple water flows\"
          import SI = SiemensPower.Units;
      //replaceable package Medium = Modelica.Media.Water.WaterIF97_ph
@@ -874,20 +874,20 @@ if the input signal is positive.
       SI.SpecificEnthalpy h;
       SI.SpecificEnthalpy hPortActual \"Specific enthalpy\";
       //Medium.BaseProperties medium \"fluid state\";
-      SiemensPower.Interfaces.FluidPort_b port 
+      SiemensPower.Interfaces.FluidPort_b port
         annotation (Placement(transformation(extent={{80,-20},{120,20}}, rotation=0)));
-      Modelica.Blocks.Interfaces.RealInput pIn 
+      Modelica.Blocks.Interfaces.RealInput pIn
         annotation (Placement(transformation(
             origin={-40,80},
             extent={{-20,-20},{20,20}},
             rotation=270)));
-      Modelica.Blocks.Interfaces.RealInput hIn 
+      Modelica.Blocks.Interfaces.RealInput hIn
         annotation (Placement(transformation(
             origin={40,80},
             extent={{-20,-20},{20,20}},
             rotation=270)));
 
-    equation 
+    equation
       if cardinality(pIn) == 0 then
         pIn = p0;
       end if;
@@ -930,8 +930,8 @@ if the input signal is positive.
 </ul></p>
 
 </html>
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -941,18 +941,18 @@ if the input signal is positive.
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\",
@@ -969,18 +969,18 @@ This package contains sources and sinks fluids and heat.
 
   package Components \"Aggregates\"
     package FlueGasZones \"Gas side topology and heat transfer\"
-      model FlueGasZoneSingleTubeOwnMedia 
+      model FlueGasZoneSingleTubeOwnMedia
         \"Flue gas zone including a single water/steam tube as basis component for higher level flue gas zones\"
 
         import SI = SiemensPower.Units;
         constant Real pi=Modelica.Constants.pi;
 
-       replaceable package GasMedium =  SiemensPower.Media.ExhaustGas constrainedby 
-          Modelica.Media.Interfaces.PartialMedium \"Flue gas medium\" 
+       replaceable package GasMedium =  SiemensPower.Media.ExhaustGas constrainedby
+          Modelica.Media.Interfaces.PartialMedium \"Flue gas medium\"
             annotation (   choicesAllMatching=true, Dialog(group=\"Media\"));
 
-        replaceable package H2OMedium = Modelica.Media.Water.WaterIF97_ph 
-          constrainedby Modelica.Media.Interfaces.PartialTwoPhaseMedium 
+        replaceable package H2OMedium = Modelica.Media.Water.WaterIF97_ph
+          constrainedby Modelica.Media.Interfaces.PartialTwoPhaseMedium
           \"Water/steam medium\"                            annotation (choicesAllMatching=
               true, Dialog(group=\"Media\"));
 
@@ -988,49 +988,49 @@ This package contains sources and sinks fluids and heat.
         parameter Integer numberOfTubeNodes=2 \"Number of water nodes per tube\";
         parameter Integer numberOfWallLayers(min=1)=3 \"Number of wall layers\" annotation(choices(choice=1, choice=2, choice=3, choice=4, choice=5, choice=6));
         parameter Modelica.Fluid.Types.HydraulicResistance
-          hydraulicResistance_gas =                                                2 
+          hydraulicResistance_gas =                                                2
           \"Hydraulic conductance (for gas pressure drop)\";
-        parameter SI.CoefficientOfHeatTransfer alphaOffset=0.5e3 
+        parameter SI.CoefficientOfHeatTransfer alphaOffset=0.5e3
           \"alpha offset (in case of verysimple=true)\"                    annotation(Dialog(tab=\"Inner heat transfer\", enable=verysimple));
-        parameter Real alphaFactor=1.0 
+        parameter Real alphaFactor=1.0
           \"Factor for state dependent alpha term (in case " + "of verysimple=true)\"                    annotation(Dialog(tab=\"Inner heat transfer\", enable=verysimple));
 
-        parameter SiemensPower.Units.MassFlowRate m_flow_start=19.05 
+        parameter SiemensPower.Units.MassFlowRate m_flow_start=19.05
           \"Total water/steam mass flow rate\" annotation (Dialog(tab=\"Initialization\", group=\"Water flow\"));
-        parameter H2OMedium.AbsolutePressure pIn_start=pOut_start+2e5 
+        parameter H2OMedium.AbsolutePressure pIn_start=pOut_start+2e5
           \"start value for inlet pressure\"                            annotation(Dialog(tab=\"Initialization\", group=\"Water flow\"));
-        parameter H2OMedium.AbsolutePressure pOut_start=137e5 
+        parameter H2OMedium.AbsolutePressure pOut_start=137e5
           \"start value for outlet pressure\"                              annotation(Dialog(tab=\"Initialization\", group=\"Water flow\"));
-        parameter H2OMedium.SpecificEnthalpy hIn_start=500e3 
+        parameter H2OMedium.SpecificEnthalpy hIn_start=500e3
           \"start value for inlet enthalpy\"                                      annotation(Dialog(tab=\"Initialization\", group=\"Water flow\"));
-        parameter H2OMedium.SpecificEnthalpy hOut_start=hIn_start 
+        parameter H2OMedium.SpecificEnthalpy hOut_start=hIn_start
           \"start value for outlet enthalpy\"                                   annotation(Dialog(tab=\"Initialization\", group=\"Water flow\"));
-        parameter SI.Pressure pGas_start=1.0e5 \"Gas pressure\" 
+        parameter SI.Pressure pGas_start=1.0e5 \"Gas pressure\"
           annotation (Dialog(tab=\"Initialization\", group=\"Gas\"));
-        parameter H2OMedium.Temperature TGasIn_start=300.0 
-          \"Inlet gas temperature\" 
+        parameter H2OMedium.Temperature TGasIn_start=300.0
+          \"Inlet gas temperature\"
           annotation (Dialog(tab=\"Initialization\", group=\"Gas\"));
-        parameter H2OMedium.Temperature TGasOut_start=TGasIn_start 
-          \"Outlet gas temperature\" 
+        parameter H2OMedium.Temperature TGasOut_start=TGasIn_start
+          \"Outlet gas temperature\"
           annotation (Dialog(tab=\"Initialization\", group=\"Gas\"));
         parameter GasMedium.MassFlowRate m_flowGas_start=1 \"Gas mass flow rate\"
                                annotation (Dialog(tab=\"Initialization\", group=\"Gas\"));
-        parameter SiemensPower.Utilities.Structures.FgzGeo geoFGZ 
+        parameter SiemensPower.Utilities.Structures.FgzGeo geoFGZ
           \"Geometry of flue gas zone\"  annotation (Dialog(group=\"Geometry\"));
-        parameter SiemensPower.Utilities.Structures.Fins geoFins 
+        parameter SiemensPower.Utilities.Structures.Fins geoFins
           \"Geometry of outer wall fins\"   annotation (Dialog(group=\"Geometry\"));
-        parameter SiemensPower.Utilities.Structures.PipeGeo geoPipe 
+        parameter SiemensPower.Utilities.Structures.PipeGeo geoPipe
           \"Geometry of tubes\"                                                             annotation (Dialog(group=\"Geometry\"));
-        parameter SiemensPower.Utilities.Structures.PropertiesMetal metal 
+        parameter SiemensPower.Utilities.Structures.PropertiesMetal metal
           \"Tube wall properties\"                                                           annotation (Dialog(group=\"Media\"));
         parameter Real cleanliness=1.0 \"Cleanliness factor\";
         parameter Real heatloss=0.5 \"Heat loss to ambient in %\";
         parameter Boolean hasCriticalData=(if GasMedium.nX>1 then true else false) annotation(Dialog(tab=\"No input\", enable=false));
         parameter SI.Length d_ch_Re = (if geoFins.finned then geoPipe.d_out else 0.5*pi*geoPipe.d_out) annotation(Dialog(tab=\"No input\", enable=false));
-        parameter SI.Area Ah=geoPipe.Nt*pi*geoPipe.d_out*geoPipe.L 
+        parameter SI.Area Ah=geoPipe.Nt*pi*geoPipe.d_out*geoPipe.L
           \"Heat transfer area of unfinned tubes\" annotation(Dialog(tab=\"No input\", enable=false));
 
-        SiemensPower.Interfaces.portGasIn portGasIn(redeclare package Medium = GasMedium, m_flow(start=m_flowGas_start)) 
+        SiemensPower.Interfaces.portGasIn portGasIn(redeclare package Medium = GasMedium, m_flow(start=m_flowGas_start))
           annotation (Placement(transformation(extent={{-120,-20},{-80,20}}, rotation=
                  0)));
         SiemensPower.Interfaces.portGasOut portGasOut(
@@ -1038,13 +1038,13 @@ This package contains sources and sinks fluids and heat.
             =                                                                   GasMedium, m_flow(start=-m_flowGas_start)) annotation (Placement(
               transformation(extent={{80,-20},{120,20}}, rotation=0)));
          Modelica.Fluid.Interfaces.FluidPort_a portIn(redeclare package Medium
-            =                                                                    H2OMedium, m_flow(start=m_flow_start)) 
-          \"water inlet\" 
+            =                                                                    H2OMedium, m_flow(start=m_flow_start))
+          \"water inlet\"
           annotation (Placement(transformation(extent={{-20,-100},{20,-60}}, rotation=
                  0)));
         Modelica.Fluid.Interfaces.FluidPort_b portOut(redeclare package Medium
-            =                                                                    H2OMedium, m_flow(start=-m_flow_start)) 
-          \"water moutlet\" 
+            =                                                                    H2OMedium, m_flow(start=-m_flow_start))
+          \"water moutlet\"
           annotation (Placement(transformation(extent={{-20,60},{20,100}}, rotation=0)));
         SiemensPower.Components.Pipes.TubeOwnMedia tube(
           redeclare package Medium = H2OMedium,
@@ -1075,7 +1075,7 @@ This package contains sources and sinks fluids and heat.
           geoFins=geoFins,
           geoPipe=geoPipe,
           m_flow=m_flow,
-          state=state) constrainedby 
+          state=state) constrainedby
           SiemensPower.Utilities.HeatTransfer.HeatTransferBaseClass(
           redeclare package Medium = GasMedium,
           numberOfNodes=numberOfTubeNodes,
@@ -1087,7 +1087,7 @@ This package contains sources and sinks fluids and heat.
           geoFins=geoFins,
           geoPipe=geoPipe,
           m_flow=m_flow,
-          state=state) \"Convective heat transfer\" 
+          state=state) \"Convective heat transfer\"
                   annotation (Dialog(tab=\"General\", group=\"Outer heat transfer\"),editButton=true,choicesAllMatching,
           Placement(transformation(extent={{-72,-46},{-32,-6}}, rotation=0)));
 
@@ -1100,9 +1100,9 @@ This package contains sources and sinks fluids and heat.
          GasMedium.BaseProperties mediumIn(
           p(start=pGas_start),
           T(start=TGasIn_start));
-        GasMedium.MassFlowRate m_flowGas(start=m_flowGas_start) 
+        GasMedium.MassFlowRate m_flowGas(start=m_flowGas_start)
           \"Mass flow rate\";
-        GasMedium.ThermodynamicState state(T(start=0.5*(TGasIn_start+TGasOut_start)),  p(start=pGas_start)) 
+        GasMedium.ThermodynamicState state(T(start=0.5*(TGasIn_start+TGasOut_start)),  p(start=pGas_start))
           \"gas medium properties\";
         GasMedium.MassFlowRate m_flow(start=m_flowGas_start) \"Mass flow rate\";
        inner GasMedium.Temperature TWall[numberOfTubeNodes];
@@ -1112,12 +1112,12 @@ This package contains sources and sinks fluids and heat.
         SI.TemperatureDifference dT[numberOfTubeNodes];
        SiemensPower.Interfaces.portHeat heatPortToWall(numberOfNodes=numberOfTubeNodes);
 
-      SI.HeatFlowRate[numberOfTubeNodes] Q_flowToAmbient 
+      SI.HeatFlowRate[numberOfTubeNodes] Q_flowToAmbient
           \"Heat flow rates to ambient\";
-      initial equation 
+      initial equation
         der(mediumOut.h)=0;
 
-      equation 
+      equation
 
         state=medium.state;
         m_flow = m_flowGas;
@@ -1177,21 +1177,21 @@ The flue gas flows perpendicular to the water/steam
           <ul>
                <li> The gas flow is modeled using a simple quasi stationary pressure drop.
                <li> The water/steam flow and inner heat transfer is modeled using the <bf>Components.Pipes.Tube</bf> model.
-               <li> The outer heat transfer gas-metal can be chosen from 
+               <li> The outer heat transfer gas-metal can be chosen from
                     <ul>
                        <li> Escoa correlation, see <i>Chris Weierman, Correlations ease the selection"
-         + " of finned tubes, The Oil and Gas Journal, Sept. 6, 1976</i>;   
+         + " of finned tubes, The Oil and Gas Journal, Sept. 6, 1976</i>;
                             Update (Fintube Corp. <a href=\\\"http://www.fintubetech.com/escoa/manual.exe\\\">ESCOA Engineering Manual</a>) from July 2002.
                        <li> Simple heat transfer with constant heat transfer coefficient.
                     </ul>
-          </ul> 
+          </ul>
 <p>
            The model restrictions are:
                 <ul>
                         <li> Cross flow configurations (gas flow is perpendicular to water/steam flow)
                 </ul>
         </p>
-         <p>  
+         <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -1201,18 +1201,18 @@ The flue gas flows perpendicular to the water/steam
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td>free </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td>6.1 </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
      </HTML>\",
@@ -1226,7 +1226,7 @@ The flue gas flows perpendicular to the water/steam
       package Tests \"Tests for FlueGasZones\"
             // within SiemensPower.Components.FlueGasZones.Tests;
 
-        model FlueGasZoneSingleTube_test 
+        model FlueGasZoneSingleTube_test
           \"Test case for the basic flue gas zone\"
           extends Modelica.Icons.Example;
           SiemensPower.Components.FlueGasZones.FlueGasZoneSingleTubeOwnMedia
@@ -1262,20 +1262,20 @@ The flue gas flows perpendicular to the water/steam
             heatloss=0.5,
             numberOfWallLayers=
                   3,
-            redeclare package GasMedium = 
+            redeclare package GasMedium =
                 SiemensPower.Media.ExhaustGasSingleComponent,
             pIn_start=8200000,
             pOut_start=8200000,
             TGasIn_start=673,
             TGasOut_start=760,
-            redeclare 
+            redeclare
               SiemensPower.Utilities.HeatTransfer.HeatTransfer_constAlpha
-              heatTransfer) 
+              heatTransfer)
                          annotation (Placement(transformation(extent={{-2,36},{18,56}},
                   rotation=0)));
 
-          SiemensPower.Boundaries.GasSinkP gasSinkP(redeclare package Medium = 
-                SiemensPower.Media.ExhaustGasSingleComponent) 
+          SiemensPower.Boundaries.GasSinkP gasSinkP(redeclare package Medium =
+                SiemensPower.Media.ExhaustGasSingleComponent)
                                                annotation (Placement(transformation(
                   extent={{50,36},{70,56}}, rotation=0)));
           SiemensPower.Boundaries.GasSource gasSourceW(
@@ -1283,18 +1283,18 @@ The flue gas flows perpendicular to the water/steam
                     200,
             T_start=
                673.15,
-            redeclare package Medium = 
-                SiemensPower.Media.ExhaustGasSingleComponent) 
+            redeclare package Medium =
+                SiemensPower.Media.ExhaustGasSingleComponent)
                          annotation (Placement(transformation(extent={{-54,36},{-34,56}},
                   rotation=0)));
           SiemensPower.Boundaries.WaterSink watersink_ph(
                                                p_start=
-                                                  8200000) 
+                                                  8200000)
             annotation (Placement(transformation(extent={{30,76},{50,96}}, rotation=0)));
           SiemensPower.Boundaries.WaterSourceMH watersource_mh(
                                                    m_flow_start=
                                                            18.41, h_start=
-                                                                     1300e3) 
+                                                                     1300e3)
             annotation (Placement(transformation(extent={{-34,-4},{-14,16}},   rotation=
                    0)));
           SiemensPower.Blocks.TimeTable timeTable(timeDelay=1, table=[0,673.15; 10,673.15; 100,773.15;
@@ -1338,9 +1338,9 @@ The flue gas flows perpendicular to the water/steam
             pOut_start=8200000,
             TGasIn_start=673,
             TGasOut_start=760,
-            redeclare 
+            redeclare
               SiemensPower.Utilities.HeatTransfer.HeatTransfer_constAlpha
-              heatTransfer) 
+              heatTransfer)
                          annotation (Placement(transformation(extent={{-12,-60},{8,-40}},
                   rotation=0)));
           SiemensPower.Boundaries.GasSinkP gasSinkP1(redeclare package Medium
@@ -1352,59 +1352,59 @@ The flue gas flows perpendicular to the water/steam
                     200,
             T_start=
                673.15,
-            redeclare package Medium = SiemensPower.Media.ExhaustGas) 
+            redeclare package Medium = SiemensPower.Media.ExhaustGas)
                          annotation (Placement(transformation(extent={{-64,-60},{-44,
                     -40}},
                   rotation=0)));
           SiemensPower.Boundaries.WaterSink watersink_ph1(
                                                 p_start=
-                                                   8200000) 
+                                                   8200000)
             annotation (Placement(transformation(extent={{20,-20},{40,0}}, rotation=0)));
           SiemensPower.Boundaries.WaterSourceMH watersource_mh1(
                                                    m_flow_start=
                                                            18.41, h_start=
-                                                                     1300e3) 
+                                                                     1300e3)
             annotation (Placement(transformation(extent={{-44,-100},{-24,-80}},rotation=
                    0)));
-        equation 
-          connect(gasSourceW.port,flueGasZoneSingleCompGas.portGasIn) 
+        equation
+          connect(gasSourceW.port,flueGasZoneSingleCompGas.portGasIn)
                                                                     annotation (Line(
               points={{-34,46},{-2,46}},
               color={0,191,0},
               smooth=Smooth.None));
-          connect(flueGasZoneSingleCompGas.portGasOut, gasSinkP.portGas) 
+          connect(flueGasZoneSingleCompGas.portGasOut, gasSinkP.portGas)
                                                                   annotation (Line(
               points={{18,46},{50,46}},
               color={0,191,0},
               smooth=Smooth.None));
-          connect(watersource_mh.port,flueGasZoneSingleCompGas.portIn) 
+          connect(watersource_mh.port,flueGasZoneSingleCompGas.portIn)
                                                                      annotation (Line(
               points={{-14,6},{8,6},{8,38}},
               color={0,127,255},
               smooth=Smooth.None));
-          connect(watersink_ph.port,flueGasZoneSingleCompGas.portOut) 
+          connect(watersink_ph.port,flueGasZoneSingleCompGas.portOut)
                                                                    annotation (Line(
               points={{30,86},{8,86},{8,54}},
               color={0,127,255},
               smooth=Smooth.None));
           connect(timeTable.y,gasSourceW.T_set) annotation (Line(points={{-61,82},{-44,
                   82},{-44,52}}, color={0,0,127}));
-          connect(gasSourceW1.port,flueGasZoneComposedGas.portGasIn) 
+          connect(gasSourceW1.port,flueGasZoneComposedGas.portGasIn)
                                                                     annotation (Line(
               points={{-44,-50},{-12,-50}},
               color={0,191,0},
               smooth=Smooth.None));
-          connect(flueGasZoneComposedGas.portGasOut, gasSinkP1.portGas) 
+          connect(flueGasZoneComposedGas.portGasOut, gasSinkP1.portGas)
                                                                   annotation (Line(
               points={{8,-50},{40,-50}},
               color={0,191,0},
               smooth=Smooth.None));
-          connect(watersource_mh1.port,flueGasZoneComposedGas.portIn) 
+          connect(watersource_mh1.port,flueGasZoneComposedGas.portIn)
                                                                      annotation (Line(
               points={{-24,-90},{-2,-90},{-2,-58}},
               color={0,127,255},
               smooth=Smooth.None));
-          connect(watersink_ph1.port,flueGasZoneComposedGas.portOut) 
+          connect(watersink_ph1.port,flueGasZoneComposedGas.portOut)
                                                                    annotation (Line(
               points={{20,-10},{-2,-10},{-2,-42}},
               color={0,127,255},
@@ -1420,7 +1420,7 @@ The flue gas flows perpendicular to the water/steam
              info=\"<HTML>
         <p>
            This is a test case for the basic flue gas zone with a single tube in a cross flow flue gas zone.
-         <p>  
+         <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -1430,18 +1430,18 @@ The flue gas flows perpendicular to the water/steam
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td>free </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td>6.1 </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
      </HTML>\",
@@ -1451,7 +1451,7 @@ The flue gas flows perpendicular to the water/steam
         </ul>
      </html>\"),
             experiment(StopTime=200),
-            Commands(file=\"Scripts/tests/FlueGasZoneSingleTube_test.mos\" 
+            Commands(file=\"Scripts/tests/FlueGasZoneSingleTube_test.mos\"
                 \"FlueGasZoneSingleTube_test\"));
         end FlueGasZoneSingleTube_test;
       annotation (Documentation(info=\"<html>
@@ -1463,22 +1463,22 @@ This package contains flue gas zones.
 </html>\"));
     end FlueGasZones;
 
-    package HeatExchanger 
+    package HeatExchanger
       \"Simple heat exchangers and compositions of tubes and flue gas zones\"
-      model ParallelFlowEvaporatorOwnMedia 
+      model ParallelFlowEvaporatorOwnMedia
         \"Evaporator with parallel rows according to Cottam design\"
         import SI = SiemensPower.Units;
-        replaceable package GasMedium =  SiemensPower.Media.ExhaustGas constrainedby 
-          Modelica.Media.Interfaces.PartialMedium \"Flue gas medium\" 
+        replaceable package GasMedium =  SiemensPower.Media.ExhaustGas constrainedby
+          Modelica.Media.Interfaces.PartialMedium \"Flue gas medium\"
             annotation (   choicesAllMatching=true, Dialog(group=\"Media\"));
 
-        replaceable package WaterMedium = Modelica.Media.Water.WaterIF97_ph 
-          constrainedby Modelica.Media.Interfaces.PartialTwoPhaseMedium 
+        replaceable package WaterMedium = Modelica.Media.Water.WaterIF97_ph
+          constrainedby Modelica.Media.Interfaces.PartialTwoPhaseMedium
           \"Water/steam medium\"                            annotation (choicesAllMatching=
               true, Dialog(group=\"Media\"));
 
         parameter Integer numberOfTubeLayers(min=1)=1 \"Number of tube layers\";
-        parameter Integer numberOfCellsPerLayer=20 
+        parameter Integer numberOfCellsPerLayer=20
           \"Number of water/steam cells per tube layer\";
         parameter Integer numberOfWallLayers(min=1)=3 \"Number of wall layers\" annotation(choices(choice=1, choice=2, choice=3, choice=4, choice=5, choice=6));
         parameter SiemensPower.Utilities.Structures.FgzGeo geoFGZ(
@@ -1511,32 +1511,32 @@ This package contains flue gas zones.
         parameter Boolean hasMixerVolume=false annotation(Dialog(group=\"Mixer\"));
         parameter SI.Volume V=0.1 annotation(Dialog(group=\"Mixer\", enable=hasMixerVolume));
         parameter Modelica.Fluid.Types.HydraulicResistance
-          hydrResistanceSplitterOut =                                                2000 
+          hydrResistanceSplitterOut =                                                2000
           \"Hydraulic conductance\" annotation(Dialog(group=\"Splitter\", enable=withPressureDrops));
 
-        parameter SiemensPower.Units.MassFlowRate m_flowGas_start=228.68 
+        parameter SiemensPower.Units.MassFlowRate m_flowGas_start=228.68
           \"Flue gas mass flow rate\" annotation (Dialog(tab=\"Initialization\", group=\"Flue gas flow\"));
-        parameter GasMedium.Temperature TGasIn_start=390 
-          \"Inlet gas temperature\" 
+        parameter GasMedium.Temperature TGasIn_start=390
+          \"Inlet gas temperature\"
           annotation (Dialog(tab=\"Initialization\", group=\"Flue gas flow\"));
-        parameter GasMedium.Temperature TGasOut_start=TGasIn_start 
-          \"Outlet gas temperature\" 
+        parameter GasMedium.Temperature TGasOut_start=TGasIn_start
+          \"Outlet gas temperature\"
           annotation (Dialog(tab=\"Initialization\", group=\"Flue gas flow\"));
-        parameter SiemensPower.Units.MassFlowRate m_flow_start=19.05 
+        parameter SiemensPower.Units.MassFlowRate m_flow_start=19.05
           \"Total water/steam mass flow rate\" annotation (Dialog(tab=\"Initialization\", group=\"Water flow\"));
-        parameter GasMedium.AbsolutePressure pIn_start=pOut_start+2e5 
+        parameter GasMedium.AbsolutePressure pIn_start=pOut_start+2e5
           \"start value for inlet pressure\"                            annotation(Dialog(tab=\"Initialization\", group=\"Water flow\"));
-        parameter GasMedium.AbsolutePressure pOut_start=137e5 
+        parameter GasMedium.AbsolutePressure pOut_start=137e5
           \"start value for outlet pressure\"                              annotation(Dialog(tab=\"Initialization\", group=\"Water flow\"));
-        parameter GasMedium.SpecificEnthalpy hIn_start=500e3 
+        parameter GasMedium.SpecificEnthalpy hIn_start=500e3
           \"start value for inlet enthalpy\"                                      annotation(Dialog(tab=\"Initialization\", group=\"Water flow\"));
-        parameter GasMedium.SpecificEnthalpy hOut_start=hIn_start 
+        parameter GasMedium.SpecificEnthalpy hOut_start=hIn_start
           \"start value for outlet enthalpy\"                                   annotation(Dialog(tab=\"Initialization\", group=\"Water flow\"));
 
-        replaceable model outerHeatTransfer = 
-            SiemensPower.Utilities.HeatTransfer.HeatTransfer_constAlpha constrainedby 
-          SiemensPower.Utilities.HeatTransfer.HeatTransferBaseClass 
-          \"Convective heat transfer\" 
+        replaceable model outerHeatTransfer =
+            SiemensPower.Utilities.HeatTransfer.HeatTransfer_constAlpha constrainedby
+          SiemensPower.Utilities.HeatTransfer.HeatTransferBaseClass
+          \"Convective heat transfer\"
                   annotation (Dialog(tab=\"Heat transfer\", group=\"Outer heat transfer\"),editButton=true,choicesAllMatching);
 
         SiemensPower.Components.FlueGasZones.FlueGasZoneSingleTubeOwnMedia[numberOfTubeLayers]
@@ -1573,7 +1573,7 @@ This package contains flue gas zones.
                   hOut_start,
           redeclare package H2OMedium = WaterMedium,
           redeclare SiemensPower.Utilities.HeatTransfer.HeatTransfer_constAlpha
-            heatTransfer) 
+            heatTransfer)
           annotation (extent=[-10,-10; 10,10]);
 
         SiemensPower.Components.Junctions.SplitterMixer splitter(
@@ -1596,26 +1596,26 @@ This package contains flue gas zones.
           redeclare package Medium = WaterMedium,
           hasVolume=hasMixerVolume,
           V=V,
-          initializeSteadyEnthalpyBalance=false) 
+          initializeSteadyEnthalpyBalance=false)
                           annotation (extent=[-10,60; 12,36]);
 
         Modelica.Fluid.Interfaces.FluidPort_b portSteamOut(redeclare package
-            Medium = 
-              WaterMedium) 
+            Medium =
+              WaterMedium)
           annotation (extent=[20,80; -20,120]);
         Modelica.Fluid.Interfaces.FluidPort_a portWaterIn(redeclare package
-            Medium = 
-              WaterMedium) 
+            Medium =
+              WaterMedium)
           annotation (extent=[-20,-120; 20,-80]);
         SiemensPower.Interfaces.portGasOut portGasOut(
                                                      redeclare package Medium
             =                                                                   GasMedium, m_flow(start=-m_flowGas_start)) annotation (extent=[80,-20;
               120,20]);
-        SiemensPower.Interfaces.portGasIn portGasIn(redeclare package Medium = GasMedium, m_flow(start=m_flowGas_start)) 
+        SiemensPower.Interfaces.portGasIn portGasIn(redeclare package Medium = GasMedium, m_flow(start=m_flowGas_start))
           annotation (extent=[-120,-20; -80,20]);
-      equation 
+      equation
 
-        connect(flueGasZone[1].portGasIn,portGasIn) 
+        connect(flueGasZone[1].portGasIn,portGasIn)
           annotation (points=[-10,0; -100,0],style(color=58, rgbcolor={0,191,0}));
         for i in 1:(numberOfTubeLayers" + "-1) loop
             connect(flueGasZone[i].portGasOut,flueGasZone[i + 1].portGasIn);
@@ -1623,7 +1623,7 @@ This package contains flue gas zones.
         connect(flueGasZone[numberOfTubeLayers].portGasOut,
                                            portGasOut) annotation (points=[10,0; 100,0],
                            style(color=58, rgbcolor={0,191,0}));
-        connect(splitter.portMix, portWaterIn) 
+        connect(splitter.portMix, portWaterIn)
           annotation (points=[0,-49; 0,-100],style(color=69, rgbcolor={0,127,255}));
         connect(mixer.portMix, portSteamOut) annotation (points=[1,58.8; 1,58.4; 0,58.4;
               0,100],       style(color=69, rgbcolor={0,127,255}));
@@ -1721,20 +1721,20 @@ This package contains flue gas zones.
           <ul>
                <li> The gas flow is modeled using a simple quasi stationary pressure drop.
                <li> The water/steam flow and inner heat transfer is modeled using the <bf>Components.Pipes.Tube</bf> model.
-               <li> The outer heat transfer gas-metal can be chosen from 
+               <li> The outer heat transfer gas-metal can be chosen from
                     <ul>
-                       <li> Escoa correlation, see <i>Chris Weierman, Correlations ease the selection of finned tubes, The Oil and Gas Journal, Sept. 6, 1976</i>;   
+                       <li> Escoa correlation, see <i>Chris Weierman, Correlations ease the selection of finned tubes, The Oil and Gas Journal, Sept. 6, 1976</i>;
                             Update (Fintube Corp. <a href=\\\"http://www.fintubetech.com/escoa/manual.exe\\\">ESCOA Engineering Manual</a>) from July 2002.
                        <li> Simple heat transfer with constant heat transfer coefficient.
                     </ul>
-          </ul> 
+          </ul>
 <p>
            The model restrictions are:
                 <ul>
                         <li> see composits
                 </ul>
         </p>
-         <p>  
+         <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -1744,18 +1744,18 @@ This package contains flue gas zones.
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td>free </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td>6.1 </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
      </HTML>\",
@@ -1769,7 +1769,7 @@ This package contains flue gas zones.
       package Tests \"Tests for HeatExchanger\"
             // within SiemensPower.Components.HeatExchanger.Tests;
 
-        model ParallelFlowEvaporatorOwnMedia_test 
+        model ParallelFlowEvaporatorOwnMedia_test
           \"Evaporator of Liegender Benson with parallel gas and water flow, with analytical Jacobian\"
 
            parameter Integer N=2 \"Number of water/steam cells per tube layer\";
@@ -1787,7 +1787,7 @@ This package contains flue gas zones.
               material=\"St 35.8\"),
             geoFGZ(
                 pt=0.09, Lh=0.18),
-            redeclare package GasMedium = 
+            redeclare package GasMedium =
                 SiemensPower.Media.ExhaustGasSingleComponent,
             V=1,
             hasMixerVolume=
@@ -1799,7 +1799,7 @@ This package contains flue gas zones.
             numberOfWallLayers=
                   1,
             numberOfTubeLayers=
-               2) 
+               2)
             annotation (Placement(transformation(extent={{20,22},{40,42}}, rotation=0)));
 
           SiemensPower.Components.HeatExchanger.ParallelFlowEvaporatorOwnMedia
@@ -1808,7 +1808,7 @@ This package contains flue gas zones.
                 material=\"13 CrMo 4.4\"),
             propertiesMetal(
                   lambda=38),
-            redeclare package GasMedium = 
+            redeclare package GasMedium =
                 SiemensPower.Media.ExhaustGasSingleComponent,
             V=1,
             hasMixerVolume=
@@ -1820,7 +1820,7 @@ This package contains flue gas zones.
             numberOfWallLayers=
                   1,
             numberOfTubeLayers=
-               2) 
+               2)
             annotation (Placement(transformation(extent={{-24,22},{-4,42}}, rotation=0)));
 
           SiemensPower.Components.Pipes.TubeOwnMedia downcomer(
@@ -1844,14 +1844,14 @@ This package contains flue gas zones.
             useINTH2O=
                    false,
             pIn_start= 13700000,
-            pOut_start= 13900000) 
+            pOut_start= 13900000)
                  annotation (Placement(transformation(
                 origin={5,14},
                 extent={{-12,-9},{8,9}},
                 rotation=270)));
-          SiemensPower.Boundaries.WaterSink watersink_ph 
+          SiemensPower.Boundaries.WaterSink watersink_ph
             annotation (Placement(transformation(extent={{-14,78},{6,98}}, rotation=0)));
-          SiemensPower.Boundaries.WaterSourceMH watersource_mh 
+          SiemensPower.Boundaries.WaterSourceMH watersource_mh
             annotation (Placement(transformation(extent={{82,-4},{60,-26}},  rotation=0)));
           SiemensPower.Blocks.Smoothing smoothing(timeDelay=
                                                     0.01) annotation (Placement(
@@ -1866,73 +1866,73 @@ This package contains flue gas zones.
             nPorts=1,
             use_m_flow_in=true,
             use_h_in=true,
-            redeclare package Medium = 
+            redeclare package Medium =
                 SiemensPower.Media.ExhaustGasSingleComponent,
-            use_X_in=false) 
+            use_X_in=false)
             annotation (Placement(transformation(extent={{-74,22},{-54,42}})));
           Modelica.Fluid.Sources.Boundary_ph boundary_ph(
             nPorts=1,
-            redeclare package Medium = 
+            redeclare package Medium =
                 SiemensPower.Media.ExhaustGasSingleComponent,
             use_p_in=true,
             use_h_in=true,
-            use_X_in=false) 
+            use_X_in=false)
             annotation (Placement(transformation(extent={{70,24},{54,40}})));
           SiemensPower.Boundaries.PrescribedHeatFlow prescribedHeatFlow(numberOfCells=
-                                                                          N) 
+                                                                          N)
             annotation (Placement(transformation(extent={{-8,-8},{10,8}},
                 rotation=90,
                 origin={24,0})));
-          Modelica.Blocks.Sources.RealExpression realExpression 
+          Modelica.Blocks.Sources.RealExpression realExpression
             annotation (Placement(transformation(extent={{-2,-20},{10,-8}})));
           Modelica.Fluid.Sensors.MassFlowRate massFlowRate(redeclare package
-              Medium = 
+              Medium =
                 Modelica.Media.Water.StandardWater) annotation (Placement(
                 transformation(
                 extent={{-8,9},{9,-8}},
                 rotation=90,
                 origin={-14,59})));
           Modelica.Fluid.Sensors.Temperature temperature(redeclare package
-              Medium = 
-                Modelica.Media.Water.StandardWater) 
+              Medium =
+                Modelica.Media.Water.StandardWater)
             annotation (Placement(transformation(extent={{-44,64},{-28,84}})));
-          Modelica.Fluid.Sensors.Pressure pressure(redeclare package Medium = 
-                Modelica.Media.Water.StandardWater) 
+          Modelica.Fluid.Sensors.Pressure pressure(redeclare package Medium =
+                Modelica.Media.Water.StandardWater)
             annotation (Placement(transformation(extent={{50,-2},{70,16}})));
-          Modelica.Blocks.Interfaces.RealOutput ausgang[3] \"pin mout Tout\" 
+          Modelica.Blocks.Interfaces.RealOutput ausgang[3] \"pin mout Tout\"
             annotation (Placement(transformation(extent={{90,50},{110,70}})));
-          inner Modelica.Fluid.System system 
+          inner Modelica.Fluid.System system
             annotation (Placement(transformation(extent={{-72,84},{-60,96}})));
           SiemensPower.Blocks.TimeTable h_in_gas(timeDelay=
                                                       0.5, table=[0,121.894e3; 10,
-                121.894e3; 900,537.432e3; 1000,537.432e3]) 
+                121.894e3; 900,537.432e3; 1000,537.432e3])
                              annotation (Placement(transformation(extent={{-108,26},{
                     -88,46}},
                           rotation=0)));
-          Modelica.Blocks.Sources.RealExpression p_out_gas(y=1.01325e5) 
+          Modelica.Blocks.Sources.RealExpression p_out_gas(y=1.01325e5)
             annotation (Placement(transformation(extent={{-108,60},{-88,80}},rotation=0)));
-          Modelica.Blocks.Sources.RealExpression hr_gas(y=122e3) 
+          Modelica.Blocks.Sources.RealExpression hr_gas(y=122e3)
             annotation (Placement(transformation(extent={{-108,74},{-88,94}},rotation=0)));
-          Modelica.Blocks.Sources.RealExpression m_in_gas(y=228.68) 
+          Modelica.Blocks.Sources.RealExpression m_in_gas(y=228.68)
             annotation (Placement(transformation(extent={{-108,46},{-88,66}},
                                                                             rotation=0)));
           SiemensPower.Blocks.TimeTable h_in_water(timeDelay=
                                                         1, table=[0,500e3; 100,500e3;
-                2000,1527e3; 3000,1527e3]) 
+                2000,1527e3; 3000,1527e3])
                              annotation (Placement(transformation(extent={{-108,-38},{
                     -88,-18}},
                            rotation=0)));
-          Modelica.Blocks.Sources.RealExpression hr_water(y=2800e3) 
+          Modelica.Blocks.Sources.RealExpression hr_water(y=2800e3)
             annotation (Placement(transformation(extent={{-108,-4},{-88,16}},
                                                                             rotation=0)));
-          Modelica.Blocks.Sources.RealExpression p_out_water(y=137.058e5) 
+          Modelica.Blocks.Sources.RealExpression p_out_water(y=137.058e5)
             annotation (Placement(transformation(extent={{-108,-18},{-88,2}},rotation=0)));
-          Modelica.Blocks.Sources.RealExpression m_in_water(y=20) 
+          Modelica.Blocks.Sources.RealExpression m_in_water(y=20)
             annotation (Placement(transformation(extent={{-108,-58},{-88,-38}},
                                                                              rotation=0)));
-        equation 
+        equation
 
-          connect(EVA2.portGasOut,EVA1.portGasIn) 
+          connect(EVA2.portGasOut,EVA1.portGasIn)
             annotation (Line(points={{-4,32},{20,32}}, color={0,191,0}));
           connect(EVA1.portSteamOut,downcomer.portIn)   annotation (Line(points={{30,42},
                   {30,50},{5,50},{5,26}},           color={0,127,255}));
@@ -1945,17 +1945,17 @@ This package contains flue gas zones.
                   {66,-28},{66,-21.6},{66.6,-21.6}},                   color={0,0,127}));
           connect(watersource_mh.port,EVA1.portWaterIn)     annotation (Line(points={{60,-15},
                   {30,-15},{30,22}},                 color={0,127,255}));
-          connect(massflowSource_h.ports[1],EVA2.portGasIn) 
+          connect(massflowSource_h.ports[1],EVA2.portGasIn)
                                                      annotation (Line(
               points={{-54,32},{-24,32}},
               color={0,127,255},
               smooth=Smooth.None));
-          connect(EVA1.portGasOut,boundary_ph.ports[1]) 
+          connect(EVA1.portGasOut,boundary_ph.ports[1])
                                                       annotation (Line(
               points={{40,32},{54,32}},
               color={0,191,0},
               smooth=Smooth.None));
-          connect(downcomer.gasSide,prescribedHeatFlow.portsOut) 
+          connect(downcomer.gasSide,prescribedHeatFlow.portsOut)
                                                               annotation (Line(
               points={{10.94,16},{24,16},{24,10}},
               color={191,0,0},
@@ -1968,12 +1968,12 @@ This package contains flue gas zones.
               points={{-14,88},{-14.5,88},{-14.5,68}},
               color={0,127,255},
               smooth=Smooth.None));
-          connect(massFlowRate.port_a,EVA2.portSteamOut) 
+          connect(massFlowRate.port_a,EVA2.portSteamOut)
                                                        annotation (Line(
               points={{-14.5,51},{-14.5,42},{-14,42}},
               color={0,127,255},
               smooth=Smooth.None));
-          connect(temperature.port,EVA2.portSteamOut) 
+          connect(temperature.port,EVA2.portSteamOut)
                                                     annotation (Line(
               points={{-36,64},{-36,42},{-14,42}},
               color={0,127,255},
@@ -1982,12 +1982,12 @@ This package contains flue gas zones.
               points={{60,-2},{60,-15}},
               color={0,127,255},
               smooth=Smooth.None));
-          connect(h_in_gas.y, massflowSource_h.h_in) 
+          connect(h_in_gas.y, massflowSource_h.h_in)
                                              annotation (Line(
               points={{-87,36},{-76,36}},
               color={0,0,127},
               smooth=Smooth.None));
-          connect(m_in_gas.y, massflowSource_h.m_flow_in) 
+          connect(m_in_gas.y, massflowSource_h.m_flow_in)
                                                   annotation (Line(
               points={{-87,56},{-84,56},{-84,40},{-74,40}},
               color={0,0,127},
@@ -2012,12 +2012,12 @@ This package contains flue gas zones.
               points={{-65,-8},{-46,-8},{-46,100},{-8,100},{-8,96}},
               color={0,0,127},
               smooth=Smooth.None));
-          connect(p_out_gas.y, boundary_ph.p_in) 
+          connect(p_out_gas.y, boundary_ph.p_in)
                                                annotation (Line(
               points={{-87,70},{-80,70},{-80,106},{78,106},{78,38.4},{71.6,38.4}},
               color={0,0,127},
               smooth=Smooth.None));
-          connect(hr_gas.y, boundary_ph.h_in) 
+          connect(hr_gas.y, boundary_ph.h_in)
                                             annotation (Line(
               points={{-87,84},{-82,84},{-82,108},{80,108},{80,36},{71.6,36},{71.6,35.2}},
               color={0,0,127},
@@ -2065,7 +2065,7 @@ This package contains flue gas zones.
         <p>
            This is a test case for CouterCurrentHeatExchanger
         </p>
-         <p>  
+         <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -2075,18 +2075,18 @@ This package contains flue gas zones.
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td>free </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td>6.1 </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2008 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
      </HTML>\"));
@@ -2100,7 +2100,7 @@ This package contains heat exchangers.
 </html>\"));
     end HeatExchanger;
 
-    package Junctions 
+    package Junctions
       \"Contains splitter, mixer, separators without volume and decouple elements\"
       model SplitterMixer \"Splitter/mixer with N ports\"
 
@@ -2109,41 +2109,41 @@ This package contains heat exchangers.
         //  Modelica.Media.Interfaces.PartialMedium \"Medium in the component\"  annotation (
         //    choicesAllMatching =      true);
 
-        parameter Integer numberOfPortsSplit(min=1)=2 
+        parameter Integer numberOfPortsSplit(min=1)=2
           \"Number of inlets(mixer) / outlets(splitter)\";
 
-        parameter SI.AbsolutePressure p_start=1e5 \"Pressure\" 
+        parameter SI.AbsolutePressure p_start=1e5 \"Pressure\"
                                                      annotation(Dialog(tab=\"Initialization\"));
-        parameter Boolean useTemperatureStartValue=false 
+        parameter Boolean useTemperatureStartValue=false
           \"Use temperature instead of specific enthalpy\"                                   annotation(Dialog(tab=\"Initialization\"));
         // parameter Medium.SpecificEnthalpy h_start=if useTemperatureStartValue then Medium.specificEnthalpy_pTX(p_start, T_start, Medium.reference_X) else 300e3
-       parameter SI.SpecificEnthalpy h_start = 300e3 \"Specific enthalpy\" 
+       parameter SI.SpecificEnthalpy h_start = 300e3 \"Specific enthalpy\"
         annotation(Dialog(tab=\"Initialization\", enable= not useTemperatureStartValue));
        // parameter Medium.Temperature T_start=
        //     if useTemperatureStartValue then 300 else Medium.temperature_phX(p_start,h_start,Medium.reference_X)
-         parameter SI.Temperature T_start=300 \"Guess value of temperature\" 
+         parameter SI.Temperature T_start=300 \"Guess value of temperature\"
          annotation(Dialog(tab = \"Initialization\", enable = useTemperatureStartValue));
         //parameter SI.MassFraction X_start[Medium.nX] = Medium.reference_X
         //  \"Start value of mass fractions m_i/m\"
         //  annotation (Dialog(tab=\"Initialization\", enable=Medium.nXi > 0));
 
-        parameter SI.MassFlowRate m_flow_start=1 
+        parameter SI.MassFlowRate m_flow_start=1
           \"Mass flow rate trough outlet(mixer, negative!) / inlet(splitter)\"                                   annotation(Dialog(tab=\"Initialization\"));
-        parameter SI.MassFlowRate[numberOfPortsSplit] m_flowOpposite_start = -ones(numberOfPortsSplit)*m_flow_start/numberOfPortsSplit 
+        parameter SI.MassFlowRate[numberOfPortsSplit] m_flowOpposite_start = -ones(numberOfPortsSplit)*m_flow_start/numberOfPortsSplit
           \"Mass flow rate trough inlets(mixer) / outlets(splitter, negative!)\"                                   annotation(Dialog(tab=\"Initialization\"));
 
         parameter Boolean initializeSteadyMassBalance=true \"ma=sum(mb)\" annotation(Dialog(tab=\"Initialization\",group=\"Initial equations in case of volume > 0\", enable=hasVolume));
-        parameter Boolean initializeSteadyEnthalpyBalance=true 
-          \"der(h)=0, may be too much in case of mixer\" 
+        parameter Boolean initializeSteadyEnthalpyBalance=true
+          \"der(h)=0, may be too much in case of mixer\"
                        annotation(Dialog(tab=\"Initialization\",group=\"Initial equations in case of volume > 0\", enable=hasVolume));
         parameter Boolean initializeFixedPressure=false \"p=p_start\" annotation(Dialog(tab=\"Initialization\",group=\"Initial equations in case of volume > 0\", enable=hasVolume));
         parameter Boolean initializeFixedEnthalpy=false \"h=h_start\" annotation(Dialog(tab=\"Initialization\",group=\"Initial equations in case of volume > 0\", enable=hasVolume));
 
         parameter Boolean hasVolume=false annotation(evaluate=true, Dialog(group=\"Volume\"));
         parameter SI.Volume V=0.1 annotation(Dialog(group=\"Volume\", enable=hasVolume));
-        parameter Boolean hasPressureDrop=false 
+        parameter Boolean hasPressureDrop=false
           \"may be necessary in case of a splitter\"                                         annotation(evaluate=true, Dialog(group=\"Pressure loss\"));
-        parameter Modelica.Fluid.Types.HydraulicResistance resistanceHydraulic=2 
+        parameter Modelica.Fluid.Types.HydraulicResistance resistanceHydraulic=2
           \"Hydraulic resistance\" annotation(Dialog(group=\"Pressure loss\", enable=hasPressureDrop));
 
         SI.SpecificEnthalpy h( start = h_start);
@@ -2160,7 +2160,7 @@ This package contains heat exchangers.
         SiemensPower.Interfaces.FluidPorts_b portsSplit[numberOfPortsSplit](
           m_flow(start=m_flowOpposite_start),
           each p(start=p_start),
-          each h_outflow(start=h_start)) \"outlets(splitter) / inlets(mixer)\" 
+          each h_outflow(start=h_start)) \"outlets(splitter) / inlets(mixer)\"
           annotation (Placement(transformation(extent={{-8,16},{12,96}}),
               iconTransformation(
               extent={{-10,-40},{10,40}},
@@ -2173,7 +2173,7 @@ This package contains heat exchangers.
         SI.MassFlowRate m_flowFromPortMix;
         SI.MassFlowRate m_flowFromPortsSplit[ numberOfPortsSplit];
 
-      initial equation 
+      initial equation
 
       if hasVolume then
          if (initializeSteadyEnthalpyBalance) then
@@ -2190,7 +2190,7 @@ This package contains heat exchangers.
          end if;
       end if;
 
-      equation 
+      equation
 
         d = SiemensPower.Media.TTSE.Utilities.rho_ph(p, h);
         if hasVolume then
@@ -2230,7 +2230,7 @@ This package contains heat exchangers.
 
         annotation (Documentation(
        info=\"<HTML>
-This splitter/mixer hasa variable number N of ports. It can be an ideal splitter/mixer (hasVolume=false and hasPressureDrop=false) 
+This splitter/mixer hasa variable number N of ports. It can be an ideal splitter/mixer (hasVolume=false and hasPressureDrop=false)
 or can be modeled with a volume and/or pressure losses in the N outlets/inlets.
 <p>
 In case of using this component as a mixer you must use the portsSplit[numberOfPortsSplit] as inlets and portMix as the outlet.
@@ -2244,16 +2244,16 @@ In case of using this component as a mixer you must use the portsSplit[numberOfP
         <tr>
            <td><b>Checked by:</b>   </td>
            <td>            </td>
-        </tr> 
+        </tr>
         <tr>
            <td><b>Protection class:</b>    </td>
            <td>free </td>
-        </tr> 
+        </tr>
         <tr>
            <td><b>Used Dymola version:</b>    </td>
            <td>6.1 </td>
-        </tr> 
-        
+        </tr>
+
         </table>
      Copyright &copy  2007 Siemens AG, PG EIP12 , All rights reserved.<br>
  <br>   This model is distributed in the hope that it will be useful,
@@ -2262,7 +2262,7 @@ In case of using this component as a mixer you must use the portsSplit[numberOfP
                       <ul>
                               <li> Feb 2009 adapted for stream connector by Haiko Steuer
                               <li> November 2007, generalized for other media
-                              <li> June 2007 by Haiko Steuer (for water/steam)  
+                              <li> June 2007 by Haiko Steuer (for water/steam)
                        </ul>
                         </html>\"),
           Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},{100,
@@ -2294,18 +2294,18 @@ In case of using this component as a mixer you must use the portsSplit[numberOfP
               2,
             m_flow_start=
                     20,
-            p_start=3000000) 
+            p_start=3000000)
                         annotation (Placement(transformation(extent={{-34,-52},{-14,-32}},
                   rotation=0)));
           SiemensPower.Boundaries.WaterSourceMH watersource_mh(
                                                    h_start=
                                                       1000e3, m_flow_start=
-                                                                      20) 
+                                                                      20)
             annotation (Placement(transformation(extent={{-44,-86},{-24,-66}}, rotation=
                    0)));
           SiemensPower.Boundaries.WaterSink watersink_ph(  h_start=
                                                               1500e3, p_start=
-                                                                         3000000) 
+                                                                         3000000)
             annotation (Placement(transformation(extent={{12,70},{32,90}},   rotation=0)));
           SiemensPower.Components.Junctions.SplitterMixer mixer(
             numberOfPortsSplit=
@@ -2319,7 +2319,7 @@ In case of using this component as a mixer you must use the portsSplit[numberOfP
             V=0.05,
             initializeSteadyEnthalpyBalance=
                                   false,
-            p_start=3000000) 
+            p_start=3000000)
                          annotation (Placement(transformation(extent={{-24,64},{-6,42}},
                   rotation=0)));
 
@@ -2330,7 +2330,7 @@ In case of using this component as a mixer you must use the portsSplit[numberOfP
             pIn_start= 3100000,
             pOut_start= 3000000,
             hIn_start= 1000e3,
-            hOut_start= 1000e3) 
+            hOut_start= 1000e3)
             annotation (Placement(transformation(
                 origin={-34,8},
                 extent={{-10,-10},{10,10}},
@@ -2342,7 +2342,7 @@ In case of using this component as a mixer you must use the portsSplit[numberOfP
             pIn_start= 3100000,
             pOut_start= 3000000,
             hIn_start= 1000e3,
-            hOut_start= 1000e3) 
+            hOut_start= 1000e3)
             annotation (Placement(transformation(
                 origin={-14,8},
                 extent={{-10,-10},{10,10}},
@@ -2353,7 +2353,7 @@ In case of using this component as a mixer you must use the portsSplit[numberOfP
             pIn_start= 3100000,
             pOut_start= 3000000,
             hIn_start= 2000e3,
-            hOut_start= 2000e3) 
+            hOut_start= 2000e3)
                        annotation (Placement(transformation(
                 origin={8,8},
                 extent={{-10,-10},{10,10}},
@@ -2361,12 +2361,12 @@ In case of using this component as a mixer you must use the portsSplit[numberOfP
           SiemensPower.Boundaries.WaterSourceMH watersource_mh1(
                                                     h_start=
                                                        2000e3, m_flow_start=
-                                                                       10) 
+                                                                       10)
             annotation (Placement(transformation(extent={{44,-40},{26,-22}},   rotation=
                    0)));
-          SiemensPower.Blocks.TimeTable timeTable(table=[0,5; 1,5; 2,0; 3,0; 4,-10; 5,-10]) 
+          SiemensPower.Blocks.TimeTable timeTable(table=[0,5; 1,5; 2,0; 3,0; 4,-10; 5,-10])
             annotation (Placement(transformation(extent={{86,8},{70,24}})));
-        equation 
+        equation
           connect(watersource_mh.port,splitter.portMix) annotation (Line(
               points={{-24,-76},{-24,-51}},
               color={0,127,255},
@@ -2375,30 +2375,30 @@ In case of using this component as a mixer you must use the portsSplit[numberOfP
               points={{-15,62.9},{-15,80},{12,80}},
               color={0,127,255},
               smooth=Smooth.None));
-          connect(splitter.portsSplit[1],pipe1.portIn) 
+          connect(splitter.portsSplit[1],pipe1.portIn)
                                                     annotation (Line(
               points={{-24,-35},{-24,-32},{-34,-32},{-34,-2}},
               color={0,127,255},
               smooth=Smooth.None));
-          connect(splitter.portsSplit[2],pipe2.portIn) 
+          connect(splitter.portsSplit[2],pipe2.portIn)
                                                     annotation (Line(
               points={{-24,-31},{-24,-32},{-14,-32},{-14,-2}},
               color={0,127,255},
               smooth=Smooth.None));
           connect(pipe1.portOut,
-                               mixer.portsSplit[1]) 
+                               mixer.portsSplit[1])
                                                  annotation (Line(
               points={{-34,18},{-34,40},{-18,40},{-18,46.0333},{-15,46.0333}},
               color={0,127,255},
               smooth=Smooth.None));
           connect(pipe2.portOut,
-                               mixer.portsSplit[2]) 
+                               mixer.portsSplit[2])
                                                  annotation (Line(
               points={{-14,18},{-14,30.35},{-15,30.35},{-15,43.1}},
               color={0,127,255},
               smooth=Smooth.None));
           connect(pipe3.portOut,
-                               mixer.portsSplit[3]) 
+                               mixer.portsSplit[3])
                                                  annotation (Line(
               points={{8,18},{8,40.1667},{-15,40.1667}},
               color={0,127,255},
@@ -2416,7 +2416,7 @@ In case of using this component as a mixer you must use the portsSplit[numberOfP
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
                     -100},{100,100}}), graphics),
             experiment(StopTime=12),
-            Commands(file=\"Scripts/tests/splitterMixer_test.mos\" 
+            Commands(file=\"Scripts/tests/splitterMixer_test.mos\"
                 \"splitterMixer_test\"),
           Documentation(
              info=\"<HTML>
@@ -2427,7 +2427,7 @@ In case of using this component as a mixer you must use the portsSplit[numberOfP
                         <li> none
                 </ul>
         </p>
-         <p>  
+         <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -2437,18 +2437,18 @@ In case of using this component as a mixer you must use the portsSplit[numberOfP
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td>free </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td>6.1 </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
      </HTML>\",
@@ -2471,15 +2471,15 @@ In case of using this component as a mixer you must use the portsSplit[numberOfP
           SiemensPower.Boundaries.WaterSourceMH watersource_mh(
                                                    m_flow_start=
        " + "                                                    50, h_start=
-                                                                  500e3) 
+                                                                  500e3)
             annotation (Placement(transformation(extent={{-100,20},{-80,40}},rotation=0)));
           SiemensPower.Boundaries.WaterSink watersink_ph(
                                                p_start=
                                                   30e5, h_start=
-                                                           1000e3) 
+                                                           1000e3)
             annotation (Placement(transformation(extent={{80,20},{100,40}},rotation=0)));
           SiemensPower.Boundaries.PrescribedHeatFlow prescribedHeatFlow(numberOfCells=
-                                                             20) 
+                                                             20)
             annotation (Placement(transformation(extent={{-32,74},{-12,94}}, rotation=0)));
           SiemensPower.Components.Pipes.TubeOwnMedia EVA(
             numberOfNodes=
@@ -2497,10 +2497,10 @@ In case of using this component as a mixer you must use the portsSplit[numberOfP
             pIn_start= 3100000,
             pOut_start= 3000000,
             useINTH2O=
-                   false) 
+                   false)
                   annotation (Placement(transformation(extent={{0,20},{20,40}},
                   rotation=0)));
-          SiemensPower.Blocks.TimeTable timeTable(table=[0,0; 1000,100e6; 2000,100e6]) 
+          SiemensPower.Blocks.TimeTable timeTable(table=[0,0; 1000,100e6; 2000,100e6])
             annotation (Placement(transformation(extent={{-80,74},{-60,94}}, rotation=0)));
           SiemensPower.Components.Pipes.TubeOwnMedia ECO(
             numberOfNodes=
@@ -2519,16 +2519,16 @@ In case of using this component as a mixer you must use the portsSplit[numberOfP
             pIn_start= 3100000,
             pOut_start= 3000000,
             useINTH2O=
-                   false) 
+                   false)
                   annotation (Placement(transformation(extent={{-60,40},{-38,20}},
                   rotation=0)));
-          SiemensPower.Blocks.TimeTable timeTable1(table=[0,30e5; 1100,30e5; 1400,31e5; 2000,31e5]) 
+          SiemensPower.Blocks.TimeTable timeTable1(table=[0,30e5; 1100,30e5; 1400,31e5; 2000,31e5])
             annotation (Placement(transformation(extent={{44,70},{64,90}}, rotation=0)));
-          Modelica.Blocks.Sources.RealExpression realExpression(y=25e6) 
+          Modelica.Blocks.Sources.RealExpression realExpression(y=25e6)
             annotation (Placement(transformation(extent={{-102,-12},{-82,8}}, rotation=
                     0)));
           SiemensPower.Boundaries.PrescribedHeatFlow prescribedHeatFlow1(numberOfCells=
-                                                              10) 
+                                                              10)
             annotation (Placement(transformation(extent={{-60,-20},{-40,0}}, rotation=0)));
           SiemensPower.Components.Pipes.TubeOwnMedia SH(
             numberOfNodes=
@@ -2547,32 +2547,32 @@ In case of using this component as a mixer you must use the portsSplit[numberOfP
                         true,
             pIn_start= 3200000,
             pOut_start= 3000000,
-            hIn_start= 2000e3) 
+            hIn_start= 2000e3)
                   annotation (Placement(transformation(extent={{40,-20},{62,-40}},
                   rotation=0)));
           SiemensPower.Boundaries.WaterSink watersink_ph1(
                                                         h_start=
                                                            2000e3, p_start=
-                                                                      3000000) 
+                                                                      3000000)
             annotation (Placement(transformation(extent={{80,-40},{100,-20}},  rotation=
                    0)));
-          Modelica.Blocks.Sources.RealExpression realExpression1(y=0) 
+          Modelica.Blocks.Sources.RealExpression realExpression1(y=0)
             annotation (Placement(transformation(extent={{-14,-68},{6,-48}}, rotation=0)));
           SiemensPower.Boundaries.PrescribedHeatFlow prescribedHeatFlow2(numberOfCells=
-                                                              10) 
+                                                              10)
             annotation (Placement(transformation(extent={{16,-70},{36,-50}}, rotation=0)));
           SiemensPower.Boundaries.WaterSourceWithSetPressure watersource_ph(
-                                                   h0=2000e3, p0=3200000) 
+                                                   h0=2000e3, p0=3200000)
             annotation (Placement(transformation(extent={{0,-40},{20,-20}},  rotation=0)));
-          SiemensPower.Blocks.TimeTable timeTable2(table=[0,32e5; 200,32e5; 800,35e5; 2000,35e5]) 
+          SiemensPower.Blocks.TimeTable timeTable2(table=[0,32e5; 200,32e5; 800,35e5; 2000,35e5])
             annotation (Placement(transformation(extent={{-20,-20},{0,0}},  rotation=0)));
-        equation 
+        equation
 
           connect(prescribedHeatFlow.portsOut,
                                           EVA. gasSide)            annotation (Line(
                 points={{-12,84},{10,84},{10,36.6}}, color={191,0,0}));
 
-          connect(timeTable.y,prescribedHeatFlow. Q_flow) 
+          connect(timeTable.y,prescribedHeatFlow. Q_flow)
             annotation (Line(points={{-59,84},{-32,84}}, color={0,0,127}));
           connect(watersource_mh.port,ECO.portIn)  annotation (Line(points={{-80,30},{
                   -60,30}},                                  color={0,127,255}));
@@ -2587,12 +2587,12 @@ In case of using this component as a mixer you must use the portsSplit[numberOfP
                   30},{80,30}},                    color={0,127,255}));
           connect(timeTable1.y,watersink_ph.p_set) annotation (Line(points={{65,80},{86,
                   80},{86,38}}, color={0,0,127}));
-          connect(realExpression.y,prescribedHeatFlow1. Q_flow) 
+          connect(realExpression.y,prescribedHeatFlow1. Q_flow)
             annotation (Line(points={{-81,-2},{-76,-2},{-76,-10},{-60,-10}},
                                                          color={0,0,127}));
           connect(watersink_ph1.port,SH.portOut) annotation (Line(points={{80,-30},{72,
                   -30},{62,-30}},                            color={0,127,255}));
-          connect(realExpression1.y,prescribedHeatFlow2. Q_flow) 
+          connect(realExpression1.y,prescribedHeatFlow2. Q_flow)
             annotation (Line(points={{7,-58},{16,-58},{16,-60}},
                                                         color={0,0,127}));
           connect(prescribedHeatFlow2.portsOut,
@@ -2603,8 +2603,8 @@ In case of using this component as a mixer you must use the portsSplit[numberOfP
           connect(timeTable2.y,watersource_ph.pIn)   annotation (Line(points={{1,-10},{
                   6,-10},{6,-22}},
                                color={0,0,127}));
-          annotation (Documentation(info=\"<HTML> 
-       <p>  
+          annotation (Documentation(info=\"<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -2614,18 +2614,18 @@ In case of using this component as a mixer you must use the portsSplit[numberOfP
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\",     revisions=\"<html>
@@ -2639,7 +2639,7 @@ In case of using this component as a mixer you must use the portsSplit[numberOfP
               StopTime=2000,
               NumberOfIntervals=2000,
               Tolerance=1e-005),
-            Commands(file=\"Scripts/tests/tube_ownMedia_test.mos\" 
+            Commands(file=\"Scripts/tests/tube_ownMedia_test.mos\"
                 \"tube_ownMedia_test\"));
         end tube_ownMedia_test;
       annotation (Documentation(info=\"<html>
@@ -2647,7 +2647,7 @@ This package contains tests.
 </html>\"));
       end Tests;
 
-      model TubeOwnMedia 
+      model TubeOwnMedia
         \"SimpleMedia-Tube (incl wall) with detailed energy , integrated momentum and mass balance\"
         import SI = SiemensPower.Units;
         extends SiemensPower.Utilities.BaseClasses.PartialTwoPortTransport;
@@ -2656,48 +2656,48 @@ This package contains tests.
         //constant Medium.AbsolutePressure pcrit=Medium.fluidConstants[1].criticalPressure;
         //constant Medium.Temperature Tcrit=Medium.fluidConstants[1].criticalTemperature;
 
-         parameter Boolean initializeInletPressure=true 
+         parameter Boolean initializeInletPressure=true
           \"mp or pp boundary conditions\"                                               annotation(evaluate=true);
-        parameter Integer numberOfNodes(min=2) = 2 
+        parameter Integer numberOfNodes(min=2) = 2
           \"Number of nodes for thermal variables\"                                          annotation(Dialog(group=\"Geometry and pressure drop parameters\"));
-        parameter SiemensPower.Ut" + "ilities.Structures.PipeGeo geoPipe 
+        parameter SiemensPower.Ut" + "ilities.Structures.PipeGeo geoPipe
           \"Geometry of tube\"                                                           annotation(Dialog(group=\"Geometry and pressure drop parameters\"));
-        parameter SI.MassFlowRate m_flowLaminar=0.001 
+        parameter SI.MassFlowRate m_flowLaminar=0.001
           \"(small) mass flow rate at wich laminar equals turbulent pressure drop\"
                                                                                   annotation(Dialog(group=\"Geometry and pressure drop parameters\"));
-        parameter Boolean considerDynamicMomentum=true 
+        parameter Boolean considerDynamicMomentum=true
           \"der(m_dot) accounted for, be careful!\" annotation(evaluate=true);
-        parameter Boolean considerMassAccelaration=true 
+        parameter Boolean considerMassAccelaration=true
           \"Inertial phenomena d/dz(m_dot^2/d) accounted for\" annotation(evaluate=true);
-        parameter Boolean initializeSteadyStateEnthalpies=true 
+        parameter Boolean initializeSteadyStateEnthalpies=true
           \"lets initialize der(h)=0\"                                                      annotation(evaluate=true, Dialog(tab=\"Initialization\"));
-        parameter Boolean initializeSteadyStateInletEnthalpy=true 
+        parameter Boolean initializeSteadyStateInletEnthalpy=true
           \"steady state initial condition for input enthalpy\" annotation(evaluate=true, Dialog(tab=\"Initialization\", enable=initializeSteadyStateEnthalpies));
 
-        parameter Boolean useINTH2O=false 
+        parameter Boolean useINTH2O=false
           \"water/steam table: true = useINTH2O, false = TTSE\";
-        parameter Boolean considerDynamicPressure=false 
+        parameter Boolean considerDynamicPressure=false
           \"With der(p)/d in enthalpy balance\";
         parameter Boolean useDelayedPressure=false \"Pressure delay\";
-        parameter SI.Time timeDelayOfPressure=0.1 
+        parameter SI.Time timeDelayOfPressure=0.1
           \"Artificial delay time for delay of pressure value\" annotation(Dialog(enable=useDelayedPressure));
         parameter Real hydP=0.6 \"Part of portIn for p\";
         parameter Real hydM=0.4 \"Part of portOut for m_flow\";
 
-        parameter SI.CoefficientOfHeatTransfer alphaOffset=10e3 
+        parameter SI.CoefficientOfHeatTransfer alphaOffset=10e3
           \"alpha offset (in case of verysimple=true)\"                    annotation(Dialog(tab=\"Inner heat transfer\", enable=verysimple));
-        parameter Real alphaFactor=0.0 
+        parameter Real alphaFactor=0.0
           \"Factor for state dependent alpha term (in case of verysimple=true)\"                    annotation(Dialog(tab=\"Inner heat transfer\", enable=verysimple));
 
-        parameter Boolean delayInnerHeatTransfer=false 
+        parameter Boolean delayInnerHeatTransfer=false
           \"With delay of qMetalFluid\"                                              annotation(Dialog(tab=\"Inner heat transfer\"));
-        parameter SI.Time timeDelayOfInnerHeatTransfer=1 
+        parameter SI.Time timeDelayOfInnerHeatTransfer=1
           \"artificial delay time for qMetalFluid\"             annotation(Dialog(tab=\"Inner heat transfer\",enable=delayInnerHeatTransfer));
 
         // Init parameters
-        parameter Boolean useHeatInput=true 
+        parameter Boolean useHeatInput=true
           \"Initialisation of qMetalFluidDelayed=qMetalFluid\"                                   annotation(Dialog(tab=\"Initialization\", group=\"Heat transfer\"));
-        parameter Boolean initializeWithZeroInnerHeatFlow=false 
+        parameter Boolean initializeWithZeroInnerHeatFlow=false
           \"Initialisation of qMetalFluidDelayed=0\"                                                       annotation(Dialog(tab=\"Initialization\",group=\"Heat transfer\",enable=(useHeatInput==false) and delayInnerHeatTransfer));
 
         // wall parameters
@@ -2707,10 +2707,10 @@ This package contains tests.
           choice=\"noInit\" \"No initial equations\",
           choice=\"steadyState\" \"Steady-state initialization\",
           choice=\"fixedTemperature\" \"Fixed-temperatures initialization\"));
-        parameter SI.Temperature T_wall_start[numberOfNodes]=T_start 
-          \"start values for wall temperatures\" 
+        parameter SI.Temperature T_wall_start[numberOfNodes]=T_start
+          \"start values for wall temperatures\"
                                              annotation (Dialog(tab=\"Initialization\",group=\"Wall\"));
-       parameter SiemensPower.Utilities.Structures.PropertiesMetal metal 
+       parameter SiemensPower.Utilities.Structures.PropertiesMetal metal
           \"Wall metal properties\"                                                      annotation (Dialog(group=\"Wall\"));
 
         final parameter SI.Length di = geoPipe.d_out - 2*geoPipe.s;
@@ -2735,8 +2735,8 @@ This package contains tests.
         Real zeta \"friction coefficient\";
         SI.CoefficientOfHeatTransfer alpha;
 
-         Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a gasSide[numberOfNodes](T(start=T_wall_start)) 
-          \"Outer wall heat port\" 
+         Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a gasSide[numberOfNodes](T(start=T_wall_start))
+          \"Outer wall heat port\"
         annotation (extent=[-14,54; 14,78]);
 
         SiemensPower.Components.SolidComponents.Wall wall(
@@ -2748,16 +2748,16 @@ This package contains tests.
           T_start =   T_wall_start,
           initOpt=initOptWall,
           numberOfParallelTubes=geoPipe.Nt,
-          diameterInner =   geoPipe.d_out - 2*geoPipe.s) 
-          \"Metal wall of the tube\" 
+          diameterInner =   geoPipe.d_out - 2*geoPipe.s)
+          \"Metal wall of the tube\"
                        annotation (extent=[-10,34; 10,54]);
 
         SiemensPower.Interfaces.portHeat heatport(
-                                     numberOfNodes=numberOfNodes) 
+                                     numberOfNodes=numberOfNodes)
           \"Inner wall (masked) heat port \"                                             annotation (extent=[-10,-8; 10,12]);
 
-      protected 
-        final parameter SI.Temperature T_start[numberOfNodes]=SiemensPower.Media.TTSE.Utilities.T_ph(SiemensPower.Utilities.Functions.my_linspace(pIn_start,pOut_start,numberOfNodes),SiemensPower.Utilities.Functions.my_linspace(hIn_start,hOut_start,numberOfNodes)) 
+      protected
+        final parameter SI.Temperature T_start[numberOfNodes]=SiemensPower.Media.TTSE.Utilities.T_ph(SiemensPower.Utilities.Functions.my_linspace(pIn_start,pOut_start,numberOfNodes),SiemensPower.Utilities.Functions.my_linspace(hIn_start,hOut_start,numberOfNodes))
           \"start values for fluid temperatures\";
         final parameter SI.Density rho0[numberOfNodes]=SiemensPower.Utilities.Functions.my_linspace(SiemensPower.Media.TTSE.Utilities.rho_ph(pIn_start,hIn_start), SiemensPower.Media.TTSE.Utilities.rho_ph(pOut_start,hOut_start), numberOfNodes);
 
@@ -2767,7 +2767,7 @@ This package contains tests.
         inner SI.Temperature TWall[numberOfNodes];
         Integer TTSEid(start=0);
 
-      algorithm 
+      algorithm
       //    when (initial()) then
       //      if not useINTH2O then
       //       TTSEid:=SiemensPower.Media.TTSE.init_ttse();
@@ -2776,7 +2776,7 @@ This package contains tests.
       //      end if;
       //    end when;
 
-      initial equation 
+      initial equation
 
          // h
         if (initializeSteadyStateInletEnthalpy and initializeSteadyStateEnthalpies) then
@@ -2805,7 +2805,7 @@ This package contains tests.
               qMetalFluidDelayed=zeros(numberOfNodes);
         end if;
 
-      equation 
+      equation
 
         perimeter=pi*di;
         dAverage=sum(d)/numberOfNodes;
@@ -2927,7 +2927,7 @@ This package contains tests.
               32.7; 0,32.7; 0,5.4], style(color=42, rgbcolor={191,0,0}));
 
       annotation (Documentation(info=\"<HTML>
-<p>This tube model comes with a detailed energy balance, but <b>integrated</b> momentum and mass balance. 
+<p>This tube model comes with a detailed energy balance, but <b>integrated</b> momentum and mass balance.
 See <a href=\\\"../Documents/tube_integration.pdf\\\"> pdf documentation </a>for details.<br>
 The tube is heated. The water/steam media is simplified: You can chose between:
 <ul>
@@ -2936,7 +2936,7 @@ The tube is heated. The water/steam media is simplified: You can chose between:
 </ul>
 <p>
 
-       <p>  
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -2946,18 +2946,18 @@ The tube is heated. The water/steam media is simplified: You can chose between:
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 
@@ -2992,35 +2992,35 @@ The tube is heated. The water/steam media is simplified: You can chose between:
                 lineColor={0,0,0})}));
       end TubeOwnMedia;
 
-      model TubeWithoutWall 
+      model TubeWithoutWall
         \"Tube with detailed energy, integrated momentum and mass balance\"
         import SI = SiemensPower.Units;
         extends SiemensPower.Utilities.BaseClasses.BaseTube;
 
-        replaceable model Friction = 
-            SiemensPower.Utilities.PressureLoss.RoughnessFlow constrainedby 
-          SiemensPower.Utilities.PressureLoss.PartialFrictionSinglePhase 
+        replaceable model Friction =
+            SiemensPower.Utilities.PressureLoss.RoughnessFlow constrainedby
+          SiemensPower.Utilities.PressureLoss.PartialFrictionSinglePhase
           \"Friction pressure loss correlation\"   annotation (Dialog(group=\"Geometry and correlations\"),choicesAllMatching=true);
-        parameter String locationMassflow=\"interpolation\" 
-          \"location of mass flow rate\" 
+        parameter String locationMassflow=\"interpolation\"
+          \"location of mass flow rate\"
             annotation(choices(choice=\"inlet\" \"inlet\",
                                choice=\"outlet\" \"outlet\",
                                choice=\"interpolation\" \"interpolation\"),evaluate=true);
         parameter Boolean useDelayedPressure=false \"Pressure delay\" annotation(Dialog(tab=\"Advanced\"),evaluate=true);
-        parameter SI.Time timeDelayOfPressure=0.1 
+        parameter SI.Time timeDelayOfPressure=0.1
           \"Artificial delay time for delay of pressure value\" annotation(Dialog(tab=\"Advanced\"),enable=useDelayedPressure);
 
-        Medium.AbsolutePressure p(start=hydP*pIn_start + (1-hydP)*pOut_start) 
+        Medium.AbsolutePressure p(start=hydP*pIn_start + (1-hydP)*pOut_start)
           \"pressure\";
 
-      protected 
-        final parameter Real hydM=(if (locationMassflow==\"inlet\") then 1.0 else if (locationMassflow==\"outlet\") then 0.0 else  0.4) 
+      protected
+        final parameter Real hydM=(if (locationMassflow==\"inlet\") then 1.0 else if (locationMassflow==\"outlet\") then 0.0 else  0.4)
           \"Part of portIn for p\";
         final parameter Real hydP=1-hydM \"Part of portIn for m_flow\";
         Medium.AbsolutePressure pUndelayed(start=hydP*pIn_start + (1-hydP)*pOut_start);
         Friction friction(geoPipe=geoPipe, dz=geoPipe.L, m_flow=m_flows[1], p=p, rho=d_av, h=fluid[1].h, eta=eta[1], steamQuality = 1.5, xdo=0.9);
 
-      initial equation 
+      initial equation
         // m_flow
         if (considerDynamicMomentum and useDynamicMassBalance) then
               der(m_flows[1]) = 0;
@@ -3032,7 +3032,7 @@ The tube is heated. The water/steam media is simplified: You can chose between:
           der(p) = 0;
        end if;
 
-      equation 
+      equation
         // lumped pressure and mass flow rate
         if (locationMassflow==\"inlet\") then
           pUndelayed = portOut.p;
@@ -3073,7 +3073,7 @@ The tube is heated. The water/steam media is simplified: You can chose between:
         fluid.p = p*ones(numberOfNodes);
 
         annotation (Documentation(info=\"<HTML>
-<p>This tube model comes with a detailed energy, but integrated momentum and mass balance. 
+<p>This tube model comes with a detailed energy, but integrated momentum and mass balance.
 See <a href=\\\"../Documents/tube_integration.pdf\\\"> pdf documentation </a>for details of the integration of the hydrodynamic equations.
 Both heat transfer and friction pressure drop can be selected from a set of correlations.
  </p>
@@ -3084,7 +3084,7 @@ Both heat transfer and friction pressure drop can be selected from a set of corr
 <li>dynamic mass balance has no effect if medium is incompressible </li>
 </ul>
 </p>
-       <p>  
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -3094,18 +3094,18 @@ Both heat transfer and friction pressure drop can be selected from a set of corr
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 
@@ -3140,19 +3140,19 @@ There are two families of tubes, which both comes with a unheated (WithoutWall) 
             numberOfNodes=
               5,
             T_start=
-               {500,510,520,590,600}) 
+               {500,510,520,590,600})
                     annotation (Placement(transformation(extent={{-14,-10},{6,10}},
                   rotation=0)));
           SiemensPower.Boundaries.Reservoir reservoir(
-                                              reservoir=\"temperature\", N=5) 
+                                              reservoir=\"temperature\", N=5)
             annotation (Placement(transformation(extent={{-20,-18},{12,-40}}, rotation=
                     0)));
           SiemensPower.Boundaries.PrescribedHeatFlow prescribedHeatFlow(numberOfCells=
-                                                             5) 
+                                                             5)
             annotation (Placement(transformation(extent={{-46,20},{-26,40}}, rotation=0)));
-          SiemensPower.Blocks.TimeTable heatInput(table=[0,0; 5,0; 10,100e3; 15,100e3]) 
+          SiemensPower.Blocks.TimeTable heatInput(table=[0,0; 5,0; 10,100e3; 15,100e3])
             annotation (Placement(transformation(extent={{-88,20},{-68,40}}, rotation=0)));
-        equation 
+        equation
 
           connect(wall.port_int,reservoir.ports)   annotation (Line(points={{-4.1,-4.6},
                   {-4.1,-11.3},{-4,-11.3},{-4,-21.19}}, color={191,0,0}));
@@ -3160,7 +3160,7 @@ There are two families of tubes, which both comes with a unheated (WithoutWall) 
           connect(prescribedHeatFlow.portsOut,
                                            wall.port_ext) annotation (Line(points={{-26,
                   30},{-4,30},{-4,4.9}}, color={191,0,0}));
-          connect(heatInput.y, prescribedHeatFlow.Q_flow) 
+          connect(heatInput.y, prescribedHeatFlow.Q_flow)
             annotation (
         Documentation(info=\"<HTML>
 <p>This is a simple test of the wall aggregate.
@@ -3179,8 +3179,8 @@ There are two families of tubes, which both comes with a unheated (WithoutWall) 
 <p>This is a simple test of the wall aggregate.
 <p>
 </HTML>
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -3190,53 +3190,53 @@ There are two families of tubes, which both comes with a unheated (WithoutWall) 
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\"));
         end wall_test;
       end Tests;
 
-      model Wall 
+      model Wall
         \"Cylindrical metal tube with variable number of wall layers Nwall\"
         import SI = SiemensPower.Units;
 
         parameter Integer numberOfNodes(min=1)=2 \"Number of nodes\";
         parameter Integer numberOfWallLayers(min=1)=3 \"Number of wall layers\"annotation(choices(choice=1, choice=2, choice=3, choice=4, choice=5, choice=6));
 
-        parameter Boolean assumePlainHeatTransfer=false 
+        parameter Boolean assumePlainHeatTransfer=false
           \"no logarithmic correction\" annotation (Dialog(enable=considerConductivity));
-      /*   parameter Boolean userdefinedmaterial=true 
-    \"define own fixed material properties\" annotation (Dialog(group=\"Material\"));  
+      /*   parameter Boolean userdefinedmaterial=true
+    \"define own fixed material properties\" annotation (Dialog(group=\"Material\"));
   replaceable ThermoPower.Thermal.MaterialProperties.Metals.CarbonSteel_A106C[numberOfNodes] Material(
-              each npol=3) 
-   extends ThermoPower.Thermal.MaterialProperties.Interfaces.PartialMaterial 
+              each npol=3)
+   extends ThermoPower.Thermal.MaterialProperties.Interfaces.PartialMaterial
     \"pre-defined material properties\"       annotation (choicesAllMatching = true, Dialog(enable=userdefinedmaterial==false, group=\"Material\")); */
-         parameter SiemensPower.Utilities.Structures.PropertiesMetal metal 
+         parameter SiemensPower.Utilities.Structures.PropertiesMetal metal
           \"Wall metal properties\"                                                      annotation (Dialog(enable=userdefinedmaterial, group=\"Material\"));
-        parameter Integer numberOfParallelTubes(min=1)=1 
+        parameter Integer numberOfParallelTubes(min=1)=1
           \"Number of parallel tubes\";
         parameter SI.Length length=1 \"Tube length\";
-        parameter SI.Length diameterInner=0.08 
+        parameter SI.Length diameterInner=0.08
           \"Internal diameter (single tube)\";
         parameter SI.Length wallThickness=0.008 \"Wall thickness\";
-        parameter Boolean useDynamicEquations=true 
+        parameter Boolean useDynamicEquations=true
           \"switch off for steady-state simulations\" annotation (evaluate=true);
 
-        parameter Boolean considerConductivity=true 
+        parameter Boolean considerConductivity=true
           \"Wall conduction resistance accounted for\";
-        parameter Boolean considerAxialHeatTransfer=false 
+        parameter Boolean considerAxialHeatTransfer=false
           \"With (small!) heat transfer in the wall parallel to the flow direction\"
                 annotation (Dialog(enable=considerConductivity));
        parameter String initOpt=\"steadyState\" \"Initialisation option\" annotation (Dialog(group=\"Initialization\"),
@@ -3244,7 +3244,7 @@ There are two families of tubes, which both comes with a unheated (WithoutWall) 
           choice=\"noInit\" \"No initial equations\",
           choice=\"steadyState\" \"Steady-state initialization\",
           choice=\"fixedTemperature\" \"Fixed-temperatures initialization\"));
-        parameter SI.Temperature T_start[numberOfNodes] = fill(300,numberOfNodes) 
+        parameter SI.Temperature T_start[numberOfNodes] = fill(300,numberOfNodes)
           \"Temperature start values for inner layer\";
 
        // final parameter SI.HeatCapacity C_total = metal.cp*metal.rho*lengthTube*numberOfParallelTubes*Modelica.Constants.pi*wallThickness*(diameterInner+wallThickness);
@@ -3252,7 +3252,7 @@ There are two families of tubes, which both comes with a unheated (WithoutWall) 
         SiemensPower.Components.SolidComponents.Walllayer layer[
                                                 numberOfWallLayers](
           each numberOfNodes = numberOfNodes,
-          diameterInner =       if (numberOfWallLayers == 1) then diameterInner*ones(1) else 
+          diameterInner =       if (numberOfWallLayers == 1) then diameterInner*ones(1) else
              SiemensPower.Utilities.Functions.my_linspace(
               diameterInner,
               diameterInner + 2*wallThickness - 2*wallThickness/numberOfWallLayers,
@@ -3269,14 +3269,14 @@ There are two families of tubes, which both comes with a unheated (WithoutWall) 
           each useDynamicEquations = useDynamicEquations);
 
         Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a[numberOfNodes] port_ext
-          \"Outer heat port\" 
+          \"Outer heat port\"
           annotation (Placement(transformation(extent={{-14,36},{14,62}}, rotation=0)));
         Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b[numberOfNodes] port_int
-          \"Inner heat port\" 
+          \"Inner heat port\"
           annotation (Placement(transformation(extent={{-14,-58},{12,-34}}, rotation=
                   0)));
 
-      equation 
+      equation
         connect(layer[1].port_int, port_int);
         for j in 2:numberOfWallLayers loop
            connect(layer[j-1].port_ext,layer[j].port_int);
@@ -3317,8 +3317,8 @@ There are two families of tubes, which both comes with a unheated (WithoutWall) 
 This model is based on the Walllayer model which represents a cylindrical metal tube wall with a single layer.
 The parameter numberOfWallLayers says how many layers will be accounted for in that wall. The counting of layers begins at the inner side, i.e. layer[numberOfNodes] is the outside layer.
 </html>
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -3328,18 +3328,18 @@ The parameter numberOfWallLayers says how many layers will be accounted for in t
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\",       revisions=\"<html>
@@ -3354,23 +3354,23 @@ The parameter numberOfWallLayers says how many layers will be accounted for in t
 
         constant Real pi=Modelica.Constants.pi;
         parameter Integer numberOfNodes(min=1)=2 \"Number of nodes\";
-        parameter Boolean assumePlainHeatTransfer=false 
+        parameter Boolean assumePlainHeatTransfer=false
           \"no logarithmic correction\" annotation (Dialog(enable=considerConductivity));
-        parameter SiemensPower.Utilities.Structures.PropertiesMetal metal 
+        parameter SiemensPower.Utilities.Structures.PropertiesMetal metal
           \"Wall metal properties\"                                                      annotation (Dialog(enable=userdefinedmaterial, group=\"Material\"));
-        parameter Integer numberOfParallelTubes(min=1)=1 
+        parameter Integer numberOfParallelTubes(min=1)=1
           \"Number of parallel tubes\";
         parameter SI.Length length=1 \"Tube length\";
-        parameter SI.Length diameterInner=0.08 
+        parameter SI.Length diameterInner=0.08
           \"Internal diameter (single tube)\";
         parameter SI.Length wallThickness=0.008 \"Wall thickness\";
-        parameter Boolean useDynamicEquations=true 
+        parameter Boolean useDynamicEquations=true
           \"switch off for steady-state simulations\" annotation (evaluate=true);
 
-        parameter Boolean considerConductivity=true 
+        parameter Boolean considerConductivity=true
           \"Wall conduction resistance accounted for\"                                           annotation (Evaluate=true);
-        parameter Boolean considerAxialHeatTransfer=false 
-          \"With heat transfer in the wall parallel to the flow direction\" 
+        parameter Boolean considerAxialHeatTransfer=false
+          \"With heat transfer in the wall parallel to the flow direction\"
                 annotation (Evaluate=true, Dialog(enable=considerConductivity));
         parameter String initOpt=\"steadyState\" \"Initialisation option\" annotation (Dialog(group=\"Initialization\"),
         choices(
@@ -3378,14 +3378,14 @@ The parameter numberOfWallLayers says how many layers will be accounted for in t
           choice=\"steadyState\" \"Steady-state initialization\",
           choice=\"fixedTemperature\" \"Fixed-temperatures initialization\"));
 
-        parameter SI.Temperature T_start[numberOfNodes] 
+        parameter SI.Temperature T_start[numberOfNodes]
           \"Temperature start values\"                                                     annotation (Dialog(group=\"Initialization\"));
 
-        Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a[numberOfNodes] port_ext(T(start = T_start)) 
-          \"Outer heat port\" 
+        Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a[numberOfNodes] port_ext(T(start = T_start))
+          \"Outer heat port\"
           annotation (Placement(transformation(extent={{-16,20},{16,48}}, rotation=0)));                                                          //(T(start = SiemensPower.Utilities.Functions.my_linspace(Tstart1,TstartN,numberOfNodes)))
-        Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b[numberOfNodes] port_int(T(start = T_start)) 
-          \"Inner heat port\" 
+        Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_b[numberOfNodes] port_int(T(start = T_start))
+          \"Inner heat port\"
           annotation (Placement(transformation(extent={{-14,-48},{16,-20}}, rotation=
                   0)));
 
@@ -3396,10 +3396,10 @@ The parameter numberOfWallLayers says how many layers will be accounted for in t
         SI.Mass Tube_mass;
         SI.HeatCapacity HeatCap \"HeatCapacity of a Tube part\";
 
-        SI.HeatFlowRate Q_flow_ax[numberOfNodes] 
+        SI.HeatFlowRate Q_flow_ax[numberOfNodes]
           \"axial(parallel) heat transfer\";
 
-      initial equation 
+      initial equation
         if initOpt == \"noInit\" then
        // nothing to do
         elseif initOpt == \"steadyState\" then
@@ -3410,7 +3410,7 @@ The parameter numberOfWallLayers says how many layers will be accounted for in t
           assert(false, \"Unsupported initialisation option\");
         end if;
 
-      equation 
+      equation
         rint=diameterInner*0.5;
         rext=diameterInner*0.5+wallThickness;
 
@@ -3426,7 +3426,7 @@ The parameter numberOfWallLayers says how many layers will be accounted for in t
                  HeatCap*der(T[i]) = port_int[i].Q_flow + port_ext[i].Q_flow;
               end if;
           else
-              if 
+              if
                 (considerAxialHeatTransfer) then
                  0.0 = port_int[i].Q_flow + port_ext[i].Q_flow +  Q_flow_ax[i];
               else
@@ -3435,7 +3435,7 @@ The parameter numberOfWallLayers says how many layers will be accounted for in t
           end if;
         end for;
 
-        Am = (rext^2-rint^2)*pi 
+        Am = (rext^2-rint^2)*pi
           \"Area of the metal cross section of single tube\";
           if (considerConductivity and wallThickness>0) then
              for i in 1:numberOfNodes loop
@@ -3496,30 +3496,30 @@ The parameter numberOfWallLayers says how many layers will be accounted for in t
 <li><tt>considerConductivity = true</t" + "t>: the thermal resistance of the tube wall is accounted for.
 </ul>
 </HTML>
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
                            <td><a href=\\\"mailto:haiko.steuer@siemens.com\\\">Haiko Steuer</a> </td>
-        
+
                         <td><a href=\\\"https://scd.siemens.com/db4/v3/lookUp.d4w?tcgid=Z001K4SN\\\">SCD</a> </td>
                        </tr>
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\",     revisions=\"<html>
@@ -3558,30 +3558,30 @@ This package contains components of power plants.
               fillColor={0,191,0},
               fillPattern=FillPattern.Solid)}),
                                 Documentation(
-    info=\"<html>This connector differs from the Modelica.Fluid standard connector only in the annotation</html><HTML> 
-       <p>  
+    info=\"<html>This connector differs from the Modelica.Fluid standard connector only in the annotation</html><HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
                              <td><a href=\\\"mailto:haiko.steuer@siemens.com\\\">Haiko Steuer</a> </td>
-        
+
                         <td><a href=\\\"https://scd.siemens.com/db4/v3/lookUp.d4w?tcgid=Z001K4SN\\\">SCD</a> </td>
                        </tr>
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\", revisions=\"<html>
@@ -3619,30 +3619,30 @@ This package contains components of power plants.
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid)}),
                                 Documentation(
-    info=\"<html>This connector differs from the Modelica.Fluid standard connector only in the annotation</html><HTML> 
-       <p>  
+    info=\"<html>This connector differs from the Modelica.Fluid standard connector only in the annotation</html><HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
                              <td><a href=\\\"mailto:haiko.steuer@siemens.com\\\">Haiko Steuer</a> </td>
-        
+
                         <td><a href=\\\"https://scd.siemens.com/db4/v3/lookUp.d4w?tcgid=Z001K4SN\\\">SCD</a> </td>
                        </tr>
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\", revisions=\"<html>
@@ -3658,8 +3658,8 @@ This package contains components of power plants.
       import SI = SiemensPower.Units;
 
       parameter Integer numberOfNodes=2 \"Number of nodes\";
-      Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port[numberOfNodes] 
-        \"heat port\" 
+      Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a port[numberOfNodes]
+        \"heat port\"
         annotation (Placement(transformation(extent={{-16,20},{16,48}}, rotation=0)));
 
       // changed for Dymola Version 7.4 FD01
@@ -3670,7 +3670,7 @@ This package contains components of power plants.
       outer input Real TWall[numberOfNodes];
       SI.HeatFlowRate Q_flow[numberOfNodes];
 
-    equation 
+    equation
      TWall=port.T;
      Q_flow = port.Q_flow;
 
@@ -3685,8 +3685,8 @@ This package contains components of power plants.
 <p>This short model can be used to complete a heat-port connector vector!
 It is used in any tube with wall.
 </p>
-</html><HTML> 
-       <p>  
+</html><HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -3696,18 +3696,18 @@ It is used in any tube with wall.
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\", revisions=\"<html>
@@ -3739,17 +3739,17 @@ It is used in any tube with wall.
               fillPattern=FillPattern.Solid)}));
     end FluidPort_a;
 
-    connector FluidPort 
+    connector FluidPort
       \"Interface for quasi one-dimensional fluid flow in a piping network (incompressible or compressible, one or more phases, one or more substances)\"
       import SI = SiemensPower.Units;
 
      // replaceable package Medium = Modelica.Media.Interfaces.PartialMedium
      //   \"Medium model\" annotation (choicesAllMatching=true);
 
-      flow SI.MassFlowRate m_flow 
+      flow SI.MassFlowRate m_flow
         \"Mass flow rate from the connection point into the component\";
       SI.AbsolutePressure p \"Thermodynamic pressure in the connection point\";
-      stream SI.SpecificEnthalpy h_outflow 
+      stream SI.SpecificEnthalpy h_outflow
         \"Specific thermodynamic enthalpy close to the connection point if m_flow < 0\";
       //stream SI.MassFraction Xi_outflow[Medium.nXi]
       //  \"Independent mixture mass fractions m_i/m close to the connection point if m_flow < 0\";
@@ -3757,7 +3757,7 @@ It is used in any tube with wall.
       //  \"Properties c_i/m close to the connection point if m_flow < 0\";
     end FluidPort;
 
-    connector FluidPorts_b 
+    connector FluidPorts_b
       \"Fluid connector with outlined, large icon to be used for vectors of FluidPorts (vector dimensions must be added after dragging)\"
       extends SiemensPower.Interfaces.FluidPort;
 
@@ -3896,18 +3896,18 @@ This package contains interfaces if not present in the boundary package.
            substanceNames = {\"Water\",\"Air\"},
            reference_X={0.0,1.0});
 
-        redeclare replaceable function thermalConductivity 
+        redeclare replaceable function thermalConductivity
           \"Return thermal conductivity for low pressure gas mixtures\"
           extends Modelica.Icons.Function;
           input ThermodynamicState state \"thermodynamic state record\";
           output ThermalConductivity lambda \"Thermal conductivity\";
-        input Integer method=2 
+        input Integer method=2
             \"method to compute single component thermal conductivity\";
-        protected 
+        protected
         ThermalConductivity[nX] lambdaX \"component thermal conductivities\";
         DynamicViscosity[nX] eta \"component thermal dynamic viscosities\";
         SpecificHeatCapacity[nX] cp \"component heat capacity\";
-        algorithm 
+        algorithm
         for i in 1:nX loop
             assert(fluidConstants[i].hasCriticalData, \"Critical data for \" +
               fluidConstants[i].chemicalFormula +
@@ -3937,7 +3937,7 @@ This package contains interfaces if not present in the boundary package.
       annotation (
             Documentation(
          info=\"<html>
-<p>Extend of Modelica.Media.IdealGases.Common.MixtureGasNasa with <b> modified Eucken </b> method as default for thermalConductivity function.<br> 
+<p>Extend of Modelica.Media.IdealGases.Common.MixtureGasNasa with <b> modified Eucken </b> method as default for thermalConductivity function.<br>
 If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a base instead!
  <code><font style=\\\"color: #0000ff; \\\">&nbsp;</font></code></p> </br> <br> </br>
 <table cellspacing=\\\"2\\\" cellpadding=\\\"0\\\" border=\\\"0\\\"><tr>
@@ -3976,13 +3976,13 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
 
         extends Modelica.Media.IdealGases.Common.SingleGasNasa;
 
-        redeclare replaceable function thermalConductivity 
+        redeclare replaceable function thermalConductivity
           \"thermal conductivity of gas\"
         extends Modelica.Icons.Function;
         input ThermodynamicState state \"thermodynamic state record\";
         output ThermalConductivity lambda \"Thermal conductivity\";
         input Integer method=2 \"1: Eucken Method, 2: Modified Eucken Method\";
-        algorithm 
+        algorithm
         assert(fluidConstants[1].hasCriticalData,
         \"Failed to compute thermalConductivity: For the species \\\"\" + mediumName + \"\\\" no critical data is available.\");
         lambda := thermalConductivityEstimate(specificHeatCapacityCp(state),
@@ -4025,7 +4025,7 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
       end SingleGasNasa;
     end Common;
 
-    package ExhaustGas 
+    package ExhaustGas
       \"SiemensPower: Exhaust gas (6 components) for HRSGs\"
       extends SiemensPower.Media.Common.MixtureGasNasa(
         mediumName=\"Exhaust gas with Ar, CO2, H20, N2, O2, and SO2\",
@@ -4067,8 +4067,8 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
                        </ul>
                     </p>
                    </HTML>
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -4078,18 +4078,18 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\", revisions=\"<html>
@@ -4099,7 +4099,7 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
                         </html>\"));
     end ExhaustGas;
 
-    package ExhaustGasSingleComponent 
+    package ExhaustGasSingleComponent
       \"SiemensPower: Exhaust gas(single component) for HRSGs\"
       extends SiemensPower.Media.Common.SingleGasNasa(
                                                   mediumName=\"Exhaust gas(single component) for HRSGs\",
@@ -4119,8 +4119,8 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
                        </ul>
                        It is computed as a <b>single component</b> ideal gas.
                     </p>
-                   </HTML><HTML> 
-       <p>  
+                   </HTML><HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -4130,18 +4130,18 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\", revisions=\"<html>
@@ -4151,7 +4151,7 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
                         </html>\"));
     end ExhaustGasSingleComponent;
 
-    package IdealGasData 
+    package IdealGasData
       \"Ideal gas data based on the NASA Glenn coefficients\"
       extends Modelica.Icons.Library;
 
@@ -4226,8 +4226,8 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
                     </p>
                    </HTML>
 
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -4237,18 +4237,18 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\", revisions=\"<html>
@@ -4267,7 +4267,7 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
 
          output SI.AbsolutePressure p \"Pressure\";
 
-      protected 
+      protected
       SI.Density p_rho=rho;
       SI.SpecificEnthalpy p_h=h;
 
@@ -4278,7 +4278,7 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
        info=\"<HTML>
                     <p>This function returns the pressure as function of rho and h. The water/steam functions are computed according to inth2o.
                     </p>
-                    <p>  
+                    <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -4288,18 +4288,18 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
                    </HTML>\",
@@ -4312,27 +4312,27 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
                  derivative = der_p_rhoh);
       end p_rhoh;
 
-      function rho_ph_dpdh 
+      function rho_ph_dpdh
         \"rho, drdp and drdh as function of p and h\"
         import SI = SiemensPower.Units;
         input SI.Pressure p \"Pressure\";
         input SI.SpecificEnthalpy h \"Specific enthalpy\";
 
         output SI.Density rho \"Density\";
-        output Real drhodp( unit = \"kg/(m3.Pa)\") 
+        output Real drhodp( unit = \"kg/(m3.Pa)\")
           \"partial derivative of rho wrt p\";
-        output Real drhodh( unit = \"(kg.kg)/(m3.J)\") 
+        output Real drhodh( unit = \"(kg.kg)/(m3.J)\")
           \"partial derivative of rho wrt h\";
-      protected 
+      protected
       Real p_drhodp[1]( unit = \"kg/(m3.Pa)\");
       Real p_drhodh[1]( unit = \"(kg.kg)/(m3.J)\");
 
-      algorithm 
+      algorithm
         (rho,p_drhodp,p_drhodh):=drho_p_dp_p_dh(p,h);
         drhodp:=p_drhodp[1];
         drhodh:=p_drhodh[1];
 
-      protected 
+      protected
       function drho_p_dp_p_dh
         input SI.Pressure p;
         input SI.SpecificEnthalpy h;
@@ -4341,11 +4341,11 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
         output Real drho_dp[1]( unit = \"kg/(m3.Pa)\");
         output Real drho_dh[1](  unit = \"(kg.kg)/(m3.J)\");
 
-        protected 
+        protected
         SI.SpecificEnthalpy p_h = h;
         SI.Pressure p_p=p;
 
-        external \"C\" rho = 
+        external \"C\" rho =
                           dH2O_R_ph(p_p,p_h,drho_dp,drho_dh);
 
         annotation(Library={\"intH2O98\"});
@@ -4357,7 +4357,7 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
                     <p>This function returns the density as function of p and h
                   including partial derivatives. The water/steam functions are computed according to inth2o.
                     </p>
-                    <p>  
+                    <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -4367,18 +4367,18 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
                    </HTML>\",
@@ -4398,7 +4398,7 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
 
         output Real T \"Temperature\";
 
-      protected 
+      protected
       SI.Density p_rho=rho;
       SI.SpecificEnthalpy p_h=h;
 
@@ -4409,7 +4409,7 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
        info=\"<HTML>
                     <p>This function returns the temperature as function of rho and h. The water/steam functions are computed according to inth2o.
                     </p>
-                    <p>  
+                    <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -4419,18 +4419,18 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
                    </HTML>\",
@@ -4446,28 +4446,28 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
                     <p>Water-steam table functions from inth2o
                     </p>
 <b>Important note:</b>
-                    From the IntH2O/library folder 
+                    From the IntH2O/library folder
                     <ul>
-                      <li> the library file inth2O98.lib has to be copied to C:/Dymola/work 
+                      <li> the library file inth2O98.lib has to be copied to C:/Dymola/work
                             (if you want to chose another location, you h" + "ave to modify the corresponding library-annotations in the models)
-                      <li> the header file inth2O.h has to be present in your working directory. 
+                      <li> the header file inth2O.h has to be present in your working directory.
 </ul>
-                    
+
 <p>
 <b>For information only:</b> The following inth2o functions are called:
 <ul>
-<li>double  H2O_p_Rh (double*,double*); 
+<li>double  H2O_p_Rh (double*,double*);
 <li>double dH2O_p_Rh (double*,double*,double*,double*);
 <li>double  H2O_T_Rh (double*,double*);
 <li>double dH2O_T_Rh (double*,double*,double*,double*);
 <li>double  H2O_R_ph (double*,double*);
 <li>double dH2O_R_ph (double*,double*,double*,double*);
 </ul>
- 
+
                    </HTML>
 
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td> <td><a href=\\\"mailto:haiko.steuer@siemens.com\\\">Haiko Steuer</a> </td>
@@ -4476,18 +4476,18 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\",
@@ -4506,20 +4506,20 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
 
           input SI.Pressure p \"Pressure\";
           input SI.SpecificEnthalpy h \"Specific enthalpy\";
-          input Integer phase=0 
+          input Integer phase=0
             \"2 for two-phase, 1 for one-phase, 0 if not known\";
 
           output SI.Density rho \"Density\";
 
-          external \"C\" rho = 
+          external \"C\" rho =
                            TTSE_rho_ph(p,h,phase);
           annotation(Library={\"TTSEmoI\", \"TTSE\"},derivative(noDerivative=phase)=der_rho_ph, Inline=false,
             LateInline=true,
             Documentation(info=\"<html>
 <p>This function returns the density as function of p and h. The water/steam functions are computed according to TTSE. </p>
 </html>
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -4529,18 +4529,18 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\",   revisions=\"<html>
@@ -4555,19 +4555,19 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
           import SI = SiemensPower.Units;
             input SI.Pressure p \"Pressure\";
             input SI.SpecificEnthalpy h \"Specific Enthalpy\";
-            input Integer phase=0 
+            input Integer phase=0
             \"2 for two-phase, 1 for one-phase, 0 if not known\";
             output Real drho_dh \"Partial derivative drho/dh\";
 
-            external \"C\" drho_dh = 
+            external \"C\" drho_dh =
                                  TTSE_d1_rho_ph_dh(
                  p,
                   h, phase);
             annotation (Library={\"TTSEmoI\", \"TTSE\"},derivative(noDerivative=phase)=der_drhodh, Documentation(info=\"<html>
 <p>This function returns the partial derivative of rho wrt h versus p and h according to TTSE. </p>
 </html>
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -4577,18 +4577,18 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\",     revisions=\"<html>
@@ -4603,19 +4603,19 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
           import SI = SiemensPower.Units;
             input SI.Pressure p \"Pressure\";
             input SI.SpecificEnthalpy h \"Specific Enthalpy\";
-            input Integer phase=0 
+            input Integer phase=0
             \"2 for two-phase, 1 for one-phase, 0 if not known\";
             output Real drho_dp \"Partial derivative drho/dp\";
 
-            external \"C\" drho_dp = 
+            external \"C\" drho_dp =
                                  TTSE_d1_rho_ph_dp(
                   p,
                   h,phase);
             annotation (Library={\"TTSEmoI\", \"TTSE\"},derivative(noDerivative=phase)=der_drhodp, Documentation(info=\"<html>
 <p>This function returns the partial derivative of rho wrt p versus p and h according to TTSE. </p>
 </html>
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -4625,18 +4625,18 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\",     revisions=\"<html>
@@ -4651,18 +4651,18 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
           import SI = SiemensPower.Units;
           input SI.Pressure p \"Pressure\";
           input SI.SpecificEnthalpy h \"Specific enthalpy\";
-          input Integer phase=0 
+          input Integer phase=0
             \"2 for two-phase, 1 for one-phase, 0 if not known\";
           output SI.Temperature T \"Temperature\";
 
-          external \"C\" T = 
+          external \"C\" T =
                           TTSE_T_ph(p,h,phase);
 
           annotation(Library={\"TTSEmoI\", \"TTSE\"},derivative(noDerivative=phase)=der_T_ph, Documentation(info=\"<html>
 <p>This function returns the temperature as function of p and h. The water/steam functions are computed according to TTSE. </p>
 </html>
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -4672,18 +4672,18 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\",       revisions=\"<html>
@@ -4699,13 +4699,13 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
 
          input SI.Pressure p \"Pressure\";
          input SI.Sp" + "ecificEnthalpy h \"Specific enthalpy\";
-         input Integer phase=0 
+         input Integer phase=0
             \"2 for two-phase, 1 for one-phase, 0 if not known\";
          input Real der_p \"time derivative of pressure\";
          input Real der_h \"time derivative of specific enthalpy\";
          output Real der_rho \"time derivative of density\";
 
-        algorithm 
+        algorithm
              der_rho:= SiemensPower.Media.TTSE.Utilities.rho_ph_dh(p, h,phase)*der_h +
             SiemensPower.Media.TTSE.Utilities.rho_ph_dp(p, h,phase)*der_p;
 
@@ -4713,8 +4713,8 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
 <p>This function returns the time derivative of the density as function of p and h according to the chain rule. The partial derivatives are build with help of TTSE functions. </p>
 </html>
 
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -4724,18 +4724,18 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\",   revisions=\"<html>
@@ -4751,13 +4751,13 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
 
            input SI.Pressure p \"Pressure\";
            input SI.SpecificEnthalpy h \"Specific Enthalpy\";
-           input Integer phase=0 
+           input Integer phase=0
             \"2 for two-phase, 1 for one-phase, 0 if not known\";
            input Real der_p \"Time derivative of p\";
            input Real der_h \"Time derivative of h\";
            output Real der_drdh \"Time derivative of drho/dh\";
 
-        algorithm 
+        algorithm
           der_drdh := SiemensPower.Media.TTSE.Utilities.rho_ph_d2h(p, h)*der_h +
             SiemensPower.Media.TTSE.Utilities.rho_ph_d2ph(p, h)*der_p;
 
@@ -4766,8 +4766,8 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
                     </p>
 </html>
 
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -4777,18 +4777,18 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\",     revisions=\"<html>
@@ -4802,13 +4802,13 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
           import SI = SiemensPower.Units;
             input SI.Pressure p \"Pressure\";
             input SI.SpecificEnthalpy h \"Specific Enthalpy\";
-            input Integer phase=0 
+            input Integer phase=0
             \"2 for two-phase, 1 for one-phase, 0 if not known\";
             input Real der_p \"Time derivative of p\";
             input Real der_h \"Time derivative of h\";
             output Real der_drdp \"Time derivative of drho/dp\";
 
-        algorithm 
+        algorithm
           der_drdp := SiemensPower.Media.TTSE.Utilities.rho_ph_d2p(p, h)*der_p +
             SiemensPower.Media.TTSE.Utilities.rho_ph_d2ph(p, h)*der_h;
 
@@ -4817,8 +4817,8 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
                     </p>
 </html>
 
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -4828,18 +4828,18 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\",     revisions=\"<html>
@@ -4849,7 +4849,7 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
 </html>\"));
         end der_drhodp;
 
-        function rho_ph_d2h 
+        function rho_ph_d2h
           \"rho, d2rhodh2, d2rhodhdp as function of p and h\"
 
           import SI = SiemensPower.Units;
@@ -4858,13 +4858,13 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
 
           output Real d2rho_dh;
 
-          external \"C\" d2rho_dh = 
+          external \"C\" d2rho_dh =
                                 TTSE_d2_rho_ph_dh(p,h);
            annotation (Library={\"TTSEmoI\", \"TTSE\"}, Documentation(info=\"<html>
 <p>This function returns the second partial derivative of rho wrt h versus p and h according to TTSE. </p>
 </html>
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -4874,25 +4874,25 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\"));
 
         end rho_ph_d2h;
 
-        function rho_ph_d2p 
+        function rho_ph_d2p
           \"rho, d2rhodp2, d2rhodhdp as function of p and h\"
 
           import SI = SiemensPower.Units;
@@ -4901,13 +4901,13 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
 
           output Real d2rho_dp;
 
-          external \"C\" d2rho_dp = 
+          external \"C\" d2rho_dp =
                                 TTSE_d2_rho_ph_dp(p,h);
            annotation (Library={\"TTSEmoI\", \"TTSE\"}, Documentation(info=\"<html>
 <p>This function returns the second partial derivative of rho wrtp versus p and h according to TTSE. </p>
 </html>
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -4917,25 +4917,25 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\"));
 
         end rho_ph_d2p;
 
-        function rho_ph_d2ph 
+        function rho_ph_d2ph
           \"rho, d2rhodp2, d2rhodhdp as function of p and h\"
 
           import SI = SiemensPower.Units;
@@ -4944,13 +4944,13 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
 
           output Real d2rho_dpdh;
 
-          external \"C\" d2rho_dpdh = 
+          external \"C\" d2rho_dpdh =
                                   " + "TTSE_d2_rho_ph_dpdh(p,h);
            annotation (Library={\"TTSEmoI\", \"TTSE\"}, Documentation(info=\"<html>
 <p>This function returns the second partial derivative of rho wrt p and h versus p and h according to TTSE. </p>
 </html>
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -4960,18 +4960,18 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\"));
@@ -4982,14 +4982,14 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
           import SI = SiemensPower.Units;
             input SI.AbsolutePressure p \"Pressure\";
             input SI.SpecificEnthalpy h \"Specific Enthalpy\";
-            input Integer phase=0 
+            input Integer phase=0
             \"2 for two-phase, 1 for one-phase, 0 if not known\";
             input Real der_p( unit = \"Pa/s\") \"Time derivative of pressure\";
-            input Real der_h( unit = \"J/(kg.s)\") 
+            input Real der_h( unit = \"J/(kg.s)\")
             \"Time derivative of specific enthalpy\";
             output Real der_T(  unit = \"K/s\") \"Time derivative of temperature\";
 
-        algorithm 
+        algorithm
           der_T := SiemensPower.Media.TTSE.Utilities.T_ph_dh(p, h,phase)*der_h +
             SiemensPower.Media.TTSE.Utilities.T_ph_dp(p, h,phase)*der_p;
 
@@ -4997,8 +4997,8 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
 <p>This function returns the time derivative of the temperature as function of p and h according to the chain rule. The partial derivatives are build with help of TTSE functions. </p>
 </html>
 
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -5008,18 +5008,18 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\",   revisions=\"<html>
@@ -5033,19 +5033,19 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
           import SI = SiemensPower.Units;
             input SI.Pressure p \"Pressure\";
             input SI.SpecificEnthalpy h \"Specific Enthalpy\";
-             input Integer phase=0 
+             input Integer phase=0
             \"2 for two-phase, 1 for one-phase, 0 if not known\";
             output Real dT_dh \"Partial derivative dT/dh\";
 
-            external \"C\" dT_dh = 
+            external \"C\" dT_dh =
                                TTSE_d1_T_ph_dh(
                  p,
                   h,phase);
             annotation (Library={\"TTSEmoI\", \"TTSE\"}, Documentation(info=\"<html>
 <p>This function returns the partial derivative of T wrt h versus p and h according to TTSE. </p>
 </html>
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -5055,18 +5055,18 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\",       revisions=\"<html>
@@ -5081,17 +5081,17 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
           import SI = SiemensPower.Units;
             input SI.Pressure p \"Pressure\";
             input SI.SpecificEnthalpy h \"Specific Enthalpy\";
-            input Integer phase=0 
+            input Integer phase=0
             \"2 for two-phase, 1 for one-phase, 0 if not known\";
             output Real dT_dp \"Partial derivative dT/dp\";
 
-            external \"C\" dT_dp = 
+            external \"C\" dT_dp =
                                TTSE_d1_T_ph_dp(p,h,phase);
             annotation (Library={\"TTSEmoI\", \"TTSE\"}, Documentation(info=\"<html>
 <p>This function returns the partial derivative of T wrt p versus p and h according to TTSE. </p>
 </html>
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -5101,18 +5101,18 @@ If this is not intended use Modelica.Media.IdealGases.Common.MixtureGasNasa as a
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\",       revisions=\"<html>
@@ -5147,40 +5147,40 @@ This package contains medium models.
 
   package Utilities \"Parts and basics of components\"
     package BaseClasses \"Partial models\"
-      partial model BaseTube 
+      partial model BaseTube
         \"Base class for spatial discretized tubes\"
         import SI = SiemensPower.Units;
         extends SiemensPower.Utilities.BaseClasses.PartialTwoPortTransport(pIn_start=pOut_start);
         constant Real g=Modelica.Constants.g_n;
         constant Real pi=Modelica.Constants.pi;
 
-        parameter Integer numberOfNodes(min=2) = 2 
+        parameter Integer numberOfNodes(min=2) = 2
           \"Number of nodes for thermal variables\";
-        parameter SiemensPower.Utilities.Structures.PipeGeo geoPipe 
+        parameter SiemensPower.Utilities.Structures.PipeGeo geoPipe
           \"Geometry of tube\" annotation(Dialog(group=\"Geometry and correlations\"));
 
         // Initialization
-        parameter Boolean initializeInletPressure = true 
+        parameter Boolean initializeInletPressure = true
           \"add steady state equation for pressure\"  annotation(Dialog(tab=\"Initialization\"));
-        parameter Boolean initializeSteadyStateEnthalpies=true 
+        parameter Boolean initializeSteadyStateEnthalpies=true
           \"lets initialize der(h)=0\" annotation(evaluate=true, Dialog(tab=\"Initialization\"));
-        parameter Boolean initializeSteadyStateInletEnthalpy=true 
+        parameter Boolean initializeSteadyStateInletEnthalpy=true
           \"steady state initial condition for input enthalpy\" annotation(evaluate=true, Dialog(tab=\"Initialization\", enable=initializeSteadyStateEnthalpies));
         parameter SI.SpecificEnthalpy h_start[numberOfNodes] = hIn_start*ones(numberOfNodes"
-         + ") + (hOut_start-hIn_start)*SiemensPower.Utilities.Functions.my_linspace(1/numberOfNodes,1,numberOfNodes) 
+         + ") + (hOut_start-hIn_start)*SiemensPower.Utilities.Functions.my_linspace(1/numberOfNodes,1,numberOfNodes)
           \"guess values for initial enthalpy vector\"  annotation(Dialog(tab=\"Advanced\", group=\"Initialization\"));
-        parameter SI.HeatFlowRate Q_flow_start[numberOfNodes] = (hOut_start-hIn_start)*m_flow_start/(geoPipe.Nt*numberOfNodes)*ones(numberOfNodes) 
+        parameter SI.HeatFlowRate Q_flow_start[numberOfNodes] = (hOut_start-hIn_start)*m_flow_start/(geoPipe.Nt*numberOfNodes)*ones(numberOfNodes)
           \"Detailed start values for heat flow\"  annotation(Dialog(tab=\"Advanced\", group=\"Initialization\"));
 
         // Advanced
-        parameter SI.Volume additionalVolume=0 
+        parameter SI.Volume additionalVolume=0
           \"Additional volume to total tubes volumes\"annotation(Dialog(tab=\"Advanced\"));
         parameter Boolean useDynamicMassBalance=true \"consider mass storage\" annotation(Dialog(tab=\"Advanced\", group=\"Dynamics\"),Evaluate=true);
-        parameter Boolean considerDynamicMomentum=true 
+        parameter Boolean considerDynamicMomentum=true
           \"der(m_flow) accounted for, be careful!\"  annotation(Dialog(tab=\"Advanced\", group=\"Dynamics\"),evaluate=true);
-        parameter Boolean considerDynamicPressure=false 
+        parameter Boolean considerDynamicPressure=false
           \"With der(p)/d in enthalpy balance (for shock waves)\"  annotation(Dialog(tab=\"Advanced\", group=\"Dynamics\"),Evaluate=true);
-        parameter SI.Area heatedArea=geoPipe.Nt*geoPipe.L*Modelica.Constants.pi*diameterInner 
+        parameter SI.Area heatedArea=geoPipe.Nt*geoPipe.L*Modelica.Constants.pi*diameterInner
           \"Total Area for heat transfer\" annotation(Dialog(tab=\"Advanced\", group=\"Inner heat transfer\"));
 
         final parameter SI.Length diameterInner = geoPipe.d_out - 2*geoPipe.s;
@@ -5203,10 +5203,10 @@ This package contains medium models.
         SI.SpecificEnthalpy hFluid[numberOfNodes](start=h_start);
         SI.Pressure pFluid[numberOfNodes]( start=SiemensPower.Utilities.Functions.my_linspace(pIn_start,pOut_start,numberOfNodes));
 
-      protected 
+      protected
         final parameter SI.Pressure dpHyd_start = g*geoPipe.H*sum(SiemensPower.Media.TTSE.Utilities.rho_ph(SiemensPower.Utilities.Functions.my_linspace(pIn_start,pOut_start,numberOfNodes),h_start));
         final parameter SI.Pressure dpFric_start = max(0.0, pIn_start-pOut_start-dpHyd_start);
-        final parameter SI.Temperature T_start[numberOfNodes]=SiemensPower.Media.TTSE.Utilities.T_ph(SiemensPower.Utilities.Functions.my_linspace(pIn_start, pOut_start, numberOfNodes),h_start) 
+        final parameter SI.Temperature T_start[numberOfNodes]=SiemensPower.Media.TTSE.Utilities.T_ph(SiemensPower.Utilities.Functions.my_linspace(pIn_start, pOut_start, numberOfNodes),h_start)
           \"start values for fluid temperatures\";
         final parameter SI.Density d_start[numberOfNodes]=SiemensPower.Media.TTSE.Utilities.rho_ph(SiemensPower.Utilities.Functions.my_linspace(pIn_start, pOut_start, numberOfNodes),h_start);
         final parameter SI.HeatFlux q_start =  m_flow_start*(hOut_start-hIn_start)/heatedArea;
@@ -5221,7 +5221,7 @@ This package contains medium models.
       //  SI.MassFlowRate M_flows[numberOfNodes,Medium.nXi];
         replaceable SI.HeatFlux qHeating[numberOfNodes](each start=q_start)=zeros(numberOfNodes);
 
-      initial equation 
+      initial equation
 
         // h
        if (useEnergyStorage) then
@@ -5242,7 +5242,7 @@ This package contains medium models.
       //    end for;
       // end if;
 
-      equation 
+      equation
         // thermodynamic properties
         //fluid.d = d;
         //fluid.T = T;
@@ -5302,7 +5302,7 @@ This package contains medium models.
                 lineColor={0,0,0},
                 textString=\"%name\")}),
           Documentation(info=\"<HTML>
-<p>This base class describes the geometry and most important variables for the water/steam flow in a pipe.<br> 
+<p>This base class describes the geometry and most important variables for the water/steam flow in a pipe.<br>
 It will be a 1-dimensional flow model.
 In the derived class, the following quantities/equations have to be set:<br>
 <ul>
@@ -5310,11 +5310,11 @@ In the derived class, the following quantities/equations have to be set:<br>
 <li> mass flow rate(s) + momentum balance(s) incl hydrostatic and friction pressure drop
 <li> mass densities d[1], ...d[numberOfNodes] for each cell + continuity equation(s)
 <li> specific enthalpies hFluid[1], ..., hFluid[numberOfNodes] (energy balances)
-<li> 
+<li>
 </ul>
 <p>
-</HTML><HTML> 
-       <p>  
+</HTML><HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -5324,18 +5324,18 @@ In the derived class, the following quantities/equations have to be set:<br>
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\",   revisions=\"<html>
@@ -5345,7 +5345,7 @@ In the derived class, the following quantities/equations have to be set:<br>
 </HTML>\"),Diagram);
       end BaseTube;
 
-      partial model PartialTwoPortTransport 
+      partial model PartialTwoPortTransport
         \"Base class for components with two fluid ports\"
     " + "    import SI = SiemensPower.Units;
 
@@ -5357,22 +5357,22 @@ In the derived class, the following quantities/equations have to be set:<br>
       //    constrainedby Modelica.Media.Interfaces.PartialMedium
       //           annotation (choicesAllMatching = true);
 
-        parameter Boolean preferredStates=true 
+        parameter Boolean preferredStates=true
           \"Try to select preferred medium states\"                                      annotation(Dialog(tab=\"Advanced\"));
 
       // Initializatin parameters
-       parameter SiemensPower.Units.MassFlowRate m_flow_start=1 
+       parameter SiemensPower.Units.MassFlowRate m_flow_start=1
           \"Guess value for mass flow rate\"                                                 annotation(Dialog(tab=\"Initialization\"));
 
-        parameter SI.AbsolutePressure pIn_start = 1e5 
-          \"Start value of inlet pressure\" 
+        parameter SI.AbsolutePressure pIn_start = 1e5
+          \"Start value of inlet pressure\"
           annotation(Dialog(tab = \"Initialization\"));
-        parameter SI.AbsolutePressure pOut_start = 1e5 
-          \"Start value of outlet pressure\" 
+        parameter SI.AbsolutePressure pOut_start = 1e5
+          \"Start value of outlet pressure\"
           annotation(Dialog(tab = \"Initialization\"));
 
-       parameter Boolean useTemperatureStartValue = false 
-          \"Use T_start if true, otherwise h_start\" 
+       parameter Boolean useTemperatureStartValue = false
+          \"Use T_start if true, otherwise h_start\"
           annotation(Dialog(tab = \"Initialization\"), Evaluate=true);
 
         parameter SI.SpecificEnthalpy hIn_start= 1000e3;
@@ -5403,17 +5403,17 @@ In the derived class, the following quantities/equations have to be set:<br>
       //    \"Start value of mass fractions m_i/m\"
       //    annotation (Dialog(tab=\"Initialization\", enable=Medium.nXi > 0));
 
-        parameter Boolean useSubstanceStorage=false 
+        parameter Boolean useSubstanceStorage=false
           \"consider composition storage\" annotation(Dialog(tab=\"Advanced\", group=\"Dynamics\"));
 
-        parameter Boolean useEnergyStorage=true 
+        parameter Boolean useEnergyStorage=true
           \"consider energy storage (else: isenthalpic transport)\"                                        annotation(Dialog(tab=\"Advanced\", group=\"Dynamics\"));
 
-        SiemensPower.Interfaces.FluidPort_a portIn( m_flow(start=m_flow_start), h_outflow(start=hIn_start), p(start=pIn_start)) 
+        SiemensPower.Interfaces.FluidPort_a portIn( m_flow(start=m_flow_start), h_outflow(start=hIn_start), p(start=pIn_start))
           \"Inlet port\" annotation (Placement(transformation(extent={{-120,-20},{-80,
                   20}}, rotation=0), iconTransformation(extent={{-120,-20},{-80,20}})));
 
-        SiemensPower.Interfaces.FluidPort_b portOut( m_flow(start=-m_flow_start), h_outflow(start=hOut_start), p(start=pOut_start)) 
+        SiemensPower.Interfaces.FluidPort_b portOut( m_flow(start=-m_flow_start), h_outflow(start=hOut_start), p(start=pOut_start))
           \"Outlet port\" annotation (Placement(transformation(extent={{120,-20},{80,20}},
                 rotation=0), iconTransformation(extent={{120,-20},{80,20}})));
 
@@ -5424,7 +5424,7 @@ In the derived class, the following quantities/equations have to be set:<br>
         //Medium.ThermodynamicState state_from_b(p(start=pOut_start), T(start=TOut_start))
         //  \"state for medium inflowing through portOut\";
 
-      equation 
+      equation
       // medium states
       //  state_from_a = Medium.setState_phX(portIn.p, inStream(portIn.h_outflow), inStream(portIn.Xi_outflow));
       //  state_from_b = Medium.setState_phX(portOut.p, inStream(portOut.h_outflow), inStream(portOut.Xi_outflow));
@@ -5459,19 +5459,19 @@ In the derived class, the following quantities/equations have to be set:<br>
         annotation (Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
                   -100},{100,100}}), graphics),
           Documentation(info=\"<HTML>
-<p>This base class describes the geometry and most important variables for the fluid flow without storing substance.<br> 
+<p>This base class describes the geometry and most important variables for the fluid flow without storing substance.<br>
 In the derived class, the following quantities/equations have to be set:<br>
 <ul>
 <li> pressure loss dp (e.g. momentum balance)
 <li> mass flow rate (e.g. mass balance)
 <li> outflow enthalpies (e.g. energy balance)
-<li> 
+<li>
 </ul>
 <p>
 </HTML>
 
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -5481,18 +5481,18 @@ In the derived class, the following quantities/equations have to be set:<br>
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\",   revisions=\"<html>
@@ -5511,18 +5511,18 @@ This package contains partial base classes.
       package CharacteristicNumbers
 
         function NusseltNumber \"Nusselt number\"
-          input SiemensPower.Units.CoefficientOfHeatTransfer alpha 
+          input SiemensPower.Units.CoefficientOfHeatTransfer alpha
             \"Coefficient of heat transfer\";
           input SiemensPower.Units.Length length \"Characteristic length\";
-          input SiemensPower.Units.ThermalConductivity lambda 
+          input SiemensPower.Units.ThermalConductivity lambda
             \"Thermal conductivity\";
           output SiemensPower.Units.NusseltNumber Nu \"Nusselt number\";
-        algorithm 
+        algorithm
           Nu := alpha*length/lambda;
           annotation (Documentation(info=\"Nusselt number Nu = alpha*length/lambda
 
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -5532,18 +5532,18 @@ This package contains partial base classes.
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\"),          derivative=NusseltNumber_der,
@@ -5560,13 +5560,13 @@ This package contains partial base classes.
 
         function ReynoldsNumber \"Reynolds number of fluid flow\"
           input SiemensPower.Units.MassFlowRate m_flow \"Mass flow rate\";
-          input Siemen" + "sPower.Units.Length length 
+          input Siemen" + "sPower.Units.Length length
             \"Characteristic length (hyd. diam. in pipes)\";
           input SiemensPower.Units.Area A \"Cross sectional area\";
           input SiemensPower.Units.DynamicViscosity eta \"Dynamic viscosity\";
           output SiemensPower.Units.ReynoldsNumber Re \"Reynolds number\";
 
-        algorithm 
+        algorithm
           Re := abs(m_flow)*length/A/eta;
 
         annotation (derivative=ReynoldsNumber_der,
@@ -5575,8 +5575,8 @@ This package contains partial base classes.
                     <p>This function returns the Reynolds number of a fluid flow.<br>
                    </HTML>
 
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td><td><a href=\\\"mailto:kilian.link@siemens.com\\\">Kilian Link</a> </td>
@@ -5585,18 +5585,18 @@ This package contains partial base classes.
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\",   revisions=\"<html>
@@ -5610,10 +5610,10 @@ This package contains partial base classes.
       function lambdaFin \"Lambda(T) for several fin materials\"
           input SiemensPower.Units.Temperature T \"Fin temperature\";
           input String material \"Fin material\";
-          output SiemensPower.Units.ThermalConductivity lambdafin 
+          output SiemensPower.Units.ThermalConductivity lambdafin
           \"Thermal conductivity of fins\";
 
-      protected 
+      protected
         SiemensPower.Units.Temperature TdegC;  // in degC
         Integer kennz;
         constant Real koeff[11,3] = {
@@ -5640,7 +5640,7 @@ This package contains partial base classes.
                                                     // AISI 409
                                                     // AISI 304
 
-      algorithm 
+      algorithm
        if (T-273.15 < 50.0) then
           TdegC :=50.0;
        elseif (T-273.15 > 700) then
@@ -5681,8 +5681,8 @@ This package contains partial base classes.
           Documentation(
        info=\"<HTML>
                     <p>This function returns the thermal conductivity lambda(T) in dependence of the fin temperature.
-                   </HTML><HTML> 
-       <p>  
+                   </HTML><HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -5692,18 +5692,18 @@ This package contains partial base classes.
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\", revisions=\"<html>
@@ -5719,7 +5719,7 @@ This package contains partial base classes.
         input Real x2;
         input Integer n;
         output Real y[n];
-      algorithm 
+      algorithm
         if n>1 then
           for i in 1:n loop
             y[i]:=x1+(i-1)/(n-1)*(x2-x1);
@@ -5741,14 +5741,14 @@ This package contains functions.
 
          parameter Real heatingSurfaceFactor_set= 1.0 \"factor for A_h\";
 
-      equation 
+      equation
        alpha = alpha_start*ones(numberOfNodes);
        heatingSurfaceFactor = heatingSurfaceFactor_set;
        Psi = 1.0;
         annotation(Documentation(info=\"<html>
 Simple heat transfer correlation with constant heat transfer coefficient, used as default component in <a distributed pipe models.
-</html><HTML> 
-       <p>  
+</html><HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -5758,49 +5758,49 @@ Simple heat transfer correlation with constant heat transfer coefficient, used a
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\"));
       end HeatTransfer_constAlpha;
 
-      partial model HeatTransferBaseClass 
+      partial model HeatTransferBaseClass
         \"Base class for heat transfer correlation in terms of Nusselt number\"
         import SI = SiemensPower.Units;
 
-        replaceable package Medium = 
-            Modelica.Media.IdealGases.MixtureGases.FlueGasSixComponents 
+        replaceable package Medium =
+            Modelica.Media.IdealGases.MixtureGases.FlueGasSixComponents
             constrainedby Modelica.Media.Interfaces.PartialMixtureMedium annotation(Dialog(tab=\"Advanced\", enable=false));
-        parameter Integer numberOfNodes(min=1)=1 
+        parameter Integer numberOfNodes(min=1)=1
           \"Number of thermal port segments\"                                        annotation(Dialog(tab=\"Advanced\", enable=false));
 
-        parameter SI.Length lengthRe 
+        parameter SI.Length lengthRe
           \"Characteristic length for Reynolds number\"                                           annotation(Dialog(tab=\"Advanced\", enable=false));
         parameter SI.Length lengthNu \"Characteristic length for Nusselt number\"
                                                                                                annotation(Dialog(tab=\"Advanced\", enable=false));
         parameter SiemensPower.Units.Area ACrossFlow \"Cross flow area\" annotation(Dialog(tab=\"Advanced\", enable=false));
         parameter SI.Area AHeatTransfer \"Total heat transfer area\" annotation(Dialog(tab=\"Advanced\", enable=false));
 
-        parameter SiemensPower.Utilities.Structures.FgzGeo geoFGZ 
+        parameter SiemensPower.Utilities.Structures.FgzGeo geoFGZ
           \"Flue gas zone parameters\"   annotation(Dialog(tab=\"No input\", enable=false));
-        parameter SiemensPower.Utilities.Structures.Fins geoFins 
+        parameter SiemensPower.Utilities.Structures.Fins geoFins
           \"Fin parameters\"                                                        annotation(Dialog(tab=\"No input\", enable=false));
-        parameter SiemensPower.Utilities.Structures.PipeGeo geoPipe" + " 
-          \"Tube parameters\" 
+        parameter SiemensPower.Utilities.Structures.PipeGeo geoPipe" + "
+          \"Tube parameters\"
               annotation(Dialog(tab=\"No input\", enable=false));
 
-        parameter SI.CoefficientOfHeatTransfer alpha_start=200 
+        parameter SI.CoefficientOfHeatTransfer alpha_start=200
           \"Start/constant value of heat transfer coefficient\";
 
         outer input Real TWall[numberOfNodes] \"Temperature of heat port\";
@@ -5815,13 +5815,13 @@ Simple heat transfer correlation with constant heat transfer coefficient, used a
         Medium.ThermalConductivity lambda \"Thermal conductivity\";
 
       // the following variables have to be set in derived models
-       SI.CoefficientOfHeatTransfer[numberOfNodes] alpha(each start=alpha_start) 
+       SI.CoefficientOfHeatTransfer[numberOfNodes] alpha(each start=alpha_start)
           \"CoefficientOfHeatTransfer\";
         Real heatingSurfaceFactor \"factor for AHeatTransfer\";
-        Real Psi 
+        Real Psi
           \"crossing area shortening factor because of internals (factor for ACrossFlow)\";
 
-      equation 
+      equation
         cp=Medium.specificHeatCapacityCp(state);
         eta = Medium.dynamicViscosity(state);
         lambda = Medium.thermalConductivity(state, method=2);
@@ -5847,7 +5847,7 @@ Simple heat transfer correlation with constant heat transfer coefficient, used a
                 fillColor={232,0,0},
                 textString=\"%name\")}),
                                Documentation(info=\"<HTML>
-<p>This is a base class for a heat transfer model usable for inner and outer heat transfer. 
+<p>This is a base class for a heat transfer model usable for inner and outer heat transfer.
 It is located between a vector of thermal ports on the other hand and on a (vector of) fluid flow(s) on the other hand.
 In a derived class you have to specify
                     <ul>
@@ -5863,10 +5863,10 @@ At the composing level, you have to specify the fluid flow properties:
                              <li> fluid mass flow rates [ns]
                        </ul>
 as well as the thermal ports [numberOfNodes].<p>
-As a result, you can use the heat flow rate Q_flow[numberOfNodes], which leaves the fluid, and the thermalPort.Q_flow[numberOfNodes], which enters the fluid ports. The difference is due to the 
+As a result, you can use the heat flow rate Q_flow[numberOfNodes], which leaves the fluid, and the thermalPort.Q_flow[numberOfNodes], which enters the fluid ports. The difference is due to the
 <b>heatloss</b> to ambient.
- </HTML><HTML> 
-       <p>  
+ </HTML><HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -5876,18 +5876,18 @@ As a result, you can use the heat flow rate Q_flow[numberOfNodes], which leaves 
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\",   revisions=\"<html>
@@ -5897,12 +5897,12 @@ As a result, you can use the heat flow rate Q_flow[numberOfNodes], which leaves 
 </HTML>\"));
       end HeatTransferBaseClass;
 
-      package InnerHeatTransfer 
+      package InnerHeatTransfer
         \"Correlations for heat transfer inside tubes\"
         model SinglePhase \"turbulent single phase flow ~ cp m\"
-          extends 
+          extends
             SiemensPower.Utilities.HeatTransfer.InnerHeatTransfer.PartialHeatTransfer;
-          extends 
+          extends
             SiemensPower.Utilities.HeatTransfer.InnerHeatTransfer.PartialHeatTransferSinglePhase;
 
         //    parameter SiemensPower.Units.CoefficientOfHeatTransfer alpha0=0.2e3
@@ -5912,7 +5912,7 @@ As a result, you can use the heat flow rate Q_flow[numberOfNodes], which leaves 
               diameterInner                                                       *
               diameterInner;
 
-        equation 
+        equation
           isSinglePhase = true;
          // alpha = alpha0 + 0.06*cp*Modelica.Fluid.Utilities.regRoot(abs(m_flow)/A);
          alpha = 0.002*cp*max(20,abs(m_flow)/A);
@@ -5922,8 +5922,8 @@ As a result, you can use the heat flow rate Q_flow[numberOfNodes], which leaves 
 
         annotation (Documentation(info=\"<html>
   This simple inner heat transfer correlation is good for turbulent single phase flow.
-</html><HTML> 
-       <p>  
+</html><HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -5933,37 +5933,37 @@ As a result, you can use the heat flow rate Q_flow[numberOfNodes], which leaves 
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\"));
         end SinglePhase;
       end InnerHeatTransfer;
       annotation (Documentation(info=\"<html>
-Heat transfer correlations 
+Heat transfer correlations
 </html>\"));
     end HeatTransfer;
 
     package PressureLoss \"Friction pressure loss correlations\"
-      partial model PartialFriction 
+      partial model PartialFriction
         \"Base class for friction pressure loss correlations\"
 
-       parameter SiemensPower.Utilities.Structures.PipeGeo geoPipe 
+       parameter SiemensPower.Utilities.Structures.PipeGeo geoPipe
           \"geometry parameters of the tube \"                                                     annotation(Dialog(tab=\"Advanced\",enable=false));
-       parameter SiemensPower.Units.Length dz 
+       parameter SiemensPower.Units.Length dz
           \"length of tube section for which friction pressure loss is wanted\"                                  annotation(Dialog(tab=\"Advanced\",enable=false));
-       parameter Real lambda=0.02 
+       parameter Real lambda=0.02
           \"constant friction factor (used for valve friction model only)\";
 
         input SiemensPower.Units.Pressure p \"pressure\";
@@ -5971,7 +5971,7 @@ Heat transfer correlations
         input SiemensPower.Units.Density rho \"mass density\";
         input SiemensPower.Units.DynamicViscosity eta \"dynamic viscosoty\";
         input Real steamQuality \"Steam quality\";
-        input Real xdo 
+        input Real xdo
           \"Critical steam quality, at which the boiling crisis (e.g. dryout) occurs\";
         input SiemensPower.Units.MassFlowRate m_flow \"mass flow rate\";
 
@@ -5980,12 +5980,12 @@ Heat transfer correlations
 
         annotation (Documentation(info=\"<html>
   Any derived friction pressure loss correlation must define a relation between m_flow and dp, e.g.
-dp/dz = ... * m_flow^2/(rho) 
+dp/dz = ... * m_flow^2/(rho)
 <p>
 The additive friction coefficient geo.zeta_add should contribute to the pressure loss something similar to
 dp/dz = zeta_add/L*rho/2*v^2
-</html><HTML> 
-       <p>  
+</html><HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td><td><a href=\\\"mailto:haiko.steuer@siemens.com\\\">Haiko Steuer</a> </td>
@@ -5994,31 +5994,31 @@ dp/dz = zeta_add/L*rho/2*v^2
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\"));
       end PartialFriction;
 
-      partial model PartialFrictionSinglePhase 
+      partial model PartialFrictionSinglePhase
         \"Base class for restricting the choice of friction correlations\"
 
         annotation (Documentation(info=\"<html>
   Just a label to characterize friction correlations which do not use two phase prop"
          + "erties
-</html><HTML> 
-       <p>  
+</html><HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -6028,18 +6028,18 @@ dp/dz = zeta_add/L*rho/2*v^2
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\"));
@@ -6049,19 +6049,19 @@ dp/dz = zeta_add/L*rho/2*v^2
         extends SiemensPower.Utilities.PressureLoss.PartialFriction;
         extends SiemensPower.Utilities.PressureLoss.PartialFrictionSinglePhase;
 
-         parameter SiemensPower.Units.MassFlowRate m_flowLaminar=0.001 
+         parameter SiemensPower.Units.MassFlowRate m_flowLaminar=0.001
           \"nominal mass flow for laminar limit\";
          final parameter SiemensPower.Units.Length diameterInner = geoPipe.d_out-2*geoPipe.s;
          final parameter SiemensPower.Units.Area A = Modelica.Constants.pi*0.25*diameterInner*diameterInner;
          final parameter Real zeta = (1.14-2*Modelica.Math.log10(geoPipe.r/diameterInner))^(-2)+geoPipe.zeta_add*diameterInner/geoPipe.L;
 
-      equation 
+      equation
         isSinglePhase = true;
        dp/dz = zeta*m_flow*(abs(m_flow)+m_flowLaminar)/(2*rho*A^2*diameterInner);
 
         annotation (Documentation(info=\"<html>
-</html><HTML> 
-       <p>  
+</html><HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -6071,18 +6071,18 @@ dp/dz = zeta_add/L*rho/2*v^2
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\"));
@@ -6099,7 +6099,7 @@ dp/dz = zeta_add/L*rho/2*v^2
         parameter SI.Length Ld=15 \"Depth of flue gas zone > tube's length \";
         parameter SI.Length Lh=5 \"Height of flue gas zone\";
         parameter Integer Nr=1 \"Number of tube layers in bundle\";
-        parameter Boolean staggered=true 
+        parameter Boolean staggered=true
           \"Staggered tube arrangement instead of inline\";
 
         annotation (Documentation(info=\"<HTML>
@@ -6110,8 +6110,8 @@ The figure shows the meaning of the parameters for a vertical and a horizontal b
 Note that for a fired boiler, the pl parameter is not in use.
 </p>
 </HTML>
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -6121,18 +6121,18 @@ Note that for a fired boiler, the pl parameter is not in use.
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\",revisions=\"<html>
@@ -6152,7 +6152,7 @@ Note that for a fired boiler, the pl parameter is not in use.
         parameter SI.Length b=0.005 \"base height \" annotation(Dialog(enable=finned and serrated));
         parameter SI.Length w=0.004 \"segment width\" annotation(Dialog(enable=finned and serrated));
         parameter SI.WaveNumber n=270 \"no of fins per meter\" annotation(Dialog(enable=finned));
-       parameter String material=\"X 8 CrNiTi 18.10\" \" fin material\" 
+       parameter String material=\"X 8 CrNiTi 18.10\" \" fin material\"
           annotation(Dialog(enable=finned), choices(
           choice=\"Standardfunktion DEFAalt\" \"Standardfunktion DEFAalt\",
           choice= \"St 35.8\" \"St 35.8\",
@@ -6169,8 +6169,8 @@ Note that for a fired boiler, the pl parameter is not in use.
         annotation (Documentation(info=\"<HTML>
 <p>These parameters are needed to specify fin parameters.<p>
 </HTML>
-<HTML> 
-       <p>  
+<HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -6180,18 +6180,18 @@ Note that for a fired boiler, the pl parameter is not in use.
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\",revisions=\"<html>
@@ -6209,19 +6209,19 @@ Note that for a fired boiler, the pl parameter is not in use.
         parameter SI.Length H=0 \"Height difference between outlet and inlet\";
         parameter SI.Length d_out=0.038 \"Outer diameter of the tube\";
         parameter SI.Length s=0.003 \"Thickness of the wall\";
-        parameter SI.Length r=0.03e-3 
+        parameter SI.Length r=0.03e-3
           \"Inner roughness (friction coefficient) of the wall\";
-        parameter Real zeta_add=0 
+        parameter Real zeta_add=0
           \"Additive friction loss coefficient (for bendings)\";
-        parameter Boolean isCylindric=true 
+        parameter Boolean isCylindric=true
           \"assume circular (NOT quadratic) inner cross sectional area\";
-        final parameter SI.Area A = (if isCylindric then 0.25*Modelica.Constants.pi else 1.0)*(d_out-2*s)^2 
+        final parameter SI.Area A = (if isCylindric then 0.25*Modelica.Constants.pi else 1.0)*(d_out-2*s)^2
           \"inner cross sectional area\";
 
        annotation (Documentation(info=\"<HTML>
 <p>These parameters are needed to specify the geoemtry of a pipe:
-</HTML><HTML> 
-       <p>  
+</HTML><HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -6231,18 +6231,18 @@ Note that for a fired boiler, the pl parameter is not in use.
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-     " + "             </tr> 
+     " + "             </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\",   revisions=\"<html>
@@ -6263,8 +6263,8 @@ Note that for a fired boiler, the pl parameter is not in use.
 <p>These parameters are needed to specify the medium properties of a metal, e.g. in a tube' wall.
    Here, the properties are fixed, i.e. they do <b>not</b> depend on the metal temperature.
   Note that for the wall aggregate, just the <b>product</b> of rho and cp (i.e. the heat capacity per volume) will enter the physics.
-</HTML><HTML> 
-       <p>  
+</HTML><HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -6274,18 +6274,18 @@ Note that for a fired boiler, the pl parameter is not in use.
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\\\"../Documents/Disclaimer.html\\\">disclaimer</a> <br>
         </p>
 </HTML>\",   revisions=\"<html>
@@ -6301,12 +6301,12 @@ This package contains basic utilities.
   end Utilities;
 
   package Units
-    type AbsolutePressure = 
+    type AbsolutePressure =
                      Modelica.SIunits.AbsolutePressure(start = 5.0e5,min = 0e5,max = 10.0e9, nominal = 5.0e5);
     type Density =   Modelica.SIunits.Density(start = 100,min = 0,max = 9000, nominal = 100);
     type Mass =      Modelica.SIunits.Mass(start = 100,min = 0,max = 100000, nominal = 100);
     type HeatFlowRate =      Modelica.SIunits.HeatFlowRate(start = 1.0e8,min = -1.0e11, max = 1.0e11, nominal = 1.0e8);
-    type MassFlowRate = 
+    type MassFlowRate =
                      Modelica.SIunits.MassFlowRate(min = -1000,max = 1000, nominal = 100);
     type Pressure =  Modelica.SIunits.Pressure(start = 5.0e5,min = -100e6,max = 100.0e7, nominal = 5.0e5);
     type Temperature=Modelica.SIunits.Temperature(start = 400, min = 273,max = 1500, nominal = 400);

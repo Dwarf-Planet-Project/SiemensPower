@@ -24,7 +24,7 @@ partial model BaseTube "Base class for spatial discretized tubes"
 
   // Advanced
   parameter SI.Volume additionalVolume=0
-    "Additional volume to total tubes volumes" 
+    "Additional volume to total tubes volumes"
                                               annotation(Dialog(tab="Advanced"));
   parameter Boolean useDynamicMassBalance=true "consider mass storage" annotation(Dialog(tab="Advanced", group="Dynamics"),Evaluate=true);
   parameter Boolean considerDynamicMomentum=true
@@ -153,7 +153,7 @@ equation
           lineColor={0,0,0},
           textString="%name")}),
     Documentation(info="<HTML>
-<p>This base class describes the geometry and most important variables for the water/steam flow in a pipe.<br> 
+<p>This base class describes the geometry and most important variables for the water/steam flow in a pipe.<br>
 It will be a 1-dimensional flow model.
 In the derived class, the following quantities/equations have to be set:<br>
 <ul>
@@ -161,11 +161,11 @@ In the derived class, the following quantities/equations have to be set:<br>
 <li> mass flow rate(s) + momentum balance(s) incl hydrostatic and friction pressure drop
 <li> mass densities d[1], ...d[numberOfNodes] for each cell + continuity equation(s)
 <li> specific enthalpies hFluid[1], ..., hFluid[numberOfNodes] (energy balances)
-<li> 
+<li>
 </ul>
 <p>
-</HTML><HTML> 
-       <p>  
+</HTML><HTML>
+       <p>
            <table>
                 <tr>
                               <td><b>Author:</b>  </td>
@@ -175,18 +175,18 @@ In the derived class, the following quantities/equations have to be set:<br>
                 <tr>
                            <td><b>Checked by:</b>   </td>
                            <td>            </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td> </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2007 Siemens AG, PG EIP12. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\"../Documents/Disclaimer.html\">disclaimer</a> <br>
         </p>
 </HTML>",
