@@ -3,9 +3,9 @@ package SiemensPower "SiemensPower"
 
 
     annotation (
-  version="2.1beta",
+  version="2.1 beta",
  preferedView="info",
- uses(Modelica(version="3.2")),
+ uses(Modelica(version="3.2.1")),
  conversion(from(version="1.8", script="Scripts/ConvertSiemensPower_from_1.8_to_2.0.mos"), from(version="2.0", script="Scripts/ConvertSiemensPower_from_2.0_to_2.1.mos")),
      Documentation(info="<html>
 <blockquote>The SiemensPower <a href=\"http://www.modelica.org/\">Modelica</a> library contains models for power plant simulation.</blockquote><blockquote>Change requests can be submitted at the <a href=\"http://diagnostics-cvs/trac/Modelica\">SiemensPower trac</a> site. </blockquote>
