@@ -12,7 +12,7 @@ model Valve "Valve model with flexible behavior"
 
   constant Real pi = Modelica.Constants.pi;
 
-  parameter String valveType="linear valve" "water, steam/gas or linear" 
+  parameter String valveType="linear valve" "water, steam/gas or linear"
       annotation(choices(choice="steam valve" "steam or gas valve",
                          choice="water valve" "water valve",
                          choice="linear valve" "linear valve m=Y*K*delta_p"));
@@ -33,9 +33,9 @@ model Valve "Valve model with flexible behavior"
   parameter Medium.MassFlowRate m_flow_design=m_flow_start "Mass flow rate" annotation(Dialog(group="Design values (in case of no explicit geometry)", enable= not useExplicitGeometry));
   parameter Real Y_design=YDefault "Valve opening" annotation(Dialog(group="Design values (in case of no explicit geometry)", enable= not useExplicitGeometry));
 
-  parameter Real chi=8 "Spray coefficient for water valve, m ~ sqrt(1/chi)" 
+  parameter Real chi=8 "Spray coefficient for water valve, m ~ sqrt(1/chi)"
       annotation (Dialog(tab="Advanced",enable=valveType=="water valve"));
-  parameter Real kappa=1.35 "isentropic coefficient cp/cv for steam valve" 
+  parameter Real kappa=1.35 "isentropic coefficient cp/cv for steam valve"
       annotation (Dialog(tab="Advanced",enable=valveType=="steam valve"));
   parameter Real delta=0.001
     "Regularisation factor for sqrtRegularized(x,deltareg)"                           annotation (Dialog(tab="Advanced",enable=valveType<>"linear valve"));
@@ -132,7 +132,7 @@ Model restrictions
 <p>
 Three correlations for <b>mass flow</b> vs <b>pressure loss</b> are availabe:
 <ul>
-<li> steam or gas valve: For ideal gas or steam taking choked flow into account (ref: <a href=\"http://de.wikipedia.org/w/index.php?title=D%C3%BCsenstr%C3%B6mung&oldid=59686117\">Strömungsdüse</a>)
+<li> steam or gas valve: For ideal gas or steam taking choked flow into account (ref: <a href=\"http://de.wikipedia.org/w/index.php?title=D%C3%BCsenstr%C3%B6mung&oldid=59686117\">Str&ouml;mungsd&uuml;se</a>)
 <li> water valve: according to Dynaplant model
 <li> linear valve: with simple linear behavior m=Y*K*delta_p
 </ul>
@@ -154,18 +154,18 @@ Further options:
                            <td><b>Checked by:</b>   </td>
                            <td><a href=\"mailto:haiko.steuer@siemens.com\">Haiko Steuer</a> </td>
                         <td><a href=\"https://scd.siemens.com/db4/v3/lookUp.d4w?tcgid=Z001K4SN\">SCD</a> </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Protection class:</b>    </td>
                            <td>free </td>
-                </tr> 
+                </tr>
                 <tr>
                            <td><b>Used Dymola version:</b>    </td>
                            <td>7.3 </td>
-                  </tr> 
+                  </tr>
            </table>
                 Copyright &copy  2006-2010 Siemens AG. All rights reserved.<br> <br>
-               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. 
+               This model is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
            For details see <a href=\"./Documents/Disclaimer.html\">disclaimer</a> <br>
 </HTML>",
       revisions="<html>
