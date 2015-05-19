@@ -5,7 +5,7 @@ package SiemensPower "SiemensPower"
     annotation (
   version="2.2",
  preferedView="info",
- uses(Modelica(version="3.2")),
+ uses(Modelica(version="3.2.1")),
  conversion(from(version="1.8", script="Scripts/ConvertSiemensPower_from_1.8_to_2.0.mos"), from(version="2.0", script="Scripts/ConvertSiemensPower_from_2.0_to_2.1.mos"),
  from(version="2.1", script="Scripts/ConvertSiemensPower_from_2.1_to_2.2.mos")),
      Documentation(info="<html>
