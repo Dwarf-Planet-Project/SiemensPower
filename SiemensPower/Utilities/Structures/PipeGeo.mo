@@ -12,8 +12,8 @@ record PipeGeo "Geometry parameters for a tube"
   parameter Real zeta_add=0 "Additive friction loss coefficient (for bendings)";
   parameter Boolean isCylindric=true
     "assume circular (NOT quadratic) inner cross sectional area";
-  final parameter SI.Area A = (if isCylindric then 0.25*Modelica.Constants.pi else 1.0)*(d_out-2*s)^2
-    "inner cross sectional area";
+  parameter SI.Area A = (if isCylindric then 0.25*Modelica.Constants.pi else 1.0)*(d_out-2*s)^2
+    "inner cross sectional area" annotation(Evaluate=true,Dialog(enable= false, tab="Automatically filled"));
 
  annotation (Documentation(info="<HTML>
 <p>These parameters are needed to specify the geoemtry of a pipe:
